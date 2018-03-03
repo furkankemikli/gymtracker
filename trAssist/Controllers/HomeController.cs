@@ -14,17 +14,7 @@ namespace trAssist.Controllers
         {
             return View();
         }
-
-        public IActionResult Trainees()
-        {
-            return View();
-        }
-
-        public IActionResult NewTrainee()
-        {
-            return View();
-        }
-
+        
 
         public IActionResult About()
         {

@@ -21,24 +21,24 @@
     <title> trAssist Login </title>
     <environment include="Development">
         <!--===============================================================================================-->
-        <link rel="stylesheet" type="text/css" href="~/bower_components/bootstrap/dist/css/bootstrap.min.css">
+        <link rel="stylesheet" type="text/css" href="~/login/vendor/bootstrap/css/bootstrap.min.css">
         <!--===============================================================================================-->
-        <link rel="stylesheet" type="text/css" href="~/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" type="text/css" href="~/login/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
         <!--===============================================================================================-->
-        <link rel="stylesheet" type="text/css" href="~/fonts/iconic/css/material-design-iconic-font.min.css">
+        <link rel="stylesheet" type="text/css" href="~/login/fonts/iconic/css/material-design-iconic-font.min.css">
         <!--===============================================================================================-->
-        @*<link rel="stylesheet" type="text/css" href="~/bower_components/animate.css/animate.css">
-            <!--===============================================================================================-->
-            <link rel="stylesheet" type="text/css" href="~/bower_components/css-hamburgers/hamburgers.min.css">
-            <!--===============================================================================================-->
-            <link rel="stylesheet" type="text/css" href="~/bower_components/animsition/css/animsition.min.css">
-            <!--===============================================================================================-->
-            <link rel="stylesheet" type="text/css" href="~/bower_components/select2/select2.min.css">
-            <!--===============================================================================================-->
-            <link rel="stylesheet" type="text/css" href="~/bower_components/daterangepicker/daterangepicker.css">*@
+        <link rel="stylesheet" type="text/css" href="~/login/vendor/animate/animate.css">
         <!--===============================================================================================-->
-        <link rel="stylesheet" type="text/css" href="~/css/util.css">
-        <link rel="stylesheet" type="text/css" href="~/css/main.css">
+        <link rel="stylesheet" type="text/css" href="~/login/vendor/css-hamburgers/hamburgers.min.css">
+        <!--===============================================================================================-->
+        <link rel="stylesheet" type="text/css" href="~/login/vendor/animsition/css/animsition.min.css">
+        <!--===============================================================================================-->
+        <link rel="stylesheet" type="text/css" href="~/login/vendor/select2/select2.min.css">
+        <!--===============================================================================================-->
+        <link rel="stylesheet" type="text/css" href="~/login/vendor/daterangepicker/daterangepicker.css">
+        <!--===============================================================================================-->
+        <link rel="stylesheet" type="text/css" href="~/login/css/util.css">
+        <link rel="stylesheet" type="text/css" href="~/login/css/main.css">
         <!--===============================================================================================-->
     </environment>
 </head>
@@ -47,23 +47,29 @@
         <div class="container-login100" style="background-image: url('@Url.Content("~/images/bg-01.jpg")');">
             <div class="wrap-login100">
                 <form asp-route-returnurl="@ViewData["ReturnUrl"]" class="login100-form validate-form" method="post">
+                    <span class="login100-form-title p-b-26">
+                        Log in
+                    </span>
+
                     <a asp-controller="Home" asp-action="Index">
-                        <span class="login100-form-logo">
+                        <span class="login100-form-title p-b-48">
                             <i class="fa fa-paw"></i>
                         </span>
                     </a>
 
-                    <span class="login100-form-title p-b-34 p-t-27">Log in</span>
                     <div asp-validation-summary="All" class="text-danger"></div>
 
                     <div class="wrap-input100 validate-input" data-validate="Enter email address">
-                        <input asp-for="Email" class="input100" placeholder="Enter email address" />
-                        <span asp-validation-for="Email" class="focus-input100" data-placeholder="&#xf207;"></span>
+                        <input asp-for="Email" class="input100" />
+                        <span asp-validation-for="Email" class="focus-input100" data-placeholder="Email"></span>
                     </div>
 
                     <div class="wrap-input100 validate-input" data-validate="Enter password">
-                        <input asp-for="Password" class="input100" placeholder="Enter password" />
-                        <span asp-validation-for="Password" class="focus-input100" data-placeholder="&#xf191;"></span>
+                        <span class="btn-show-pass">
+                            <i class="zmdi zmdi-eye"></i>
+                        </span>
+                        <input asp-for="Password" class="input100" />
+                        <span asp-validation-for="Password" class="focus-input100" data-placeholder="Password"></span>
                     </div>
 
                     <div class="contact100-form-checkbox">
@@ -74,10 +80,13 @@
                     </div>
 
                     <div class="container-login100-form-btn">
-                        <button type="submit" class="login100-form-btn">Login</button>
+                        <div class="wrap-login100-form-btn">
+                            <div class="login100-form-bgbtn"></div>
+                            <button type="submit" class="login100-form-btn">Login</button>
+                        </div>
                     </div>
 
-                    <div class="text-center p-t-90">
+                    <div class="text-center p-t-115">
                         <a class="txt1" asp-action="ForgotPassword">Forgot your password?</a>
                     </div>
                     <div class="text-center p-t-10">
@@ -91,26 +100,27 @@
         </div>
     </div>
 
+    <div id="dropDownSelect1"></div>
 
     @section Scripts {
         @await Html.PartialAsync("_ValidationScriptsPartial")
     }
 
     <!--===============================================================================================-->
-    <script src="~/bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="~/login/vendor/jquery/jquery-3.2.1.min.js"></script>
     <!--===============================================================================================-->
-    <script src="~/bower_components/animsition/js/animsition.min.js"></script>
+    <script src="~/login/vendor/animsition/js/animsition.min.js"></script>
     <!--===============================================================================================-->
-    @*<script src="~/bower_components/bootstrap/js/popper.js"></script>*@
-    <script src="~/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="~/bower_components/bootstrap/js/popper.js"></script>
+    <script src="~/login/vendor/bootstrap/js/bootstrap.min.js"></script>
     <!--===============================================================================================-->
-    @*<script src="~/bower_components/select2/select2.min.js"></script>
-        <!--===============================================================================================-->
-        <script src="~/bower_components/daterangepicker/moment.min.js"></script>
-        <script src="~/bower_components/daterangepicker/daterangepicker.js"></script>
-        <!--===============================================================================================-->
-        <script src="~/bower_components/countdowntime/countdowntime.js"></script>*@
+    <script src="~/login/vendor/select2/select2.min.js"></script>
     <!--===============================================================================================-->
-    <script src="~/js/main.js"></script>
+    <script src="~/login/vendor/daterangepicker/moment.min.js"></script>
+    <script src="~/login/vendor/daterangepicker/daterangepicker.js"></script>
+    <!--===============================================================================================-->
+    <script src="~/login/vendor/countdowntime/countdowntime.js"></script>
+    <!--===============================================================================================-->
+    <script src="~/login/js/main.js"></script>
 </body>
 </html>
