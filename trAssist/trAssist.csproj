@@ -6,6 +6,14 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Include="wwwroot\bower_components\animate.css\.bower.json" />
+    <Content Include="wwwroot\bower_components\animate.css\animate-config.json" />
+    <Content Include="wwwroot\bower_components\animate.css\animate.css" />
+    <Content Include="wwwroot\bower_components\animate.css\animate.min.css" />
+    <Content Include="wwwroot\bower_components\animate.css\bower.json" />
+    <Content Include="wwwroot\bower_components\animate.css\package.json" />
+    <Content Include="wwwroot\bower_components\animsition\css\animsition.css" />
+    <Content Include="wwwroot\bower_components\animsition\css\animsition.min.css" />
     <Content Include="wwwroot\bower_components\bootstrap\.bower.json" />
     <Content Include="wwwroot\bower_components\bootstrap\bower.json" />
     <Content Include="wwwroot\bower_components\bootstrap\dist\css\bootstrap-theme.css" />
@@ -21,6 +29,9 @@
     <Content Include="wwwroot\bower_components\bootstrap\grunt\configBridge.json" />
     <Content Include="wwwroot\bower_components\bootstrap\less\.csscomb.json" />
     <Content Include="wwwroot\bower_components\bootstrap\package.json" />
+    <Content Include="wwwroot\bower_components\css-hamburgers\hamburgers.css" />
+    <Content Include="wwwroot\bower_components\css-hamburgers\hamburgers.min.css" />
+    <Content Include="wwwroot\bower_components\daterangepicker\daterangepicker.css" />
     <Content Include="wwwroot\bower_components\font-awesome\.bower.json" />
     <Content Include="wwwroot\bower_components\font-awesome\bower.json" />
     <Content Include="wwwroot\bower_components\font-awesome\css\font-awesome.css" />
@@ -41,6 +52,47 @@
     <Content Include="wwwroot\bower_components\jquery\bower.json" />
     <Content Include="wwwroot\bower_components\jquery\external\sizzle\LICENSE.txt" />
     <Content Include="wwwroot\bower_components\jquery\LICENSE.txt" />
+    <Content Include="wwwroot\bower_components\nprogress\.bower.json" />
+    <Content Include="wwwroot\bower_components\nprogress\bower.json" />
+    <Content Include="wwwroot\bower_components\nprogress\component.json" />
+    <Content Include="wwwroot\bower_components\nprogress\index.html" />
+    <Content Include="wwwroot\bower_components\nprogress\nprogress.css" />
+    <Content Include="wwwroot\bower_components\nprogress\support\extras.css" />
+    <Content Include="wwwroot\bower_components\nprogress\support\style.css" />
+    <Content Include="wwwroot\bower_components\perfect-scrollbar\perfect-scrollbar.css" />
+    <Content Include="wwwroot\bower_components\select2\select2.css" />
+    <Content Include="wwwroot\bower_components\select2\select2.min.css" />
+    <Content Include="wwwroot\bower_components\smart-form\smart-templates\css\css-img\flags%402x.png" />
+    <Content Include="wwwroot\bower_components\smart-form\smart-templates\css\css-img\flags.png" />
+    <Content Include="wwwroot\bower_components\smart-form\smart-templates\css\css-img\wink.png" />
+    <Content Include="wwwroot\bower_components\smart-form\smart-templates\css\font-awesome.min.css" />
+    <Content Include="wwwroot\bower_components\smart-form\smart-templates\css\smart-addons.css" />
+    <Content Include="wwwroot\bower_components\smart-form\smart-templates\css\smart-addons\dropzone.css" />
+    <Content Include="wwwroot\bower_components\smart-form\smart-templates\css\smart-addons\hideShowPassword.css" />
+    <Content Include="wwwroot\bower_components\smart-form\smart-templates\css\smart-addons\intlTelInput.css" />
+    <Content Include="wwwroot\bower_components\smart-form\smart-templates\css\smart-addons\jquery-ui-slider-pips.css" />
+    <Content Include="wwwroot\bower_components\smart-form\smart-templates\css\smart-addons\jquery.stepper.css" />
+    <Content Include="wwwroot\bower_components\smart-form\smart-templates\css\smart-addons\jquery.steps.css" />
+    <Content Include="wwwroot\bower_components\smart-form\smart-templates\css\smart-addons\select2.css" />
+    <Content Include="wwwroot\bower_components\smart-form\smart-templates\css\smart-addons\smartforms-custom.css" />
+    <Content Include="wwwroot\bower_components\smart-form\smart-templates\css\smart-addons\smartforms-modal.css" />
+    <Content Include="wwwroot\bower_components\smart-form\smart-templates\css\smart-addons\spectrum.css" />
+    <Content Include="wwwroot\bower_components\smart-form\smart-templates\css\smart-forms-ie8.css" />
+    <Content Include="wwwroot\bower_components\smart-form\smart-templates\css\smart-forms.css" />
+    <Content Include="wwwroot\bower_components\smart-form\smart-templates\css\smart-loader.css" />
+    <Content Include="wwwroot\bower_components\smart-form\smart-templates\css\smart-themes\black.css" />
+    <Content Include="wwwroot\bower_components\smart-form\smart-templates\css\smart-themes\blue.css" />
+    <Content Include="wwwroot\bower_components\smart-form\smart-templates\css\smart-themes\green.css" />
+    <Content Include="wwwroot\bower_components\smart-form\smart-templates\css\smart-themes\purple.css" />
+    <Content Include="wwwroot\bower_components\smart-form\smart-templates\css\smart-themes\red.css" />
+    <Content Include="wwwroot\bower_components\smart-form\smart-templates\css\smart-themes\yellow.css" />
+    <Content Include="wwwroot\bower_components\smart-form\smart-templates\fonts\fontawesome\fontawesome-webfont.eot" />
+    <Content Include="wwwroot\bower_components\smart-form\smart-templates\fonts\fontawesome\fontawesome-webfont.ttf" />
+    <Content Include="wwwroot\bower_components\smart-form\smart-templates\fonts\fontawesome\fontawesome-webfont.woff" />
+    <Content Include="wwwroot\bower_components\smart-form\smart-templates\fonts\fontawesome\FontAwesome.otf" />
+    <Content Include="wwwroot\bower_components\smart-form\smart-templates\images\dark.png" />
+    <Content Include="wwwroot\bower_components\smart-form\smart-templates\images\foobg.png" />
+    <Content Include="wwwroot\bower_components\smart-form\smart-templates\images\wood.png" />
   </ItemGroup>
 
 
@@ -57,6 +109,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Include="wwwroot\bower_components\animate.css\gulpfile.js" />
+    <None Include="wwwroot\bower_components\animsition\js\animsition.js" />
+    <None Include="wwwroot\bower_components\animsition\js\animsition.min.js" />
     <None Include="wwwroot\bower_components\bootstrap\CHANGELOG.md" />
     <None Include="wwwroot\bower_components\bootstrap\dist\css\bootstrap-theme.css.map" />
     <None Include="wwwroot\bower_components\bootstrap\dist\css\bootstrap-theme.min.css.map" />
@@ -86,6 +141,8 @@
     <None Include="wwwroot\bower_components\bootstrap\js\dropdown.js" />
     <None Include="wwwroot\bower_components\bootstrap\js\modal.js" />
     <None Include="wwwroot\bower_components\bootstrap\js\popover.js" />
+    <None Include="wwwroot\bower_components\bootstrap\js\popper.js" />
+    <None Include="wwwroot\bower_components\bootstrap\js\popper.min.js" />
     <None Include="wwwroot\bower_components\bootstrap\js\scrollspy.js" />
     <None Include="wwwroot\bower_components\bootstrap\js\tab.js" />
     <None Include="wwwroot\bower_components\bootstrap\js\tooltip.js" />
@@ -168,6 +225,10 @@
     <None Include="wwwroot\bower_components\bootstrap\nuget\MyGet.ps1" />
     <None Include="wwwroot\bower_components\bootstrap\package.js" />
     <None Include="wwwroot\bower_components\bootstrap\README.md" />
+    <None Include="wwwroot\bower_components\countdowntime\countdowntime.js" />
+    <None Include="wwwroot\bower_components\daterangepicker\daterangepicker.js" />
+    <None Include="wwwroot\bower_components\daterangepicker\moment.js" />
+    <None Include="wwwroot\bower_components\daterangepicker\moment.min.js" />
     <None Include="wwwroot\bower_components\font-awesome\.gitignore" />
     <None Include="wwwroot\bower_components\font-awesome\.npmignore" />
     <None Include="wwwroot\bower_components\font-awesome\css\font-awesome.css.map" />
@@ -363,6 +424,19 @@
     <None Include="wwwroot\bower_components\jquery\src\var\support.js" />
     <None Include="wwwroot\bower_components\jquery\src\var\toString.js" />
     <None Include="wwwroot\bower_components\jquery\src\wrap.js" />
+    <None Include="wwwroot\bower_components\nprogress\History.md" />
+    <None Include="wwwroot\bower_components\nprogress\License.md" />
+    <None Include="wwwroot\bower_components\nprogress\Notes.md" />
+    <None Include="wwwroot\bower_components\nprogress\nprogress.js" />
+    <None Include="wwwroot\bower_components\nprogress\Readme.md" />
+    <None Include="wwwroot\bower_components\perfect-scrollbar\perfect-scrollbar.min.js" />
+    <None Include="wwwroot\bower_components\select2\select2.js" />
+    <None Include="wwwroot\bower_components\select2\select2.min.js" />
+    <None Include="wwwroot\bower_components\smart-form\smart-templates\css\css-img\wink.svg" />
+    <None Include="wwwroot\bower_components\smart-form\smart-templates\fonts\fontawesome\fontawesome-webfont.svg" />
+    <None Include="wwwroot\bower_components\smart-form\smart-templates\fonts\fontawesome\fontawesome-webfont.woff2" />
+    <None Include="wwwroot\bower_components\smart-form\smart-templates\js\jquery-1.9.1.min.js" />
+    <None Include="wwwroot\bower_components\smart-form\smart-templates\js\jquery.placeholder.min.js" />
   </ItemGroup>
 
 </Project>

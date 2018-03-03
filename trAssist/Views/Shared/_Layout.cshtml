@@ -14,6 +14,8 @@
         <link href="~/bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
         <!-- Font Awesome -->
         <link href="~/bower_components/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+        <!-- NProgress -->
+        <link href="~/bower_components/nprogress/nprogress.css" rel="stylesheet">
         <!-- Custom Theme Style -->
         <link href="~/css/custom.min.css" rel="stylesheet">
         <link href="~/smart-form/smart-templates/css/smart-forms.css" rel="stylesheet">
@@ -60,8 +62,10 @@
                             <h3>General</h3>
                             <ul class="nav side-menu">
                                 <li><a asp-area="" asp-controller="Home" asp-action="Index"><i class="fa fa-home"></i>Home</a></li>
-                                <li><a asp-area="" asp-controller="Home" asp-action="About"><i class="fa fa-group"></i>Trainers</a></li>
-                                <li><a asp-area="" asp-controller="Home" asp-action="Contact"><i class="fa fa-phone"></i>Contact</a></li>
+                                <li><a asp-area="" asp-controller="Home" asp-action="Trainees"><i class="fa fa-group"></i>Trainees</a></li>
+                                <li><a asp-area="" asp-controller="Home" asp-action="NewTrainee"><i class="fa fa-user-plus"></i>New Trainee</a></li>
+                                <li><a asp-area="" asp-controller="Home" asp-action="About"><i class="fa fa-info-circle"></i>About</a></li>
+                                <li><a asp-area="" asp-controller="Home" asp-action="Contact"><i class="fa fa-phone-square"></i>Contact</a></li>
                             </ul>
                             @*@await Html.PartialAsync("_LoginPartial")*@
                         </div><!-- /menu section -->

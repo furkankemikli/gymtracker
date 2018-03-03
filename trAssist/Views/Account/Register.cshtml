@@ -1,36 +1,116 @@
 ﻿@model RegisterViewModel
 @{
+    Layout = null;
     ViewData["Title"] = "Register";
 }
 
-<h2>@ViewData["Title"]</h2>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!-- Meta, title, CSS, favicons, etc. -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title> trAssist Login </title>
+    <environment include="Development">
+        <!--===============================================================================================-->
+        <link rel="stylesheet" type="text/css" href="~/bower_components/bootstrap/dist/css/bootstrap.min.css">
+        <!--===============================================================================================-->
+        <link rel="stylesheet" type="text/css" href="~/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+        <!--===============================================================================================-->
+        <link rel="stylesheet" type="text/css" href="~/fonts/iconic/css/material-design-iconic-font.min.css">
+        <!--===============================================================================================-->
+        @*<link rel="stylesheet" type="text/css" href="~/bower_components/animate.css/animate.css">
+            <!--===============================================================================================-->
+            <link rel="stylesheet" type="text/css" href="~/bower_components/css-hamburgers/hamburgers.min.css">
+            <!--===============================================================================================-->
+            <link rel="stylesheet" type="text/css" href="~/bower_components/animsition/css/animsition.min.css">
+            <!--===============================================================================================-->
+            <link rel="stylesheet" type="text/css" href="~/bower_components/select2/select2.min.css">
+            <!--===============================================================================================-->
+            <link rel="stylesheet" type="text/css" href="~/bower_components/daterangepicker/daterangepicker.css">*@
+        <!--===============================================================================================-->
+        <link rel="stylesheet" type="text/css" href="~/css/util.css">
+        <link rel="stylesheet" type="text/css" href="~/css/main.css">
+        <!--===============================================================================================-->
+    </environment>
+</head>
+<body>
 
-<div class="row">
-    <div class="col-md-4">
-        <form asp-route-returnUrl="@ViewData["ReturnUrl"]" method="post">
-            <h4>Create a new account.</h4>
-            <hr />
-            <div asp-validation-summary="All" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="Email"></label>
-                <input asp-for="Email" class="form-control" />
-                <span asp-validation-for="Email" class="text-danger"></span>
+    <div class="limiter">
+        <div class="container-login100" style="background-image: url('@Url.Content("~/images/bg-01.jpg")');">
+            <div class="wrap-login100">
+                <form asp-route-returnurl="@ViewData["ReturnUrl"]" class="login100-form validate-form" method="post">
+                    <a asp-controller="Home" asp-action="Index">
+                        <span class="login100-form-logo">
+                            <i class="fa fa-paw"></i>
+                        </span>
+                    </a>
+                    <span class="login100-form-title p-b-34 p-t-27">Register</span>
+                    <div asp-validation-summary="All" class="text-danger"></div>
+
+                    <div class="wrap-input100 validate-input" data-validate="Enter name">
+                        <input asp-for="Name" class="input100" placeholder="Enter name" />
+                        <span asp-validation-for="Name" class="focus-input100" data-placeholder="&#xf207;"></span>
+                    </div>
+
+                    <div class="wrap-input100 validate-input" data-validate="Enter surname">
+                        <input asp-for="Surname" class="input100" placeholder="Enter surname" />
+                        <span asp-validation-for="Surname" class="focus-input100" data-placeholder="&#xf207;"></span>
+                    </div>
+
+                    <div class="wrap-input100 validate-input" data-validate="Enter email address">
+                        <input asp-for="Email" class="input100" placeholder="Enter email address" />
+                        <span asp-validation-for="Email" class="focus-input100" data-placeholder="&#xf207;"></span>
+                    </div>
+                    <div class="wrap-input100 validate-input" data-validate="Enter password">
+                        <input asp-for="Password" class="input100" placeholder="Enter password" />
+                        <span asp-validation-for="Password" class="focus-input100" data-placeholder="&#xf191;"></span>
+                    </div>
+                    <div class="wrap-input100 validate-input" data-validate="Confirm password">
+                        <input asp-for="ConfirmPassword" class="input100" placeholder="Confirm password" />
+                        <span asp-validation-for="ConfirmPassword" class="focus-input100" data-placeholder="&#xf191;"></span>
+                    </div>
+                    <div class="contact100-form-checkbox">
+                        <input asp-for="Terms" class="input-checkbox100" type="checkbox" />
+                        <label asp-for="Terms" class="label-checkbox100">
+                            @Html.DisplayNameFor(m => m.Terms)
+                        </label>
+                    </div>
+                    <div class="container-login100-form-btn">
+                        <button type="submit" class="login100-form-btn">Register</button>
+                    </div>
+                    <div class="text-center p-t-90">
+                        <a class="txt1" asp-action="Login">Already have an account?</a>
+                    </div>
+                </form>
             </div>
-            <div class="form-group">
-                <label asp-for="Password"></label>
-                <input asp-for="Password" class="form-control" />
-                <span asp-validation-for="Password" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="ConfirmPassword"></label>
-                <input asp-for="ConfirmPassword" class="form-control" />
-                <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
-            </div>
-            <button type="submit" class="btn btn-default">Register</button>
-        </form>
+        </div>
+        <div class="pull-right">
+            <p>©2018 All Rights Reserved by Colorlib</p>
+        </div>
     </div>
-</div>
 
-@section Scripts {
-    @await Html.PartialAsync("_ValidationScriptsPartial")
-}
+
+    @section Scripts {
+        @await Html.PartialAsync("_ValidationScriptsPartial")
+    }
+    <!--===============================================================================================-->
+    <script src="~/bower_components/jquery/dist/jquery.min.js"></script>
+    <!--===============================================================================================-->
+    <script src="~/bower_components/animsition/js/animsition.min.js"></script>
+    <!--===============================================================================================-->
+    @*<script src="~/bower_components/bootstrap/js/popper.js"></script>*@
+    <script src="~/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <!--===============================================================================================-->
+    @*<script src="~/bower_components/select2/select2.min.js"></script>
+        <!--===============================================================================================-->
+        <script src="~/bower_components/daterangepicker/moment.min.js"></script>
+        <script src="~/bower_components/daterangepicker/daterangepicker.js"></script>
+        <!--===============================================================================================-->
+        <script src="~/bower_components/countdowntime/countdowntime.js"></script>*@
+    <!--===============================================================================================-->
+    <script src="~/js/main.js"></script>
+</body>
+</html>
