@@ -14,10 +14,14 @@
         <link href="~/bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
         <!-- Font Awesome -->
         <link href="~/bower_components/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+        <!-- NProgress -->
+        <link href="~/bower_components/nprogress/nprogress.css" rel="stylesheet">
         <!-- Custom Theme Style -->
         <link href="~/css/custom.min.css" rel="stylesheet">
         <link href="~/smart-form/smart-templates/css/smart-forms.css" rel="stylesheet">
-
+        <!-- FullCalendar -->
+        <link href="~/bower_components/fullcalendar/dist/fullcalendar.min.css" rel="stylesheet">
+        <link href="~/bower_components/fullcalendar/dist/fullcalendar.print.css" rel="stylesheet" media="print">
     </environment>
     <environment exclude="Development">
         <link rel="stylesheet" href="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.7/css/bootstrap.min.css"
@@ -33,7 +37,8 @@
                 <div class="left_col scroll-view">
                     <div class="navbar nav_title" style="border: 0;">
                         <a class="site_title" asp-controller="Home" asp-action="Index">
-                            <i class="fa fa-paw"></i>
+                            @*<i class="fa fa-gg"></i>*@
+                            <img src="~/images/logo.png" height="45">
                             <span>trAssist</span>
                         </a>
                     </div>
@@ -60,7 +65,9 @@
                             <h3>General</h3>
                             <ul class="nav side-menu">
                                 <li><a asp-area="" asp-controller="Home" asp-action="Index"><i class="fa fa-home"></i>Home</a></li>
-                                <li><a asp-area="" asp-controller="Home" asp-action="About"><i class="fa fa-group"></i>Trainers</a></li>
+                                <li><a asp-area="" asp-controller="Home" asp-action="About"><i class="fa fa-group"></i>Trainees</a></li>
+                                <li><a asp-area="" asp-controller="Home" asp-action="NewTrainee"><i class="fa fa-user"></i>New Trainee</a></li>
+                                <li><a asp-area="" asp-controller="Home" asp-action="NewTrainee"><i class="fa fa-flash"></i>Exercises</a></li>
                                 <li><a asp-area="" asp-controller="Home" asp-action="Contact"><i class="fa fa-phone"></i>Contact</a></li>
                             </ul>
                             @*@await Html.PartialAsync("_LoginPartial")*@
@@ -179,9 +186,19 @@
             </div>
             <!-- /top navigation -->
 
+            <!-- page content -->
+            <div class="right_col" role="main">
+                <div class="">
+                    <div class="row">
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                            @RenderBody()
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- /page content -->
 
             <div class="right_col spacer-t30" role="main">
-                @RenderBody()
             </div>
 
             <footer>
@@ -200,8 +217,15 @@
         <script src="~/bower_components/jquery/dist/jquery.min.js"></script>
         <!-- Bootstrap -->
         <script src="~/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+        <!-- FastClick -->
+        <script src="~/bower_components/fastclick/lib/fastclick.js"></script>
+        <!-- NProgress -->
+        <script src="~/bower_components/nprogress/nprogress.js"></script>
         <!-- Custom Theme Scripts -->
         <script src="~/js/custom.min.js"></script>
+        <!--FullCalendar-->
+        <script src="~/bower_components/moment/min/moment.min.js"></script>
+        <script src="~/bower_components/fullcalendar/dist/fullcalendar.min.js"></script>
     </environment>
     <environment exclude="Development">
         <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-2.2.0.min.js"
