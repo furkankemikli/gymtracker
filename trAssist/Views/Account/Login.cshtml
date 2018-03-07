@@ -18,7 +18,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title> trAssist Login </title>
+    <title> GymTracker Login </title>
     <environment include="Development">
         <!--===============================================================================================-->
         <link rel="stylesheet" type="text/css" href="~/login/vendor/bootstrap/css/bootstrap.min.css">
@@ -54,7 +54,8 @@
 
                     <a asp-controller="Home" asp-action="Index">
                         <span class="login100-form-title p-b-48">
-                            <i class="fa fa-paw"></i>
+                            @*<i class="fa fa-paw"></i>*@
+                            <img src="~/images/logo1.png" height="60">
                         </span>
                     </a>
 
@@ -112,7 +113,7 @@
     <!--===============================================================================================-->
     <script src="~/login/vendor/animsition/js/animsition.min.js"></script>
     <!--===============================================================================================-->
-    <script src="~/bower_components/bootstrap/js/popper.js"></script>
+    <script src="~/login/vendor/bootstrap/js/popper.min.js"></script>
     <script src="~/login/vendor/bootstrap/js/bootstrap.min.js"></script>
     <!--===============================================================================================-->
     <script src="~/login/vendor/select2/select2.min.js"></script>
