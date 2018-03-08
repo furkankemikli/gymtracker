@@ -22,6 +22,11 @@ namespace trAssist.Controllers
             return View();
         }
 
+        public IActionResult Exercises()
+        {
+            return View();
+        }
+
 
         public IActionResult About()
         {

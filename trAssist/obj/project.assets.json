@@ -13134,9 +13134,9 @@
       "hideWarningsAndErrors": true
     },
     "restore": {
-      "projectUniqueName": "C:\\Users\\Furkan\\source\\repos\\web_application\\trAssist\\trAssist.csproj",
-      "projectName": "trAssist",
-      "projectPath": "C:\\Users\\Furkan\\source\\repos\\web_application\\trAssist\\trAssist.csproj",
+      "projectUniqueName": "C:\\Users\\Furkan\\source\\repos\\web_application\\trAssist\\GymTracker.csproj",
+      "projectName": "GymTracker",
+      "projectPath": "C:\\Users\\Furkan\\source\\repos\\web_application\\trAssist\\GymTracker.csproj",
       "packagesPath": "C:\\Users\\Furkan\\.nuget\\packages\\",
       "outputPath": "C:\\Users\\Furkan\\source\\repos\\web_application\\trAssist\\obj\\",
       "projectStyle": "PackageReference",

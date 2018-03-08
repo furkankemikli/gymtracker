@@ -37,8 +37,7 @@
                 <div class="left_col scroll-view">
                     <div class="navbar nav_title" style="border: 0;">
                         <a class="site_title" asp-controller="Home" asp-action="Index">
-                            @*<i class="fa fa-gg"></i>*@
-                            <img src="~/images/logo.png" height="45">
+                            <img src="~/images/logo.png" height="50">
                             <span>GymTracker</span>
                         </a>
                     </div>
@@ -67,7 +66,7 @@
                                 <li><a asp-area="" asp-controller="Home" asp-action="Index"><i class="fa fa-home"></i>Home</a></li>
                                 <li><a asp-area="" asp-controller="Home" asp-action="About"><i class="fa fa-group"></i>Trainees</a></li>
                                 <li><a asp-area="" asp-controller="Home" asp-action="NewTrainee"><i class="fa fa-user"></i>New Trainee</a></li>
-                                <li><a asp-area="" asp-controller="Home" asp-action="NewTrainee"><i class="fa fa-flash"></i>Exercises</a></li>
+                                <li><a asp-area="" asp-controller="Home" asp-action="Exercises"><i class="fa fa-flash"></i>Exercises</a></li>
                                 <li><a asp-area="" asp-controller="Home" asp-action="Contact"><i class="fa fa-phone"></i>Contact</a></li>
                             </ul>
                             @*@await Html.PartialAsync("_LoginPartial")*@
@@ -197,9 +196,6 @@
                 </div>
             </div>
             <!-- /page content -->
-
-            <div class="right_col spacer-t30" role="main">
-            </div>
 
             <footer>
                 <div class="pull-right">

@@ -43,16 +43,16 @@
             @* BackGround: style="background-image: url('@Url.Content("~/images/bg-01.jpg")');" *@
             <div class="wrap-login100">
                 <form asp-route-returnurl="@ViewData["ReturnUrl"]" class="login100-form validate-form" method="post">
-                    <span class="login100-form-title p-b-26">
-                        Register
-                    </span>
-
+                   
                     <a asp-controller="Home" asp-action="Index">
                         <span class="login100-form-title p-b-24">
                             @*<i class="fa fa-paw"></i>*@
-                            <img src="~/images/logo1.png" height="60">
+                            <img src="~/images/logo.png" height="100">
                         </span>
                     </a>
+                    <span class="login100-form-title p-b-20">
+                        Register
+                    </span>
 
                     <div asp-validation-summary="All" class="text-danger"></div>
 
