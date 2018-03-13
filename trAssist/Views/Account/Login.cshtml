@@ -18,6 +18,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" href="~/images/logo.png" type="image/ico" />
     <title> GymTracker Login </title>
     <environment include="Development">
         <!--===============================================================================================-->
@@ -50,7 +51,6 @@
                 <form asp-route-returnurl="@ViewData["ReturnUrl"]" class="login100-form validate-form" method="post">
                     <a asp-controller="Home" asp-action="Index">
                         <span class="login100-form-title p-b-20">
-                            @*<i class="fa fa-paw"></i>*@
                             <img src="~/images/logo.png" height="100">
                         </span>
                     </a>
@@ -86,10 +86,10 @@
                         </div>
                     </div>
 
-                    <div class="text-center p-t-115">
+                    <div class="text-center p-t-50">
                         <a class="txt1" asp-action="ForgotPassword">Forgot your password?</a>
                     </div>
-                    <div class="text-center p-t-10">
+                    <div class="text-center p-t-10 p-b-20">
                         <a class="txt1" asp-action="Register" asp-route-returnurl="@ViewData["ReturnUrl"]">Register as a new user?</a>
                     </div>
                 </form>

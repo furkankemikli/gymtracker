@@ -391,6 +391,7 @@ namespace trAssist.Controllers
         [AllowAnonymous]
         public IActionResult ResetPassword(string code = null)
         {
+            code = "a";
             if (code == null)
             {
                 throw new ApplicationException("A code must be supplied for password reset.");
@@ -426,6 +427,13 @@ namespace trAssist.Controllers
         [HttpGet]
         [AllowAnonymous]
         public IActionResult ResetPasswordConfirmation()
+        {
+            return View();
+        }
+
+        [HttpGet]
+        [AllowAnonymous]
+        public IActionResult SignedOut()
         {
             return View();
         }
