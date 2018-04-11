@@ -1,0 +1,258 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="~/images/logo.png" type="image/ico" />
+    <title>@ViewData["Title"] - GymTracker</title>
+
+
+    <environment include="Development">
+        <!-- Bootstrap -->
+        <link href="~/bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+        <!-- Font Awesome -->
+        <link href="~/bower_components/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+        <!-- NProgress -->
+        <link href="~/bower_components/nprogress/nprogress.css" rel="stylesheet">
+        <!-- Custom Theme Style -->
+        <link href="~/css/custom.min.css" rel="stylesheet">
+        <link href="~/smart-form/smart-templates/css/smart-forms.css" rel="stylesheet">
+        <!-- FullCalendar -->
+        <link href="~/bower_components/fullcalendar/dist/fullcalendar.min.css" rel="stylesheet">
+        <link href="~/bower_components/fullcalendar/dist/fullcalendar.print.css" rel="stylesheet" media="print">
+        <!--DatePicker-->
+        <link href="~/bower_components/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet">
+        <link href="~/bower_components/bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.css" rel="stylesheet">
+        <!--DataTable-->
+        @*<link href="~/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css" rel="stylesheet">
+        <link href="~/bower_components/datatables.net-buttons-bs/css/buttons.bootstrap.min.css" rel="stylesheet">
+        <link href="~/bower_components/datatables.net-fixedheader-bs/css/fixedHeader.bootstrap.min.css" rel="stylesheet">
+        <link href="~/bower_components/datatables.net-responsive-bs/css/responsive.bootstrap.min.css" rel="stylesheet">
+        <link href="~/bower_components/datatables.net-scroller-bs/css/scroller.bootstrap.min.css" rel="stylesheet">*@
+        <link rel="stylesheet" type="text/css" href="~/bower_components/datatable/datatables.min.css" />
+        <link rel="stylesheet" type="text/css" href="~/bower_components/Flot/examples/shared/jquery-ui/jquery-ui.min.css" />
+    </environment>
+    <environment exclude="Development">
+        <link rel="stylesheet" href="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.7/css/bootstrap.min.css"
+              asp-fallback-href="~/lib/bootstrap/dist/css/bootstrap.min.css"
+              asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute" />
+        <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
+    </environment>
+</head>
+<body class="nav-md">
+    <div class="container body">
+        <div class="main_container">
+            <div class="col-md-3 left_col">
+                <div class="left_col scroll-view">
+                    <div class="navbar nav_title" style="border: 0;">
+                        <a class="site_title" asp-controller="Home" asp-action="Index">
+                            <img src="~/images/logo.png" height="50">
+                            <span class="wrap-full">GymTracker</span>
+                        </a>
+                    </div>
+
+                    <div class="clearfix"></div>
+
+                    <!-- menu profile quick info -->
+                    <div class="profile clearfix">
+                        <div class="profile_pic">
+                            <img src="~/images/img.jpg" alt="..." class="img-circle profile_img">
+                        </div>
+                        <div class="profile_info">
+                            <span>Welcome,</span>
+                            <h2>@User.Identity.Name</h2>
+                        </div>
+                    </div>
+                    <!-- /menu profile quick info -->
+
+                    <br />
+
+                    <!-- /menu profile quick info -->
+                    <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
+                        <div class="menu_section">
+                            <h3>General</h3>
+                            <ul class="nav side-menu">
+                                <li><a asp-area="" asp-controller="Home" asp-action="Index"><i class="fa fa-home"></i>Home</a></li>
+                                <li><a asp-area="" asp-controller="Home" asp-action="Trainees"><i class="fa fa-group"></i>Trainees</a></li>
+                                <li><a asp-area="" asp-controller="Home" asp-action="TraineeDetails"><i class="fa fa-flash"></i>Trainee Details</a></li>
+                                <li><a asp-area="" asp-controller="Home" asp-action="NewTrainee"><i class="fa fa-user"></i>New Trainee</a></li>
+                                <li><a asp-area="" asp-controller="Home" asp-action="Exercises"><i class="fa fa-flash"></i>Exercises</a></li>
+                                @*<li><a asp-area="" asp-controller="Home" asp-action="EditTrainee"><i class="fa fa-edit"></i>Edit Trainee</a></a></li>*@
+                            </ul>
+                            @*@await Html.PartialAsync("_LoginPartial")*@
+                        </div><!-- /menu section -->
+                    </div><!-- /sidebar menu -->
+                    <!-- /menu footer buttons -->
+                    <div class="sidebar-footer hidden-small">
+                        <a data-toggle="tooltip" data-placement="top" title="Profile" asp-controller="Manage" asp-action="Index">
+                            <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+                        </a>
+                        <a data-toggle="tooltip" data-placement="top" title="Contact" asp-controller="Home" asp-action="Contact">
+                            <span class="fa fa-phone" aria-hidden="true"></span>
+                        </a>
+                        <a data-toggle="tooltip" data-placement="top" title="Info" asp-controller="Home" asp-action="About">
+                            <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+                        </a>
+                        <a data-toggle="tooltip" data-placement="top" title="Logout" asp-controller="Account" asp-action="Login">
+                            <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
+                        </a>
+                    </div>
+                    <!-- /menu footer buttons -->
+                </div><!-- left_col scroll-view-->
+            </div><!-- /col-md-3 left_col -->
+            <!-- top navigation -->
+            <div class="top_nav">
+                <div class="nav_menu">
+                    <nav>
+                        <div class="nav toggle">
+                            <a id="menu_toggle"><i class="fa fa-bars"></i></a>
+                        </div>
+                        <ul class="nav navbar-nav navbar-right">
+                            <li class="">
+                                <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                                    <img src="images/img.jpg" alt="">@User.Identity.Name
+                                    <span class=" fa fa-angle-down"></span>
+                                </a>
+                                <ul class="dropdown-menu dropdown-usermenu pull-right">
+                                    <li><a asp-controller="Manage" asp-action="Index"> Profile</a></li>
+                                    <li><a asp-controller="Manage" asp-action="ChangePassword">Change Password</a></li>
+                                    <li><a asp-controller="Home" asp-action="About">About</a></li>
+                                    <li>
+                                        <form asp-area="" asp-controller="Account" asp-action="Logout" method="post" id="logoutForm" hidden> </form>
+                                        <a onclick="document.getElementById('logoutForm').submit()"><i class="fa fa-sign-out pull-right"></i> Log Out</a>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+            <!-- /top navigation -->
+            <!-- page content -->
+            <div class="right_col" role="main">
+                <div class="">
+                    <div class="row">
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                            @RenderBody()
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- /page content -->
+
+            <footer>
+                <div class="pull-right">
+                    &copy; 2018 - GymTracker
+                    Gentelella - Bootstrap Admin Template by <a href="https://colorlib.com">Colorlib</a>
+                </div>
+            </footer>
+        </div>
+    </div>
+
+    <environment include="Development">
+        <script src="~/js/site.js" asp-append-version="true"></script>
+        <!-- jQuery -->
+        <script src="~/bower_components/jquery/dist/jquery.min.js"></script>
+        <!-- Bootstrap -->
+        <script src="~/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+        <script>
+            $('.modal').on('hidden.bs.modal', function () {
+                $(this).find('input').val(null);
+                $(this).find('textarea').val(null);
+            });
+        </script>
+        <!-- FastClick -->
+        <script src="~/bower_components/fastclick/lib/fastclick.js"></script>
+        <!-- NProgress -->
+        <script src="~/bower_components/nprogress/nprogress.js"></script>
+        <!-- morris.js -->
+        <script src="~/bower_components/raphael/raphael.min.js"></script>
+        <script src="~/bower_components/morris.js/morris.min.js"></script>
+        <!-- bootstrap-progressbar -->
+        <script src="~/bower_components/bootstrap-progressbar/bootstrap-progressbar.min.js"></script>
+        <!-- Custom Theme Scripts -->
+        <script src="~/js/custom.min.js"></script>
+        <!--FullCalendar-->
+        <script src="~/bower_components/moment/min/moment.min.js"></script>
+        <script src="~/bower_components/fullcalendar/dist/fullcalendar.min.js"></script>
+        <!--DatePicker-->
+        <script src="~/bower_components/bootstrap-daterangepicker/daterangepicker.js"></script>
+        <script src="~/bower_components/bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js"></script>
+        <script>
+            $('#myDatepicker').datetimepicker({
+                format: 'DD.MM.YYYY'
+            });
+            $('#myDatepicker2').datetimepicker({
+                format: 'DD.MM.YYYY'
+            });
+            $('#myDatepicker3').datetimepicker();
+            $('#myDatepicker4').datetimepicker();
+            $('#myDatepicker5').datetimepicker();
+            $('#myDatepicker6').datetimepicker();
+        </script>
+        <!--Datatables-->
+        @*<script src="~/bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
+        <script src="~/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
+        <script src="~/bower_components/datatables.net-buttons/js/dataTables.buttons.min.js"></script>
+        <script src="~/bower_components/datatables.net-buttons-bs/js/buttons.bootstrap.min.js"></script>
+        <script src="~/bower_components/datatables.net-buttons/js/buttons.flash.min.js"></script>
+        <script src="~/bower_components/datatables.net-buttons/js/buttons.html5.min.js"></script>
+        <script src="~/bower_components/datatables.net-buttons/js/buttons.print.min.js"></script>
+        <script src="~/bower_components/datatables.net-fixedheader/js/dataTables.fixedHeader.min.js"></script>
+        <script src="~/bower_components/datatables.net-keytable/js/dataTables.keyTable.min.js"></script>
+        <script src="~/bower_components/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
+        <script src="~/bower_components/datatables.net-responsive-bs/js/responsive.bootstrap.js"></script>
+        <script src="~/bower_components/datatables.net-scroller/js/dataTables.scroller.min.js"></script>
+        <script src="~/bower_components/jszip/dist/jszip.min.js"></script>
+        <script src="~/bower_components/pdfmake/build/pdfmake.min.js"></script>
+        <script src="~/bower_components/pdfmake/build/vfs_fonts.js"></script>*@
+        <script src="~/bower_components/jquery.inputmask/dist/min/jquery.inputmask.bundle.min.js"></script>
+        <script type="text/javascript" src="~/bower_components/datatable/datatables.min.js"></script>
+        <script>
+            function readURL(input) {
+
+                if (input.files && input.files[0]) {
+                    var reader = new FileReader();
+
+                    reader.onload = function (e) {
+                        $('#preview').attr('src', e.target.result);
+                    }
+
+                    reader.readAsDataURL(input.files[0]);
+                }
+            }
+
+            $("#image").change(function () {
+                readURL(this);
+            });
+        </script>
+        <script>//trainee details page assign modal datepicker in tables
+            $(".startdate").datetimepicker({
+                format: 'DD.MM.YYYY'
+            });
+            $(".enddate").datetimepicker({
+                format: 'DD.MM.YYYY'
+            });
+        </script>
+    </environment>
+    <environment exclude="Development">
+        <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-2.2.0.min.js"
+                asp-fallback-src="~/lib/jquery/dist/jquery.min.js"
+                asp-fallback-test="window.jQuery"
+                crossorigin="anonymous"
+                integrity="sha384-K+ctZQ+LL8q6tP7I94W+qzQsfRV2a+AfHIi9k8z8l9ggpc8X+Ytst4yBo/hH+8Fk">
+        </script>
+        <script src="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.7/bootstrap.min.js"
+                asp-fallback-src="~/lib/bootstrap/dist/js/bootstrap.min.js"
+                asp-fallback-test="window.jQuery && window.jQuery.fn && window.jQuery.fn.modal"
+                crossorigin="anonymous"
+                integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa">
+        </script>
+        <script src="~/js/site.min.js" asp-append-version="true"></script>
+    </environment>
+
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

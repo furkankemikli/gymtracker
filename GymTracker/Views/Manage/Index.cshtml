@@ -1,0 +1,73 @@
+﻿@model IndexViewModel
+@{
+    ViewData["Title"] = "Profile";
+    ViewData.AddActivePage(ManageNavPages.Index);
+}
+
+<h4>@ViewData["Title"]</h4>
+@Html.Partial("_StatusMessage", Model.StatusMessage)
+<div class="row">
+    <div class="col-md-6">
+        <form method="post">
+            <div asp-validation-summary="All" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Username"></label>
+                <input asp-for="Username" class="form-control" disabled />
+            </div>
+            <div class="form-group">
+                <label asp-for="Email"></label>
+                @if (Model.IsEmailConfirmed)
+        {
+            <div class="input-group">
+                <input asp-for="Email" class="form-control" />
+                <span class="input-group-addon" aria-hidden="true"><span class="glyphicon glyphicon-ok text-success"></span></span>
+            </div>
+}
+else
+{
+        <input asp-for="Email" class="form-control" />
+        <button asp-action="SendVerificationEmail" class="btn btn-link">Send verification email</button>
+}
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label for="Name">Name</label>
+                <input for="Name" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label for="Surname">Surname</label>
+                <input for="Surname" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label for="birthday">Date of Birth</label>
+                <div class='input-group date' id='myDatepicker2'>
+                    <input id="birthday" type='text' class="form-control" data-inputmask="'mask': '99/99/9999'" placeholder="DD/MM/YYYY" required="required" />
+                    <span class="input-group-addon">
+                        <span class="glyphicon glyphicon-calendar"></span>
+                    </span>
+                </div>
+            </div>
+            <img id="preview" style="height:100px;" src="~/images/user.png" alt="ProfileImage" />
+            <div class="form-group">
+                <label for="image">Profile Image</label>
+                <input type="file" for="image" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label asp-for="PhoneNumber"></label>
+                <input asp-for="PhoneNumber" class="form-control" data-inputmask="'mask' : '(999) 999-9999'" />
+                <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label for="City">City</label>
+                <input for="City" class="form-control" />
+            </div>
+            <div class="form-group">
+                <button type="submit" class="btn btn-success pull-right">Save</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @await Html.PartialAsync("_ValidationScriptsPartial")
+}

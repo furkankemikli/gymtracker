@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.27130.2027
+VisualStudioVersion = 15.0.27428.2015
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GymTracker", "trAssist\GymTracker.csproj", "{C4728C0A-56A2-45AB-83F7-01067EB0A793}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GymTracker", "GymTracker\GymTracker.csproj", "{62E85843-18CC-48A3-A6D3-8DE8AF738A58}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,15 +11,15 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{C4728C0A-56A2-45AB-83F7-01067EB0A793}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{C4728C0A-56A2-45AB-83F7-01067EB0A793}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{C4728C0A-56A2-45AB-83F7-01067EB0A793}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{C4728C0A-56A2-45AB-83F7-01067EB0A793}.Release|Any CPU.Build.0 = Release|Any CPU
+		{62E85843-18CC-48A3-A6D3-8DE8AF738A58}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{62E85843-18CC-48A3-A6D3-8DE8AF738A58}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{62E85843-18CC-48A3-A6D3-8DE8AF738A58}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{62E85843-18CC-48A3-A6D3-8DE8AF738A58}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {E6A831A6-4495-45CB-9A2B-32B125BFCC08}
+		SolutionGuid = {F78EA8BB-B67D-4BD6-AAA6-C23D82CEB5A3}
 	EndGlobalSection
 EndGlobal

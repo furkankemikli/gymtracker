@@ -1,0 +1,645 @@
+﻿@{
+    ViewData["Title"] = "Trainee Details";
+}
+<div class="">
+    <div class="clearfix"></div>
+    <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="x_panel">
+                <div class="x_title">
+                    <h2>@ViewData["Title"]</h2>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content">
+                    <div class="col-md-3 col-sm-3 col-xs-12 profile_left">
+                        <div class="profile_img">
+                            <div id="crop-avatar">
+                                <!-- Current avatar -->
+                                <img class="img-responsive avatar-view" src="~/images/picture.jpg" alt="Avatar" title="Change the avatar">
+                            </div>
+                        </div>
+                        <h3>Samuel Doe</h3>
+                        <ul class="list-unstyled user_data">
+                            <li>
+                                <i class="fa fa-envelope user-profile-icon"></i> Email
+                            </li>
+                            @*<li>
+                                    <i class="fa fa-phone user-profile-icon"></i> Phone
+                                </li>*@
+                            <li>
+                                <i class="fa fa-birthday-cake user-profile-icon"></i> Date Of Birth
+                            </li>
+                            <li>
+                                <i class="fa fa-child user-profile-icon"></i> Weight
+                            </li>
+                            <li>
+                                <i class="fa fa-child user-profile-icon"></i> Height
+                            </li>
+                            @*<li>
+                                    <i class="fa fa-child user-profile-icon"></i> Fat Ratio
+                                </li>*@
+                            @*<li>
+                                    <i class="fa fa-map-marker user-profile-icon"></i> City
+                                </li>*@
+                        </ul>
+                        <a class="btn btn-success" asp-controller="Home" asp-action="EditTrainee"><i class="fa fa-edit m-right-xs"></i>Edit Profile</a>
+                        <br />
+                        @*<!-- start skills -->
+                            <h4>Skills</h4>
+                            <ul class="list-unstyled user_data">
+                                <li>
+                                    <p>Web Applications</p>
+                                    <div class="progress progress_sm">
+                                        <div class="progress-bar bg-green" role="progressbar" data-transitiongoal="50"></div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <p>Website Design</p>
+                                    <div class="progress progress_sm">
+                                        <div class="progress-bar bg-green" role="progressbar" data-transitiongoal="70"></div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <p>Automation & Testing</p>
+                                    <div class="progress progress_sm">
+                                        <div class="progress-bar bg-green" role="progressbar" data-transitiongoal="30"></div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <p>UI / UX</p>
+                                    <div class="progress progress_sm">
+                                        <div class="progress-bar bg-green" role="progressbar" data-transitiongoal="50"></div>
+                                    </div>
+                                </li>
+                            </ul>
+                            <!-- end of skills -->*@
+                    </div>
+                    <div class="col-md-9 col-sm-9 col-xs-12">
+                        <div class="profile_title">
+                            <div class="col-md-6">
+                                <h2>User Activity Report</h2>
+                            </div>
+                            <div class="col-md-6">
+                                <div id="reportrange" class="pull-right" style="margin-top: 5px; background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #E6E9ED">
+                                    <i class="glyphicon glyphicon-calendar fa fa-calendar"></i>
+                                    <span>December 30, 2014 - January 28, 2015</span> <b class="caret"></b>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- start of user-activity-graph -->
+                        <div id="graph_bar" style="width:100%; height:280px;"></div>
+                        <!-- end of user-activity-graph -->
+                        <div class="" role="tabpanel" data-example-id="togglable-tabs">
+                            <ul id="myTab" class="nav nav-tabs bar_tabs" role="tablist">
+                                <li role="presentation" class="active">
+                                    <a href="#tab_content1" role="tab" id="profile-tab" data-toggle="tab" aria-expanded="false">Exercises Working on</a>
+                                </li>
+                                <li role="presentation" class="">
+                                    <a href="#tab_content4" role="tab" id="profile-tab3" data-toggle="tab" aria-expanded="false">Set Exercises</a>
+                                </li>
+                                <li role="presentation" class="">
+                                    <a href="#tab_content3" role="tab" id="profile-tab3" data-toggle="tab" aria-expanded="false">Goals</a>
+                                </li>
+                                <li role="presentation" class="">
+                                    <a href="#tab_content2" role="tab" id="profile-tab2" data-toggle="tab" aria-expanded="false">Profile</a>
+                                </li>
+                            </ul>
+                            <div id="myTabContent" class="tab-content">
+                                <div role="tabpanel" class="tab-pane fade active in" id="tab_content1" aria-labelledby="profile-tab">
+                                    <!-- start user exercises -->
+                                    <table class="data table table-striped no-margin">
+                                        <thead>
+                                            <tr>
+                                                <th>#</th>
+                                                <th>Exercise Name</th>
+                                                <th>Exercise Category</th>
+                                                <th class="hidden-phone">Sets</th>
+                                                <th>Progress</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>1</td>
+                                                <td>New Company Takeover Review</td>
+                                                <td>Deveint Inc</td>
+                                                <td class="hidden-phone">18</td>
+                                                <td class="vertical-align-mid">
+                                                    <div class="progress">
+                                                        <div class="progress-bar progress-bar-success" data-transitiongoal="35"></div>
+                                                        <!--Populate progress bar just calculated percentage in data-transitiongoal value(instead of 35 put our value)-->
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>2</td>
+                                                <td>New Partner Contracts Consultanci</td>
+                                                <td>Deveint Inc</td>
+                                                <td class="hidden-phone">13</td>
+                                                <td class="vertical-align-mid">
+                                                    <div class="progress">
+                                                        <div class="progress-bar progress-bar-danger" data-transitiongoal="15"></div>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>3</td>
+                                                <td>Partners and Inverstors report</td>
+                                                <td>Deveint Inc</td>
+                                                <td class="hidden-phone">30</td>
+                                                <td class="vertical-align-mid">
+                                                    <div class="progress">
+                                                        <div class="progress-bar progress-bar-success" data-transitiongoal="45"></div>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>4</td>
+                                                <td>New Company Takeover Review</td>
+                                                <td>Deveint Inc</td>
+                                                <td class="hidden-phone">28</td>
+                                                <td class="vertical-align-mid">
+                                                    <div class="progress">
+                                                        <div class="progress-bar progress-bar-success" data-transitiongoal="80"></div>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <!-- end user exercises -->
+                                </div>
+                                <div role="tabpanel" class="tab-pane fade" id="tab_content2" aria-labelledby="profile-tab">
+                                    <div class="form-horizontal form-label-left">
+                                        <div class="form-group">
+                                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">
+                                                Name <span class="required">*</span>
+                                            </label>
+                                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                                <text type="text" id="first-name" required="required" class="form-control col-md-7 col-xs-12">John</text>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="surname">
+                                                Surname <span class="required">*</span>
+                                            </label>
+                                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                                <text type="text" id="surname" name="surname" required="required" class="form-control col-md-7 col-xs-12">Wick
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="email">
+                                                Email <span class="required">*</span>
+                                            </label>
+                                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                                <text type="text" id="email" name="email" required="required" class="form-control col-md-7 col-xs-12">johnwick@gmail.com
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                                Date Of Birth <span class="required">*</span>
+                                            </label>
+                                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                                <text id="birthday" type='text' class="form-control" data-inputmask="'mask': '99/99/9999'" required="required">29-04-1983</text>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="image">
+                                                Image
+                                            </label>
+                                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                                <img id="preview" style="height:100px;" src="~/images/user.png" alt="ProfileImage" />
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="phone">
+                                                Phone
+                                            </label>
+                                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                                <text type="tel" id="phone" name="phone" class="form-control col-md-7 col-xs-12" data-inputmask="'mask' : '(999) 999-9999'">555-555-5555
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="weight">
+                                                Weight
+                                            </label>
+                                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                                <text type="number" step="0.1" id="weight" name="weight" class="form-control col-md-7 col-xs-12">74.4
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="height">
+                                                Height
+                                            </label>
+                                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                                <text type="number" id="height" name="height" class="form-control col-md-7 col-xs-12">186</text>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="fat-ratio">
+                                                Fat Ratio
+                                            </label>
+                                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                                <text type="number" step="0.01" id="fat-ratio" name="fat-ratio" class="form-control col-md-7 col-xs-12">21.39</text>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="city">
+                                                City
+                                            </label>
+                                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                                <text type="text" id="city" name="city" class="form-control col-md-7 col-xs-12">New York
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="ln_solid"></div>
+                                </div>
+                                <div role="tabpanel" class="tab-pane fade" id="tab_content3" aria-labelledby="profile-tab">
+                                    <div class="form-horizontal form-label-left">
+                                        <div class="form-group">
+                                            <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+                                                <button class="btn btn-success pull-right" data-toggle="modal" data-target="#EditGoalModal">Edit Goal</button>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="weight">
+                                                Weight
+                                            </label>
+                                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                                <text type="number" step="0.1" id="weight" name="weight" class="form-control col-md-7 col-xs-12">74.4
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="fat-ratio">
+                                                Fat Ratio
+                                            </label>
+                                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                                <text type="number" step="0.01" id="fat-ratio" name="fat-ratio" class="form-control col-md-7 col-xs-12">21.39</text>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                                Goal Date <span class="required">*</span>
+                                            </label>
+                                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                                <text id="goaldate" type='text' class="form-control" data-inputmask="'mask': '99/99/9999'" required="required">04-29-2018</text>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div id="tab_content4" class="tab-pane fade">
+                                    <div>
+                                        <button class="btn btn-success pull-right" data-toggle="modal" data-target="#AssignExerciseModal">Assign Exercise</button>
+                                    </div>
+                                    <!--start user current assigned exercises-->
+                                    <h3>Active Exercises</h3>
+                                    <table class="data table table-striped no-margin">
+                                        <thead>
+                                            <tr>
+                                                <th>Gif/Image</th>
+                                                <th>Exercise Name</th>
+                                                <th>Exercise Category</th>
+                                                <th class="hidden-phone">Sets</th>
+                                                <th>Start Date</th>
+                                                <th>End Date</th>
+                                                <th>Interval</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>1</td>
+                                                <td>New Company Takeover Review</td>
+                                                <td>Deveint Inc</td>
+                                                <td class="hidden-phone">18</td>
+                                                <td>10/04/2018</td>
+                                                <td>30/04/2018</td>
+                                                <td>10</td>
+                                                <th><button class="btn btn-info" data-toggle="modal" data-target="#EditExerciseModal">Edit</button></th>
+                                                <th><button class="btn btn-danger">Delete</button></th>
+                                            </tr>
+                                            <tr>
+                                                <td>2</td>
+                                                <td>New Partner Contracts Consultanci</td>
+                                                <td>Deveint Inc</td>
+                                                <td class="hidden-phone">13</td>
+                                                <td>10/04/2018</td>
+                                                <td>30/04/2018</td>
+                                                <td>3</td>
+                                                <th><button class="btn btn-info" data-toggle="modal" data-target="#EditExerciseModal">Edit</button></th>
+                                                <th><button class="btn btn-danger">Delete</button></th>
+                                            </tr>
+                                            <tr>
+                                                <td>3</td>
+                                                <td>Partners and Inverstors report</td>
+                                                <td>Deveint Inc</td>
+                                                <td class="hidden-phone">30</td>
+                                                <td>10/04/2018</td>
+                                                <td>30/04/2018</td>
+                                                <td>1</td>
+                                                <th><button class="btn btn-info" data-toggle="modal" data-target="#EditExerciseModal">Edit</button></th>
+                                                <th><button class="btn btn-danger">Delete</button></th>
+                                            </tr>
+                                            <tr>
+                                                <td>4</td>
+                                                <td>New Company Takeover Review</td>
+                                                <td>Deveint Inc</td>
+                                                <td class="hidden-phone">28</td>
+                                                <td>10/04/2018</td>
+                                                <td>30/04/2018</td>
+                                                <td>7</td>
+                                                <th><button class="btn btn-info" data-toggle="modal" data-target="#EditExerciseModal">Edit</button></th>
+                                                <th><button class="btn btn-danger">Delete</button></th>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <!--end user current assigned exercises-->
+                                    <!--start user passed assigned exercises-->
+                                    <h3>Passed Exercises</h3>
+                                    <table class="data table table-striped no-margin">
+                                        <thead>
+                                            <tr>
+                                                <th>Gif/Image</th>
+                                                <th>Exercise Name</th>
+                                                <th>Exercise Category</th>
+                                                <th class="hidden-phone">Sets</th>
+                                                <th>Start Date</th>
+                                                <th>End Date</th>
+                                                <th>Interval</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>1</td>
+                                                <td>New Company Takeover Review</td>
+                                                <td>Deveint Inc</td>
+                                                <td class="hidden-phone">18</td>
+                                                <td>10/04/2018</td>
+                                                <td>30/04/2018</td>
+                                                <td>10</td>
+                                                <th><button class="btn btn-info" data-toggle="modal" data-target="#EditExerciseModal">Edit</button></th>
+                                                <th><button class="btn btn-danger">Delete</button></th>
+                                            </tr>
+                                            <tr>
+                                                <td>2</td>
+                                                <td>New Partner Contracts Consultanci</td>
+                                                <td>Deveint Inc</td>
+                                                <td class="hidden-phone">13</td>
+                                                <td>10/04/2018</td>
+                                                <td>30/04/2018</td>
+                                                <td>3</td>
+                                                <th><button class="btn btn-info" data-toggle="modal" data-target="#EditExerciseModal">Edit</button></th>
+                                                <th><button class="btn btn-danger">Delete</button></th>
+                                            </tr>
+                                            <tr>
+                                                <td>3</td>
+                                                <td>Partners and Inverstors report</td>
+                                                <td>Deveint Inc</td>
+                                                <td class="hidden-phone">30</td>
+                                                <td>10/04/2018</td>
+                                                <td>30/04/2018</td>
+                                                <td>1</td>
+                                                <th><button class="btn btn-info" data-toggle="modal" data-target="#EditExerciseModal">Edit</button></th>
+                                                <th><button class="btn btn-danger">Delete</button></th>
+                                            </tr>
+                                            <tr>
+                                                <td>4</td>
+                                                <td>New Company Takeover Review</td>
+                                                <td>Deveint Inc</td>
+                                                <td class="hidden-phone">28</td>
+                                                <td>10/04/2018</td>
+                                                <td>30/04/2018</td>
+                                                <td>7</td>
+                                                <th><button class="btn btn-info" data-toggle="modal" data-target="#EditExerciseModal">Edit</button></th>
+                                                <th><button class="btn btn-danger">Delete</button></th>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <!--end user passed assigned exercises-->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div id="EditGoalModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title" id="myModalLabel">Edit Goal</h4>
+            </div>
+            <div class="modal-body">
+                <div id="testmodal" style="padding: 5px 20px;">
+                    <form class="form-horizontal" role="form">
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="weight">
+                                Weight
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <input type="number" step="0.1" id="weight" name="weight" value="74.4" class="form-control col-md-7 col-xs-12">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="fat-ratio">
+                                Fat Ratio
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <input type="number" step="0.01" id="fat-ratio" name="fat-ratio" value="21.39" class="form-control col-md-7 col-xs-12">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                Goal Date <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <div class='input-group date' id='myDatepicker2'>
+                                    <input id="goaldate" type='text' class="form-control" value="29-04-2018" data-inputmask="'mask': '99/99/9999'" placeholder="DD/MM/YYYY" required="required" />
+                                    <span class="input-group-addon">
+                                        <span class="glyphicon glyphicon-calendar"></span>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger antoclose" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-success antosubmit">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="AssignExerciseModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog" style="position: relative;">
+        <div class="modal-content" style="position: relative; overflow-y: auto; overflow-x: auto; width: 1000px; padding: 15px;">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title" id="myModalLabel">Assign Exercise</h4>
+            </div>
+            <div class="modal-body" style="position: relative; overflow-y: auto; max-height: 400px; padding: 15px;">
+                <div id="testmodal" style="padding: 5px 20px;">
+                    <table class="data table table-striped no-margin">
+                        <thead>
+                            <tr>
+                                <th>Gif/Image</th>
+                                <th>Exercise Name</th>
+                                <th>Exercise Category</th>
+                                <th class="hidden-phone">Sets</th>
+                                <th>Start Date</th>
+                                <th>End Date</th>
+                                <th>Interval</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td>New Company Takeover Review</td>
+                                <td>Deveint Inc</td>
+                                <td class="hidden-phone"><input type="number" min="0" max="100" /></td>
+                                <td>
+                                    <input type="text" class="startdate" data-inputmask="'mask': '99/99/9999'" placeholder="DD/MM/YYYY">
+                                </td>
+                                <td>
+                                    <input type="text" class="enddate" data-inputmask="'mask': '99/99/9999'" placeholder="DD/MM/YYYY">
+                                </td>
+                                <td><input type="number" min="0" max="30" /></td>
+                                <td><button class="btn btn-info">Assign</button></td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td>New Partner Contracts Consultanci</td>
+                                <td>Deveint Inc</td>
+                                <td class="hidden-phone"><input type="number" min="0" max="100" /></td>
+                                <td>
+                                    <input type="text" class="startdate" data-inputmask="'mask': '99/99/9999'" placeholder="DD/MM/YYYY">
+                                </td>
+                                <td>
+                                    <input type="text" class="enddate" data-inputmask="'mask': '99/99/9999'" placeholder="DD/MM/YYYY">
+                                </td>
+                                <td><input type="number" min="0" max="30" /></td>
+                                <td><button class="btn btn-info">Assign</button></td>
+                            </tr>
+                            <tr>
+                                <td>3</td>
+                                <td>Partners and Inverstors report</td>
+                                <td>Deveint Inc</td>
+                                <td class="hidden-phone"><input type="number" min="0" max="100" /></td>
+                                <td>
+                                    <input type="text" class="startdate" data-inputmask="'mask': '99/99/9999'" placeholder="DD/MM/YYYY">
+                                </td>
+                                <td>
+                                    <input type="text" class="enddate" data-inputmask="'mask': '99/99/9999'" placeholder="DD/MM/YYYY">
+                                </td>
+                                <td><input type="number" min="0" max="30" /></td>
+                                <td><button class="btn btn-info">Assign</button></td>
+                            </tr>
+                            <tr>
+                                <td>4</td>
+                                <td>New Company Takeover Review</td>
+                                <td>Deveint Inc</td>
+                                <td class="hidden-phone"><input type="number" min="0" max="100" /></td>
+                                <td>
+                                    <input type="text" class="startdate" data-inputmask="'mask': '99/99/9999'" placeholder="DD/MM/YYYY">
+                                </td>
+                                <td>
+                                    <input type="text" class="enddate" data-inputmask="'mask': '99/99/9999'" placeholder="DD/MM/YYYY">
+                                </td>
+                                <td><input type="number" min="0" max="30" /></td>
+                                <td><button class="btn btn-info">Assign</button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger antoclose" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="EditExerciseModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title" id="myModalLabel">Edit Assigned Exercise</h4>
+            </div>
+            <div class="modal-body">
+                <div id="testmodal" style="padding: 5px 20px;">
+                    <form class="form-horizontal" role="form">
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="exerciseName">
+                                Name <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <text type="text" id="first-name" required="required" class="form-control col-md-7 col-xs-12">Push Up</text>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="exerciseCategory">
+                                Category <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <text type="text" id="first-name" required="required" class="form-control col-md-7 col-xs-12">Body-Weight</text>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="exerciseSets">
+                                Sets <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <input type="number" min="0" max="100" id="exerciseSet" required="required" class="form-control col-md-7 col-xs-12" value="10">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="exerciseCategory">
+                                Interval <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <input type="number" id="exerciseInterval" required="required" class="form-control col-md-7 col-xs-12" value="15">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                Start Date <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <div class='input-group startdate'>
+                                    <input id="exerciseStartDate" type='text' class="form-control" value="10-04-2018" data-inputmask="'mask': '99/99/9999'" placeholder="DD/MM/YYYY" required="required" />
+                                    <span class="input-group-addon">
+                                        <span class="glyphicon glyphicon-calendar"></span>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                End Date <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <div class='input-group enddate'>
+                                    <input id="exerciseEndDate" type='text' class="form-control" value="29-04-2018" data-inputmask="'mask': '99/99/9999'" placeholder="DD/MM/YYYY" required="required" />
+                                    <span class="input-group-addon">
+                                        <span class="glyphicon glyphicon-calendar"></span>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger antoclose" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-success antosubmit">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- /page content -->
