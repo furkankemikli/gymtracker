@@ -5,8 +5,10 @@ using System.Threading.Tasks;
 
 namespace GymTracker.Models
 {
-    public class ExercisesViewModel
+    public class GymProfileViewModel
     {
-        public IEnumerable<Exercise> Exercises { get; set; }
+        public Gym Gym { get; set; }
+
+        public IEnumerable<Gym> Gyms { get; set; }
     }
 }

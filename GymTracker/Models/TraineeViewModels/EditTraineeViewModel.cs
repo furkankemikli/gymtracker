@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace GymTracker.Models.TraineeViewModels
 {
-    public class NewTraineeViewModel
+    public class EditTraineeViewModel
     {
         public Trainee Trainee { get; set; }
 
