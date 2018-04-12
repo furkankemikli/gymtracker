@@ -7,8 +7,26 @@ namespace GymTracker.Models.TraineeViewModels
 {
     public class EditTraineeViewModel
     {
-        public Trainee Trainee { get; set; }
+        public string Name { get; set; }
 
-        public ApplicationUser TraineePersonalInfo { get; set; }
+        public string Surame { get; set; }
+
+        public string Email { get; set; }
+
+        public DateTime DateOfBirth { get; set; }
+
+        public byte[] Image { get; set; }
+
+        public string Phone { get; set; }
+
+        public double Weight { get; set; }
+
+        public double Height { get; set; }
+
+        public double FatRatio { get; set; }
+
+        public string City { get; set; }
+
+        public string Gender { get; set; }
     }
 }

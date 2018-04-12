@@ -8,7 +8,27 @@ namespace GymTracker.Models.TraineeViewModels
     public class TraineeDetailsPageViewModel
     {
         //to reach trainee info
-        public Trainee Trainee { get; set; }
+        public string Name { get; set; }
+
+        public string Surame { get; set; }
+
+        public string Email { get; set; }
+
+        public DateTime DateOfBirth { get; set; }
+
+        public byte[] Image { get; set; }
+
+        public string Phone { get; set; }
+
+        public double Weight { get; set; }
+
+        public double Height { get; set; }
+
+        public double FatRatio { get; set; }
+
+        public string City { get; set; }
+
+        public string Gender { get; set; }
 
         //to list done exercises with percentage
         public IEnumerable<DailyProgress> DailyProgresses { get; set; }
@@ -20,7 +40,11 @@ namespace GymTracker.Models.TraineeViewModels
         public IEnumerable<Exercise> Exercises { get; set; }
 
         //to show and edit trainee goals
-        public TraineeGoals TraineeGoals { get; set; }
+        public double GoalWeight { get; set; }
+
+        public double GoalFatRatio { get; set; }
+
+        public DateTime GoalDate { get; set; }
 
     }
 }

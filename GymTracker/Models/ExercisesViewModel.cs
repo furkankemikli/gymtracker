@@ -8,5 +8,14 @@ namespace GymTracker.Models
     public class ExercisesViewModel
     {
         public IEnumerable<Exercise> Exercises { get; set; }
+
+        //for new exercise modal
+        public string Name { get; set; }
+
+        public double CalorieBySet { get; set; }
+
+        public byte[] GifPicture { get; set; }
+
+        public string Category { get; set; }
     }
 }

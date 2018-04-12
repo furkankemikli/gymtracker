@@ -56,6 +56,8 @@ namespace GymTracker.Models
 
                 entity.Property(e => e.Surname).HasMaxLength(150);
 
+                //entity.Property(e => e.Gender).HasMaxLength(50);
+
                 entity.Property(e => e.UserName).HasMaxLength(256);
 
                 entity.HasOne(d => d.Gym)
