@@ -35,7 +35,6 @@ namespace GymTracker.Models
         public byte[] Picture { get; set; }
         public string Name { get; set; }
         public string Surname { get; set; }
-        //public string Gender { get; set; }
 
         public Gym Gym { get; set; }
         public Trainee TraineeTraineeNavigation { get; set; }

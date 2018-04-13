@@ -12,12 +12,26 @@ namespace GymTracker.Models.TrainerViewModels
         //for new event adding
         public string Name { get; set; }
 
-        public string Description { get; set; 
+        public string Description { get; set; } 
 
         public string Location { get; set; }
 
         public DateTime StartDate { get; set; }
 
         public DateTime EndDate { get; set; }
+
+        //editing event
+        public int EventId { get; }
+
+        public string EditName { get; set; }
+
+        public string EditDescription { get; set; }
+
+        public string EditLocation { get; set; }
+
+        public DateTime EditStartDate { get; set; }
+
+        public DateTime EditEndDate { get; set; }
+
     }
 }

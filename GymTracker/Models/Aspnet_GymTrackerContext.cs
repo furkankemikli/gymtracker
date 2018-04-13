@@ -24,7 +24,7 @@ namespace GymTracker.Models
                 optionsBuilder.UseSqlServer(@"Server=(localdb)\mssqllocaldb;Database=aspnet-GymTracker;Trusted_Connection=True;");
             }
         }
-        
+
         public Aspnet_GymTrackerContext(DbContextOptions<Aspnet_GymTrackerContext> options)
         : base(options)
         { }
@@ -56,8 +56,6 @@ namespace GymTracker.Models
 
                 entity.Property(e => e.Surname).HasMaxLength(150);
 
-                //entity.Property(e => e.Gender).HasMaxLength(50);
-
                 entity.Property(e => e.UserName).HasMaxLength(256);
 
                 entity.HasOne(d => d.Gym)
@@ -65,7 +63,7 @@ namespace GymTracker.Models
                     .HasForeignKey(d => d.GymId)
                     .HasConstraintName("FK_AspNetUsers_Gym");
             });
-            
+
             modelBuilder.Entity<DailyProgress>(entity =>
             {
                 entity.HasKey(e => e.ProgressId);
@@ -196,6 +194,8 @@ namespace GymTracker.Models
                 entity.Property(e => e.Birthday).HasColumnType("date");
 
                 entity.Property(e => e.EntryDate).HasColumnType("datetime");
+
+                entity.Property(e => e.Gender).HasMaxLength(50);
 
                 entity.Property(e => e.TrainerId)
                     .IsRequired()

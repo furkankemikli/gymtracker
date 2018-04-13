@@ -8,6 +8,7 @@ namespace GymTracker.Models
         public int ProgressId { get; set; }
         public string TraineeId { get; set; }
         public int ExerciseId { get; set; }
+        public double AssignedSets { get; set; }
         public double CompletedSets { get; set; }
         public DateTime Date { get; set; }
 

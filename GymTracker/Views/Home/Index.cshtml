@@ -1,4 +1,5 @@
-﻿@{
+﻿@model HomeIndexViewModel
+@{
     ViewData["Title"] = "Home Page";
 }
 
@@ -20,28 +21,36 @@
                 <div id="testmodal" style="padding: 5px 20px;">
                     <form id="antoform" class="form-horizontal calender" role="form">
                         <div class="form-group">
-                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="Title">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" asp-for="Name">
                                 Title <span class="required">*</span>
                             </label>
                             <div class="col-md-6 col-sm-6 col-xs-12">
-                                <input type="text" id="title" name="title" required="required" class="form-control col-md-7 col-xs-12">
+                                <input type="text" id="title" name="title" required="required" asp-for="Name" class="form-control col-md-7 col-xs-12">
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="descr">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" asp-for="Description">
                                 Description
                             </label>
                             <div class="col-md-6 col-sm-6 col-xs-12">
-                                <textarea style="height:55px;" id="descr" name="descr" class="form-control col-md-7 col-xs-12"></textarea>
+                                <textarea style="height:55px;" id="descr" name="descr" asp-for="Description" class="form-control col-md-7 col-xs-12"></textarea>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" asp-for="Location">
+                                Location <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <input type="text" id="Location" name="Location" required="required" asp-for="Location" class="form-control col-md-7 col-xs-12">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" asp-for="StartDate">
                                 Start Date <span class="required">*</span>
                             </label>
                             <div class="col-md-6 col-sm-6 col-xs-12">
                                 <div class='input-group date' id='myDatepicker6'>
-                                    <input id="startdate" type='text' class="form-control" placeholder="DD/MM/YYYY HH:MM" required="required" />
+                                    <input id="startdate" type='text' class="form-control" asp-for="StartDate" placeholder="DD/MM/YYYY HH:MM" required="required" />
                                     <span class="input-group-addon">
                                         <span class="glyphicon glyphicon-calendar"></span>
                                     </span>
@@ -49,12 +58,12 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" asp-for="EndDate">
                                 End Date <span class="required">*</span>
                             </label>
                             <div class="col-md-6 col-sm-6 col-xs-12">
                                 <div class='input-group date' id='myDatepicker3'>
-                                    <input id="enddate" type='text' class="form-control" placeholder="DD/MM/YYYY HH:MM" required="required" />
+                                    <input id="enddate" type='text' class="form-control" asp-for="EndDate" placeholder="DD/MM/YYYY HH:MM" required="required" />
                                     <span class="input-group-addon">
                                         <span class="glyphicon glyphicon-calendar"></span>
                                     </span>
@@ -82,28 +91,36 @@
                 <div id="testmodal2" style="padding: 5px 20px;">
                     <form id="antoform2" class="form-horizontal calender" role="form">
                         <div class="form-group">
-                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" asp-for="EditName">
                                 Title<span class="required">*</span>
                             </label>
                             <div class="col-md-6 col-sm-6 col-xs-12">
-                                <input type="text" id="title2" name="title2" required="required" class="form-control col-md-7 col-xs-12">
+                                <input type="text" id="title2" name="title2" required="required" asp-for="EditName" class="form-control col-md-7 col-xs-12">
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="descr2">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" asp-for="EditDescription">
                                 Description
                             </label>
                             <div class="col-md-6 col-sm-6 col-xs-12">
-                                <textarea class="form-control col-md-7 col-xs-12" style="height:55px;" id="descr2" name="descr"></textarea>
+                                <textarea class="form-control col-md-7 col-xs-12" asp-for="EditDescription" style="height:55px;" id="EditDescription" name="EditDescription"></textarea>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" asp-for="EditLocation">
+                                Location <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <input type="text" id="EditLocation" name="EditLocation" required="required" asp-for="EditLocation" class="form-control col-md-7 col-xs-12">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" asp-for="EditStartDate">
                                 Start Date <span class="required">*</span>
                             </label>
                             <div class="col-md-6 col-sm-6 col-xs-12">
                                 <div class='input-group date' id='myDatepicker4'>
-                                    <input id="startdate2" type='text' class="form-control" placeholder="DD/MM/YYYY HH:MM" required="required" />
+                                    <input id="startdate2" type='text' class="form-control" asp-for="EditStartDate" placeholder="DD/MM/YYYY HH:MM" required="required" />
                                     <span class="input-group-addon">
                                         <span class="glyphicon glyphicon-calendar"></span>
                                     </span>
@@ -111,12 +128,12 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" asp-for="EditEndDate">
                                 End Date <span class="required">*</span>
                             </label>
                             <div class="col-md-6 col-sm-6 col-xs-12">
                                 <div class='input-group date' id='myDatepicker5'>
-                                    <input id="enddate2" type='text' class="form-control" placeholder="DD/MM/YYYY HH:MM" required="required" />
+                                    <input id="enddate2" type='text' class="form-control" asp-for="EditEndDate" placeholder="DD/MM/YYYY HH:MM" required="required" />
                                     <span class="input-group-addon">
                                         <span class="glyphicon glyphicon-calendar"></span>
                                     </span>

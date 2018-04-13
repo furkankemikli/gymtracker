@@ -9,6 +9,19 @@ namespace GymTracker.Models.ManageViewModels
     public class IndexViewModel
     {
         public string Username { get; set; }
+        
+        [Required]
+        [StringLength(150)]
+        public string Name { get; set; }
+
+        [Required]
+        [StringLength(150)]
+        public string Surname { get; set; }
+
+        public byte[] Image { get; set; }
+
+        [StringLength(150)]
+        public string City { get; set; }
 
         public bool IsEmailConfirmed { get; set; }
 

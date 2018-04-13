@@ -32,7 +32,7 @@ namespace GymTracker.Controllers
             return View();
         }
 
-        public IActionResult TraineeDetails()
+        public IActionResult TraineeDetails(string Id)
         {
             return View();
         }

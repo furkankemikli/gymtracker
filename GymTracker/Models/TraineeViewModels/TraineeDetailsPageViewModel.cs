@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -10,7 +11,7 @@ namespace GymTracker.Models.TraineeViewModels
         //to reach trainee info
         public string Name { get; set; }
 
-        public string Surame { get; set; }
+        public string Surname { get; set; }
 
         public string Email { get; set; }
 
@@ -39,12 +40,33 @@ namespace GymTracker.Models.TraineeViewModels
         //for listing them to assign to the trainee
         public IEnumerable<Exercise> Exercises { get; set; }
 
+        public double ExSets { get; set; }
+
+        public DateTime ExStartDate { get; set; }
+
+        public DateTime ExEndDate { get; set; }
+
+        public int ExInterval { get; set; }
+
         //to show and edit trainee goals
         public double GoalWeight { get; set; }
 
         public double GoalFatRatio { get; set; }
 
         public DateTime GoalDate { get; set; }
+
+        //to edit assigned exercise
+        public string EditExName { get; set; }
+        
+        public string EditExCategory { get; set; }
+
+        public double EditExSets { get; set; }
+
+        public DateTime EditExStartDate { get; set; }
+
+        public DateTime EditExEndDate { get; set; }
+
+        public int EditExInterval { get; set; }
 
     }
 }

@@ -1,4 +1,5 @@
-﻿@{
+﻿@model GymProfileViewModel
+@{
     ViewData["Title"] = "Gym Profile";
     ViewData.AddActivePage(ManageNavPages.GymProfile);
 }
@@ -9,16 +10,28 @@
         <form method="post">
             <div asp-validation-summary="All" class="text-danger"></div>
             <div class="form-group">
-                <label for="OldPassword">Gym Name</label>
-                <input for="OldPassword" class="form-control" />
+                <label asp-for="Name">Gym Name</label>
+                <input asp-for="Name" class="form-control" />
             </div>
             <div class="form-group">
-                <label for="NewPassword">Address</label>
-                <input for="NewPassword" class="form-control" />
+                <label asp-for="Address">Address</label>
+                <input asp-for="Address" class="form-control" />
             </div>
             <div class="form-group">
-                <label for="ConfirmPassword">Phone</label>
-                <input for="ConfirmPassword" class="form-control" />
+                <label asp-for="City">City</label>
+                <input asp-for="City" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label asp-for="Country">Country</label>
+                <input asp-for="Country" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label asp-for="Phone">Phone</label>
+                <input asp-for="Phone" class="form-control"/>
+            </div>
+            <div class="form-group">
+                <label asp-for="Email">Email</label>
+                <input asp-for="Email" class="form-control" />
             </div>
             <div class="forn-group">
                 <button type="submit" class="btn btn-success pull-right">Update Gym Info</button>

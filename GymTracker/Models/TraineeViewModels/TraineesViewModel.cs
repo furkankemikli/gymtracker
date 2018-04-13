@@ -7,8 +7,6 @@ namespace GymTracker.Models.TraineeViewModels
 {
     public class TraineesViewModel
     {
-        public IEnumerable<Trainee> Trainees { get; set; }
-
-        public IEnumerable<ApplicationUser> TraineePersonalInfos { get; set; }
+        public IEnumerable<ApplicationUser> Trainees { get; set; }
     }
 }
