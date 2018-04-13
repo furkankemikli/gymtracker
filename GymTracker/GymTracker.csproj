@@ -1366,7 +1366,6 @@
   <ItemGroup>
     <Folder Include="Models\MockRepositories\" />
     <Folder Include="Models\RepositoryInterfaces\" />
-    <Folder Include="Models\Repositories\" />
   </ItemGroup>
 
 </Project>
