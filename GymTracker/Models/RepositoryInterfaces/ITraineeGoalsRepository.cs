@@ -9,6 +9,8 @@ namespace GymTracker.Models.Repositories
     {
         TraineeGoals GetTraineeGoals(string TraineeId);
 
-        void NewGoalInsert();
+        void CreateGoal(TraineeGoals traineeGoals);
+
+        void UpdateGoal(TraineeGoals traineeGoals);
     }
 }

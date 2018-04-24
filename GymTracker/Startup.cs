@@ -11,6 +11,7 @@ using Microsoft.Extensions.DependencyInjection;
 using GymTracker.Data;
 using GymTracker.Models;
 using GymTracker.Services;
+using GymTracker.Models.Repositories;
 
 namespace GymTracker
 {
@@ -39,6 +40,7 @@ namespace GymTracker
 
             // Add application services.
             services.AddTransient<IEmailSender, EmailSender>();
+            services.AddTransient<IEventRepository, EventRepository>();
 
             services.AddMvc();
 

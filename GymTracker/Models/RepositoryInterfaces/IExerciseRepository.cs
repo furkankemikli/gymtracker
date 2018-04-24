@@ -11,6 +11,7 @@ namespace GymTracker.Models.Repositories
 
         Exercise GetExerciseById(int exerciseId);
 
-        void NewExerciseInsert();
+        void CreateExercise(Exercise exercise);
+
     }
 }

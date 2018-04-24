@@ -5,10 +5,12 @@ using System.Threading.Tasks;
 
 namespace GymTracker.Models.Repositories
 {
-    public interface IDailyRoutineRepository
+    public interface IGymRepository
     {
-        IEnumerable<DailyRoutine> DailyRoutines(string traineeId);
+        IEnumerable<Gym> Gyms { get; }
 
-        void NewDailyRoutineInsert();
+        Gym GetGymById(int gymId);
+
+        void CreateGym(Gym gym);
     }
 }

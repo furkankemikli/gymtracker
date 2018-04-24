@@ -7,10 +7,14 @@ namespace GymTracker.Models.Repositories
 {
     public interface IEventRepository
     {
-        IEnumerable<Event> Events(string trainerId);
+        List<Event> Events(string trainerId);
 
         Event GetEventById(int eventId);
 
-        void NewEventInsert();
+        void CreateEvent(Event newEvent);
+
+        void UpdateEvent(Event newEvent);
+
+        void DeleteEvent(int eventId);
     }
 }
