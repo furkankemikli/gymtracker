@@ -100,8 +100,7 @@ namespace GymTracker.Controllers
             }
             return RedirectToAction("Index", "Home");
         }
-
-        [HttpPost]
+        
         public IActionResult DeleteEvent(int eventId)
         {
             _eventRepository.DeleteEvent(eventId);

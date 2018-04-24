@@ -63,12 +63,10 @@ namespace GymTracker.Models
                     .HasForeignKey(d => d.GymId)
                     .HasConstraintName("FK_AspNetUsers_Gym");
             });
-
+            
             modelBuilder.Entity<DailyProgress>(entity =>
             {
                 entity.HasKey(e => e.ProgressId);
-
-                entity.Property(e => e.ProgressId).ValueGeneratedNever();
 
                 entity.Property(e => e.Date).HasColumnType("date");
 
@@ -93,8 +91,6 @@ namespace GymTracker.Models
             {
                 entity.HasKey(e => e.RoutineId);
 
-                entity.Property(e => e.RoutineId).ValueGeneratedNever();
-
                 entity.Property(e => e.EndDate).HasColumnType("date");
 
                 entity.Property(e => e.StartDate).HasColumnType("date");
@@ -118,8 +114,6 @@ namespace GymTracker.Models
 
             modelBuilder.Entity<Event>(entity =>
             {
-                entity.Property(e => e.EventId).ValueGeneratedNever();
-
                 entity.Property(e => e.Description).HasMaxLength(450);
 
                 entity.Property(e => e.EndDate).HasColumnType("datetime");
@@ -145,8 +139,6 @@ namespace GymTracker.Models
 
             modelBuilder.Entity<Exercise>(entity =>
             {
-                entity.Property(e => e.ExerciseId).ValueGeneratedNever();
-
                 entity.Property(e => e.Category)
                     .IsRequired()
                     .HasMaxLength(150);
@@ -160,8 +152,6 @@ namespace GymTracker.Models
 
             modelBuilder.Entity<Gym>(entity =>
             {
-                entity.Property(e => e.GymId).ValueGeneratedNever();
-
                 entity.Property(e => e.Address)
                     .IsRequired()
                     .HasMaxLength(450);
@@ -217,8 +207,6 @@ namespace GymTracker.Models
             modelBuilder.Entity<TraineeGoals>(entity =>
             {
                 entity.HasKey(e => e.GoalId);
-
-                entity.Property(e => e.GoalId).ValueGeneratedNever();
 
                 entity.Property(e => e.ByDate).HasColumnType("date");
 
