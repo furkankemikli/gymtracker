@@ -21,21 +21,27 @@ namespace GymTracker.Models.TraineeViewModels
         [EmailAddress]
         public string Email { get; set; }
 
-        public DateTime DateOfBirth { get; set; }
-
-        public byte[] Image { get; set; }
+        [Required]
+        [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 6)]
+        [DataType(DataType.Password)]
+        [Display(Name = "Password")]
+        public string Password { get; set; }
 
         [Phone]
         public string Phone { get; set; }
+
+        [StringLength(150)]
+        public string City { get; set; }
+
+        public DateTime DateOfBirth { get; set; }
+
+        public byte[] Image { get; set; }
 
         public double Weight { get; set; }
 
         public double Height { get; set; }
 
         public double FatRatio { get; set; }
-        
-        [StringLength(150)]
-        public string City { get; set; }
 
         public string Gender { get; set; }
     }

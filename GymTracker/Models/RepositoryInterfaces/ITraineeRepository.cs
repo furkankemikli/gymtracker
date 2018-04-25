@@ -7,13 +7,15 @@ namespace GymTracker.Models.Repositories
 {
     public interface ITraineeRepository
     {
-        IEnumerable<Trainee> GetTrainees(string trainerId); 
+        IEnumerable<TraineeInfoModel> GetTrainees(string trainerId); 
 
-        Trainee GetTraineeById(string traineeId);
+        TraineeInfoModel GetTraineeById(string traineeId);
+
+        string GetUserId(string email, string name, string surname);
 
         void CreateTrainee(Trainee trainee);
 
-        void UpdateTrainee(Trainee trainee, ApplicationUser user);
+        void UpdateTrainee(TraineeInfoModel trainee);
 
         void DeleteTrainee(string traineeId);
     }

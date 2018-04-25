@@ -31,6 +31,8 @@ namespace GymTracker.Models.TraineeViewModels
 
         public string Gender { get; set; }
 
+        public DateTime EntryDate { get; set; }
+
         //to list done exercises with percentage
         public IEnumerable<DailyProgress> DailyProgresses { get; set; }
 
@@ -40,6 +42,7 @@ namespace GymTracker.Models.TraineeViewModels
         //for listing them to assign to the trainee
         public IEnumerable<Exercise> Exercises { get; set; }
 
+        //to assign exercise
         public double ExSets { get; set; }
 
         public DateTime ExStartDate { get; set; }

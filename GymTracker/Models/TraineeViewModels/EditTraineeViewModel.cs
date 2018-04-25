@@ -8,6 +8,8 @@ namespace GymTracker.Models.TraineeViewModels
 {
     public class EditTraineeViewModel
     {
+        public string TraineeId { get; set; }
+
         [Required]
         [StringLength(150)]
         public string Name { get; set; }

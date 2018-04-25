@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27428.2015
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GymTracker", "GymTracker\GymTracker.csproj", "{62E85843-18CC-48A3-A6D3-8DE8AF738A58}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GymTracker", "GymTracker\GymTracker.csproj", "{62E85843-18CC-48A3-A6D3-8DE8AF738A58}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
