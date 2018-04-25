@@ -16,11 +16,7 @@
                         <div class="profile_img">
                             <div id="crop-avatar">
                                 <!-- Current avatar -->
-                                @{
-                                    var base64 = Convert.ToBase64String(Model.Image);
-                                    var imgSrc = String.Format("data:image/gif;base64,{0}", base64);
-                                }
-                                <img class="img-responsive avatar-view" src="@imgSrc" alt="Avatar" title="Change the avatar">
+                                <img class="img-responsive avatar-view" width="150" height="150" src="/../@Model.Image" alt="Avatar" title="Change the avatar">
                             </div>
                         </div>
                         <h3>@Model.Name @Model.Surname</h3>
@@ -47,7 +43,7 @@
                                     <i class="fa fa-map-marker user-profile-icon"></i> City
                                 </li>*@
                         </ul>
-                        <a class="btn btn-success" asp-controller="Home" asp-action="EditTrainee"><i class="fa fa-edit m-right-xs"></i>Edit Profile</a>
+                        <a class="btn btn-success" onclick="location.href='@(Url.Action("EditTrainee", "Home", new { Id = Model.Id }))'"><i class="fa fa-edit m-right-xs"></i>Edit Profile</a>
                         <br />
                         @*<!-- start skills -->
                             <h4>Skills</h4>
@@ -183,7 +179,7 @@
                                                 Image
                                             </label>
                                             <div class="col-md-6 col-sm-6 col-xs-12">
-                                                <img id="preview" style="height:100px;" src="@imgSrc" alt="ProfileImage" />
+                                                <img id="preview" style="height:100px;" src="~/../@Model.Image" alt="ProfileImage" />
                                             </div>
                                         </div>
                                         <div class="form-group">
@@ -286,12 +282,8 @@
                                                 if (ex.EndDate >= DateTime.Now.Date)
                                                 {
                                                     <tr>
-                                                        @{
-                                                            var base64_2 = Convert.ToBase64String(ex.Exercise.GifPicture);
-                                                            var imgSrc_2 = String.Format("data:image/gif;base64,{0}", base64_2);
-                                                        }
                                                         <td>
-                                                            <img border=3 height=100 width=100 src="@imgSrc_2">
+                                                            <img border=3 height=100 width=100 src="~/../@ex.Exercise.GifPicture">
                                                         </td>
                                                         <td>@ex.Exercise.Name</td>
                                                         <td>@ex.Exercise.Category</td>
@@ -325,12 +317,8 @@
                                                 if (ex.EndDate < DateTime.Now.Date)
                                                 {
                                                     <tr>
-                                                        @{
-                                                            var base64_2 = Convert.ToBase64String(ex.Exercise.GifPicture);
-                                                            var imgSrc_2 = String.Format("data:image/gif;base64,{0}", base64_2);
-                                                        }
                                                         <td>
-                                                            <img border=3 height=100 width=100 src="@imgSrc_2">
+                                                            <img border=3 height=100 width=100 src="~/../@ex.Exercise.GifPicture">
                                                         </td>
                                                         <td>@ex.Exercise.Name</td>
                                                         <td>@ex.Exercise.Category</td>
@@ -430,12 +418,8 @@
                             @foreach (var ex in Model.Exercises)
                                 {
                             <tr>
-                                @{
-                                    var base64_3 = Convert.ToBase64String(ex.GifPicture);
-                                    var imgSrc_3 = String.Format("data:image/gif;base64,{0}", base64_3);
-                                }
                                 <td>
-                                    <img border=3 height=100 width=100 src="@imgSrc_3">
+                                    <img border=3 height=100 width=100 src="~/../@ex.GifPicture">
                                 </td>
                                 <td>@ex.Name</td>
                                 <td>@ex.Category</td>

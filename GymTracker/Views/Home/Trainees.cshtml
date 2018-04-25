@@ -33,7 +33,7 @@
             <tbody>
                 @foreach (var trainee in Model.Trainees)
                 {
-                    <tr onclick="location.href='@(Url.Action("TraineeDetails", "Home", new { traineeId = trainee.TraineeId }))'">
+                    <tr onclick="location.href='@(Url.Action("TraineeDetails", "Home", new { Id = trainee.TraineeId }))'">
                         @{
                             var imgSrc = trainee.Picture;
                         }

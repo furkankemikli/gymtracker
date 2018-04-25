@@ -241,19 +241,35 @@ namespace GymTracker.Controllers
         }
 
         //to open edit trainee page
-        public IActionResult EditTrainee()
+        public IActionResult EditTrainee(string Id)
         {
-            return View();
+            TraineeInfoModel model = _traineeRepository.GetTraineeById(Id);
+            EditTraineeViewModel trainee = new EditTraineeViewModel
+            {
+                Name = model.Name,
+                Surname = model.Surname,
+                Email = model.Email,
+                Phone = model.PhoneNumber,
+                City = model.City,
+                DateOfBirth = (DateTime)model.Birthday,
+                Gender = model.Gender,
+                CurrentImage = model.Picture,
+                TraineeId = model.TraineeId,
+                FatRatio = (double)model.FatRatio,
+                Height = (double)model.Height,
+                Weight = (double)model.Weight
+            };
+            return View(trainee);
         }
 
-        public IActionResult UpdateTraineeInfo(EditTraineeViewModel model)
+        [HttpPost]
+        public async Task<IActionResult> UpdateTraineeInfo(EditTraineeViewModel model)
         {
             TraineeInfoModel trainee = new TraineeInfoModel
             {
                 Name = model.Name,
                 Surname = model.Surname,
                 Email = model.Email,
-                Picture = model.Image,
                 City = model.City,
                 PhoneNumber = model.Phone,                
                 Birthday = model.DateOfBirth,
@@ -263,6 +279,18 @@ namespace GymTracker.Controllers
                 TraineeId = model.TraineeId,
                 Weight = model.Weight
             };
+
+            if (model.Image != null && model.Image.Length > 0)
+            {
+                var guid = Guid.NewGuid().ToString();
+                trainee.Picture = "Uploads/" + guid + Path.GetExtension(model.Image.FileName);
+                var userPath = Path.Combine(_hostingEnvironment.ContentRootPath, "Uploads", guid + Path.GetExtension(model.Image.FileName));
+
+                using (var stream = new FileStream(userPath, FileMode.Create))
+                {
+                    await model.Image.CopyToAsync(stream);
+                }
+            }
             _traineeRepository.UpdateTrainee(trainee);
             return RedirectToAction("Trainees", "Home");
         }
@@ -273,12 +301,14 @@ namespace GymTracker.Controllers
             return RedirectToAction("Trainees", "Home");
         }
 
+        [HttpGet]
         public IActionResult TraineeDetails(string Id)
         {
             TraineeInfoModel personalInfo = _traineeRepository.GetTraineeById(Id);
             TraineeGoals goals = _traineeGoalsRepository.GetTraineeGoals(Id);
             TraineeDetailsPageViewModel model = new TraineeDetailsPageViewModel
             {
+                Id = personalInfo.TraineeId,
                 Name = personalInfo.Name,
                 Surname = personalInfo.Surname,
                 Email = personalInfo.Email,
@@ -293,11 +323,14 @@ namespace GymTracker.Controllers
                 EntryDate = personalInfo.EntryDate,
                 DailyProgresses = _dailyProgressRepository.DailyProgresses(Id),
                 DailyRoutines = _dailyRoutineRepository.DailyRoutines(Id),
-                Exercises = _exerciseRepository.Exercises,
-                GoalWeight = (double)goals.Weight,
-                GoalFatRatio = (double)goals.FatRatio,
-                GoalDate = (DateTime)goals.ByDate                
+                Exercises = _exerciseRepository.Exercises        
             };
+            if (goals != null)
+            {
+                model.GoalWeight = (double)goals.Weight;
+                model.GoalFatRatio = (double)goals.FatRatio;
+                model.GoalDate = (DateTime)goals.ByDate;
+            }
             return View(model);
         }
 

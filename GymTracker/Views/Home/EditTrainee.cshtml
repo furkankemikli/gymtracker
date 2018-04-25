@@ -10,13 +10,14 @@
     </div>
     <div class="x_content">
         <br />
-        <form id="edit-trainee" data-parsley-validate class="form-horizontal form-label-left">
+        <form id="edit-trainee" method="post" asp-controller="Home" enctype="multipart/form-data" asp-action="UpdateTraineeInfo" data-parsley-validate class="form-horizontal form-label-left">
+            <input type="hidden" class="form-control" asp-for="TraineeId" id="traineeId" readonly>
             <div class="form-group">
                 <label class="control-label col-md-3 col-sm-3 col-xs-12" asp-for="Name">
                     Name <span class="required">*</span>
                 </label>
                 <div class="col-md-6 col-sm-6 col-xs-12">
-                    <input type="text" id="first-name" required="required" asp-for="Name" value="John" class="form-control col-md-7 col-xs-12">
+                    <input type="text" id="first-name" required="required" asp-for="Name" value="@Model.Name" class="form-control col-md-7 col-xs-12">
                 </div>
             </div>
             <div class="form-group">
@@ -24,7 +25,7 @@
                     Surname <span class="required">*</span>
                 </label>
                 <div class="col-md-6 col-sm-6 col-xs-12">
-                    <input type="text" id="surname" name="surname" asp-for="Surname" required="required" value="Wick" class="form-control col-md-7 col-xs-12">
+                    <input type="text" id="surname" asp-for="Surname" required="required" value="@Model.Surname" class="form-control col-md-7 col-xs-12">
                 </div>
             </div>
             <div class="form-group">
@@ -32,7 +33,7 @@
                     Email <span class="required">*</span>
                 </label>
                 <div class="col-md-6 col-sm-6 col-xs-12">
-                    <input type="text" id="email" name="email" asp-for="Email" required="required" value="johnwick@gmail.com" class="form-control col-md-7 col-xs-12">
+                    <input type="text" id="email" asp-for="Email" required="required" value="@Model.Email" class="form-control col-md-7 col-xs-12">
                 </div>
             </div>
             <div class="form-group">
@@ -41,7 +42,7 @@
                 </label>
                 <div class="col-md-6 col-sm-6 col-xs-12">
                     <div class='input-group date' id='myDatepicker2'>
-                        <input id="birthday" type="text" asp-for="DateOfBirth" class="form-control" value="29-04-1983" data-inputmask="'mask': '99.99.9999'" placeholder="DD.MM.YYYY" required="required" />
+                        <input id="birthday" type="text" asp-for="DateOfBirth" class="form-control" value="@Model.DateOfBirth" data-inputmask="'mask': '99.99.9999'" placeholder="DD.MM.YYYY" required="required" />
                         <span class="input-group-addon">
                             <span class="glyphicon glyphicon-calendar"></span>
                         </span>
@@ -53,8 +54,8 @@
                     Image
                 </label>
                 <div class="col-md-6 col-sm-6 col-xs-12">
-                    <img id="preview" style="height:100px;" src="~/images/user.png" alt="ProfileImage" />
-                    <input type="file" accept="image/*" id="image" asp-for="Image" name="image" class="form-control col-md-7 col-xs-12">
+                    <img id="preview" style="height:100px;" src="~/../@Model.CurrentImage" alt="ProfileImage" />
+                    <input type="file" accept="image/*" id="image" asp-for="Image" class="form-control col-md-7 col-xs-12">
                 </div>
             </div>
             <div class="form-group">
@@ -62,7 +63,7 @@
                     Phone
                 </label>
                 <div class="col-md-6 col-sm-6 col-xs-12">
-                    <input type="tel" id="phone" name="phone" asp-for="Phone" class="form-control col-md-7 col-xs-12" value="@Model.Phone">
+                    <input type="tel" id="phone" asp-for="Phone" class="form-control col-md-7 col-xs-12" value="@Model.Phone">
                 </div>
             </div>
             <div class="form-group">
@@ -70,7 +71,7 @@
                     Weight
                 </label>
                 <div class="col-md-6 col-sm-6 col-xs-12">
-                    <input type="number" step="0.1" id="weight" name="weight" asp-for="Weight" value="74.4" class="form-control col-md-7 col-xs-12">
+                    <input type="number" step="0.1" id="weight" asp-for="Weight" value="@Model.Weight" class="form-control col-md-7 col-xs-12">
                 </div>
             </div>
             <div class="form-group">
@@ -78,7 +79,7 @@
                     Height
                 </label>
                 <div class="col-md-6 col-sm-6 col-xs-12">
-                    <input type="number" id="height" name="height" asp-for="Height" value="186" class="form-control col-md-7 col-xs-12">
+                    <input type="number" id="height" asp-for="Height" value="@Model.Height" class="form-control col-md-7 col-xs-12">
                 </div>
             </div>
             <div class="form-group">
@@ -86,7 +87,7 @@
                     Fat Ratio
                 </label>
                 <div class="col-md-6 col-sm-6 col-xs-12">
-                    <input type="number" step="0.01" id="FatRatio" name="FatRatio" asp-for="FatRatio" value="21.39" class="form-control col-md-7 col-xs-12">
+                    <input type="number" step="0.01" id="FatRatio" asp-for="FatRatio" value="@Model.FatRatio" class="form-control col-md-7 col-xs-12">
                 </div>
             </div>
             <div class="form-group">
@@ -94,7 +95,7 @@
                     City
                 </label>
                 <div class="col-md-6 col-sm-6 col-xs-12">
-                    <input type="text" id="city" name="city" asp-for="City" value="@Model.City" class="form-control col-md-7 col-xs-12">
+                    <input type="text" id="city" asp-for="City" value="@Model.City" class="form-control col-md-7 col-xs-12">
                 </div>
             </div>
             <div class="form-group">
@@ -111,26 +112,24 @@
                 </div>
             </div>
             <!--    For toggle button in our case check gender value and set value of checked attribute of button according to this
-             public ActionResult CheckBoxTestAct()
-            {
-                CheckBoxViewModel vm1 = new CheckBoxViewModel();
-                vm1.TestValue = "AAA";
-                vm1.IsSelected = true;
-                return View(vm1);
-            }
-            [HttpPost]
-            public ActionResult CheckBoxTestAct(CheckBoxViewModel vm)
-            {
-                return View(vm);
-            }
-        View
+                     public ActionResult CheckBoxTestAct()
+                    {
+                        CheckBoxViewModel vm1 = new CheckBoxViewModel();
+                        vm1.TestValue = "AAA";
+                        vm1.IsSelected = true;
+                        return View(vm1);
+                    }
+                    [HttpPost]
+                    public ActionResult CheckBoxTestAct(CheckBoxViewModel vm)
+                    {
+                        return View(vm);
+                    }
+                View
 
-        <div class="col-md-10">
-            <input type="checkbox" name="IsSelected" checked="Model.IsSelected" data-toggle="toggle">
-        </div>
-
-
-    -->
+                <div class="col-md-10">
+                    <input type="checkbox" name="IsSelected" checked="Model.IsSelected" data-toggle="toggle">
+                </div>
+            -->
             <div class="ln_solid"></div>
             <div class="form-group">
                 <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">

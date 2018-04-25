@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -25,7 +26,9 @@ namespace GymTracker.Models.TraineeViewModels
 
         public DateTime DateOfBirth { get; set; }
 
-        public string Image { get; set; }
+        public string CurrentImage { get; set; }
+
+        public IFormFile Image { get; set; }
 
         [Phone]
         public string Phone { get; set; }
