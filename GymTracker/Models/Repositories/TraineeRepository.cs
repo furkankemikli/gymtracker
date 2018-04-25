@@ -20,6 +20,7 @@ namespace GymTracker.Models.Repositories
             var traineesGeneral = (from t in _aspnetGymTrackerContext.Trainee
                                    join u in _aspnetGymTrackerContext.ApplicationUser
                                    on t.TraineeId equals u.Id
+                                   where t.TrainerId == trainerId
                                    select new { t.TraineeId, t.TrainerId, u.Name, u.Surname, t.Birthday, t.Weight, t.Height, t.Gender, t.FatRatio, u.Email, u.PhoneNumber, u.GymId, u.City, u.Picture, t.EntryDate }).ToList();
             List<TraineeInfoModel> trainees = new List<TraineeInfoModel>();
             foreach (var elmt in traineesGeneral)
