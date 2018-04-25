@@ -47,6 +47,7 @@ namespace GymTracker.Controllers
             _dailyProgressRepository = dailyProgressRepository;
             _dailyRoutineRepository = dailyRoutineRepository;
             _emailSender = emailSender;
+            _userManager = userManager;
         }
 
         public IActionResult Index()
@@ -173,6 +174,7 @@ namespace GymTracker.Controllers
 
         public async Task<IActionResult> AddNewTrainee(NewTraineeViewModel model)
         {
+
             var trainer = await _userManager.GetUserAsync(User);
             var user = new ApplicationUser { UserName = model.Email, Email = model.Email,
                                              Name = model.Name, Surname = model.Surname,
@@ -203,6 +205,7 @@ namespace GymTracker.Controllers
             return View(model);
         }
 
+        //to open edit trainee page
         public IActionResult EditTrainee()
         {
             return View();
