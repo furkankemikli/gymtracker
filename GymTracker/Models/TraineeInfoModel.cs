@@ -33,7 +33,7 @@ namespace GymTracker.Models
 
         public string City { get; set; }
 
-        public byte[] Picture { get; set; }
+        public string Picture { get; set; }
 
         public DateTime EntryDate { get; set; }
 

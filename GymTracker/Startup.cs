@@ -12,6 +12,9 @@ using GymTracker.Data;
 using GymTracker.Models;
 using GymTracker.Services;
 using GymTracker.Models.Repositories;
+using Microsoft.Extensions.FileProviders;
+using Microsoft.AspNetCore.Http;
+using System.IO;
 
 namespace GymTracker
 {
@@ -76,6 +79,12 @@ namespace GymTracker
             }
 
             app.UseStaticFiles();
+
+            app.UseStaticFiles(new StaticFileOptions
+            {
+                FileProvider = new PhysicalFileProvider(Path.Combine(env.ContentRootPath, "Uploads")),
+                RequestPath = new PathString("/Uploads")
+            });
 
             app.UseAuthentication();
 

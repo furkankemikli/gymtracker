@@ -17,7 +17,7 @@ namespace GymTracker.Models
 
         public double CalorieBySet { get; set; }
 
-        public byte[] GifPicture { get; set; }
+        public string GifPicture { get; set; }
 
         [Required]
         [StringLength(150)]

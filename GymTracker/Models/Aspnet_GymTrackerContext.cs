@@ -54,6 +54,8 @@ namespace GymTracker.Models
 
                 entity.Property(e => e.NormalizedUserName).HasMaxLength(256);
 
+                entity.Property(e => e.Picture).HasMaxLength(250);
+
                 entity.Property(e => e.Surname).HasMaxLength(150);
 
                 entity.Property(e => e.UserName).HasMaxLength(256);
@@ -143,7 +145,9 @@ namespace GymTracker.Models
                     .IsRequired()
                     .HasMaxLength(150);
 
-                entity.Property(e => e.GifPicture).IsRequired();
+                entity.Property(e => e.GifPicture)
+                    .IsRequired()
+                    .HasMaxLength(250);
 
                 entity.Property(e => e.Name)
                     .IsRequired()

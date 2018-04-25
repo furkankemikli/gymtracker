@@ -32,9 +32,9 @@ namespace GymTracker.Models
         public int? GymId { get; set; }
         public override string UserName { get; set; }
         public string City { get; set; }
-        public byte[] Picture { get; set; }
         public string Name { get; set; }
         public string Surname { get; set; }
+        public string Picture { get; set; }
 
         public Gym Gym { get; set; }
         public Trainee TraineeTraineeNavigation { get; set; }

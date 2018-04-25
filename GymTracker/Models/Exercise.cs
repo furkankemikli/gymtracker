@@ -14,8 +14,8 @@ namespace GymTracker.Models
         public int ExerciseId { get; set; }
         public string Name { get; set; }
         public double CalorieBySet { get; set; }
-        public byte[] GifPicture { get; set; }
         public string Category { get; set; }
+        public string GifPicture { get; set; }
 
         public ICollection<DailyProgress> DailyProgress { get; set; }
         public ICollection<DailyRoutine> DailyRoutine { get; set; }

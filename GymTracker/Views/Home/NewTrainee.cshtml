@@ -10,7 +10,8 @@
     </div>
     <div class="x_content">
         <br />
-        <form id="new-trainee" asp-controller="Home" asp-action="AddNewTrainee" data-parsley-validate class="form-horizontal form-label-left">
+        <form method="post" asp-controller="Home" enctype="multipart/form-data" asp-action="NewTrainee" data-parsley-validate class="form-horizontal form-label-left">
+            <div asp-validation-summary="All" class="text-danger"></div>
             <div class="form-group">
                 <label class="control-label col-md-3 col-sm-3 col-xs-12" asp-for="Name">
                     Name <span class="required">*</span>
@@ -36,6 +37,24 @@
                 </div>
             </div>
             <div class="form-group">
+                <label class="control-label col-md-3 col-sm-3 col-xs-12" asp-for="Password">
+                    Password <span class="required">*</span>
+                </label>
+                <div class="col-md-6 col-sm-6 col-xs-12">
+                    <input type="password" id="password" name="password" required="required" asp-for="Password" class="form-control col-md-7 col-xs-12">
+                    <span asp-validation-for="Password" class="focus-input100" data-placeholder="Password"></span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-md-3 col-sm-3 col-xs-12" asp-for="ConfirmPassword">
+                    Confirm Password <span class="required">*</span>
+                </label>
+                <div class="col-md-6 col-sm-6 col-xs-12">
+                    <input type="password" id="confirmpassword" name="confirmpassword" required="required" asp-for="ConfirmPassword" class="form-control col-md-7 col-xs-12">
+                    <span asp-validation-for="ConfirmPassword" class="focus-input100" data-placeholder="Confirm Password"></span>
+                </div>
+            </div>
+            <div class="form-group">
                 <label class="control-label col-md-3 col-sm-3 col-xs-12" asp-for="DateOfBirth">
                     Date Of Birth <span class="required">*</span>
                 </label>
@@ -54,7 +73,7 @@
                 </label>
                 <div class="col-md-6 col-sm-6 col-xs-12">
                     <img id="preview" style="height:100px;" src="~/images/user.png" alt="ProfileImage" />
-                    <input type="file" accept="image/*" size="100" id="image" name="image" asp-for="Image" class="form-control col-md-7 col-xs-12">
+                    <input type="file" accept="image/*" size="100" id="image" asp-for="Image" class="form-control col-md-7 col-xs-12">
                 </div>
             </div>
             <div class="form-group">
@@ -86,7 +105,7 @@
                     Fat Ratio
                 </label>
                 <div class="col-md-6 col-sm-6 col-xs-12">
-                    <input type="number" step="0.01" id="fat-ratio" name="fat-ratio" asp-for="FatRatio" class="form-control col-md-7 col-xs-12">
+                    <input type="number" step="0.01" id="fat-ratio" asp-for="FatRatio" class="form-control col-md-7 col-xs-12">
                 </div>
             </div>
             <div class="form-group">

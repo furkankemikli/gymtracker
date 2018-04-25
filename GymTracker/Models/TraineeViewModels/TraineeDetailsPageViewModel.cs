@@ -17,7 +17,7 @@ namespace GymTracker.Models.TraineeViewModels
 
         public DateTime DateOfBirth { get; set; }
 
-        public byte[] Image { get; set; }
+        public string Image { get; set; }
 
         public string Phone { get; set; }
 

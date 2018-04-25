@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -27,6 +28,11 @@ namespace GymTracker.Models.TraineeViewModels
         [Display(Name = "Password")]
         public string Password { get; set; }
 
+        [DataType(DataType.Password)]
+        [Display(Name = "Confirm password")]
+        [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
+        public string ConfirmPassword { get; set; }
+
         [Phone]
         public string Phone { get; set; }
 
@@ -35,7 +41,7 @@ namespace GymTracker.Models.TraineeViewModels
 
         public DateTime DateOfBirth { get; set; }
 
-        public byte[] Image { get; set; }
+        public IFormFile Image { get; set; }
 
         public double Weight { get; set; }
 

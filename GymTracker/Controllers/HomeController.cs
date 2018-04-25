@@ -14,6 +14,8 @@ using System.Globalization;
 using GymTracker.Models.TraineeViewModels;
 using GymTracker.Services;
 using Microsoft.AspNetCore.Identity;
+using System.IO;
+using Microsoft.AspNetCore.Hosting;
 
 namespace GymTracker.Controllers
 {
@@ -28,6 +30,7 @@ namespace GymTracker.Controllers
         private readonly IDailyRoutineRepository _dailyRoutineRepository;
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly IEmailSender _emailSender;
+        private readonly IHostingEnvironment _hostingEnvironment;
 
 
         public HomeController(
@@ -38,7 +41,8 @@ namespace GymTracker.Controllers
             IDailyProgressRepository dailyProgressRepository,
             IDailyRoutineRepository dailyRoutineRepository,
             UserManager<ApplicationUser> userManager,
-            IEmailSender emailSender)
+            IEmailSender emailSender,
+            IHostingEnvironment hostingEnvironment)
         {
             _eventRepository = eventRepository;
             _exerciseRepository = exerciseRepository;
@@ -48,6 +52,7 @@ namespace GymTracker.Controllers
             _dailyRoutineRepository = dailyRoutineRepository;
             _emailSender = emailSender;
             _userManager = userManager;
+            _hostingEnvironment = hostingEnvironment;
         }
 
         public IActionResult Index()
@@ -172,35 +177,53 @@ namespace GymTracker.Controllers
             return View();
         }
 
-        public async Task<IActionResult> AddNewTrainee(NewTraineeViewModel model)
+        [HttpPost]
+        public async Task<IActionResult> NewTrainee(NewTraineeViewModel model)
         {
-
-            var trainer = await _userManager.GetUserAsync(User);
-            var user = new ApplicationUser { UserName = model.Email, Email = model.Email,
-                                             Name = model.Name, Surname = model.Surname,
-                                             PhoneNumber = model.Phone, City = model.City,
-                                             GymId = trainer.GymId, Picture = model.Image                                            
-                                            };
-            var result = await _userManager.CreateAsync(user, model.Password);
-            if (result.Succeeded)
+            if (ModelState.IsValid)
             {
-                var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
-                var callbackUrl = Url.EmailConfirmationLink(user.Id, code, Request.Scheme);
-                await _emailSender.SendEmailConfirmationAsync(model.Email, callbackUrl);
-                Trainee trainee = new Trainee
-                {
-                    Birthday = model.DateOfBirth,
-                    EntryDate = DateTime.Today,
-                    FatRatio = model.FatRatio,
-                    Gender = model.Gender,
-                    Height = model.Height,
-                    TrainerId = trainer.Id,
-                    TraineeId = _traineeRepository.GetUserId(model.Email, model.Name, model.Surname),
-                    Weight = model.Weight
-
+                var trainer = await _userManager.GetUserAsync(User);
+                var user = new ApplicationUser { UserName = model.Email, Email = model.Email,
+                    Name = model.Name, Surname = model.Surname,
+                    PhoneNumber = model.Phone, City = model.City,
+                    GymId = trainer.GymId
                 };
-                _traineeRepository.CreateTrainee(trainee);
-                return RedirectToAction("Trainees", "Home");
+
+                if (model.Image != null && model.Image.Length > 0)
+                {
+                    var guid = Guid.NewGuid().ToString();
+                    user.Picture = "Uploads/" + guid + Path.GetExtension(model.Image.FileName);
+                    var userPath = Path.Combine(_hostingEnvironment.ContentRootPath, "Uploads", guid + Path.GetExtension(model.Image.FileName));
+                    
+                    using (var stream = new FileStream(userPath, FileMode.Create))
+                    {
+                        await model.Image.CopyToAsync(stream);
+                    }
+                }
+                #warning "Remove after adding password field."
+                model.Password = "hello";
+
+                var result = await _userManager.CreateAsync(user, model.Password);
+                if (result.Succeeded)
+                {
+                    var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
+                    var callbackUrl = Url.EmailConfirmationLink(user.Id, code, Request.Scheme);
+                    await _emailSender.SendEmailConfirmationAsync(model.Email, callbackUrl);
+                    Trainee trainee = new Trainee
+                    {
+                        Birthday = model.DateOfBirth,
+                        EntryDate = DateTime.Today,
+                        FatRatio = model.FatRatio,
+                        Gender = model.Gender,
+                        Height = model.Height,
+                        TrainerId = trainer.Id,
+                        TraineeId = _traineeRepository.GetUserId(model.Email, model.Name, model.Surname),
+                        Weight = model.Weight
+
+                    };
+                    _traineeRepository.CreateTrainee(trainee);
+                    return RedirectToAction("Trainees", "Home");
+                }
             }
             return View(model);
         }
