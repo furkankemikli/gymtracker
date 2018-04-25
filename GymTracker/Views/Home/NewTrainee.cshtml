@@ -75,7 +75,7 @@
                     <img id="preview" style="height:100px;" src="~/images/user.png" alt="ProfileImage" />
                     <input type="file" accept="image/*" size="100" id="image" asp-for="Image" class="form-control col-md-7 col-xs-12">
                 </div>
-            </div>
+            </div>s
             <div class="form-group">
                 <label class="control-label col-md-3 col-sm-3 col-xs-12" asp-for="Phone">
                     Phone
@@ -121,10 +121,10 @@
                 <div class="col-md-6 col-sm-6 col-xs-12">
                     <div id="gender" class="btn-group" data-toggle="buttons">
                         <label class="btn btn-default" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default">
-                            <input type="radio" name="gender" value="male" asp-for="Gender"> &nbsp; Male &nbsp;
+                            <input type="radio" value="male" asp-for="Gender"> &nbsp; Male &nbsp;
                         </label>
                         <label class="btn btn-primary" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default">
-                            <input type="radio" name="gender" value="female" asp-for="Gender"> Female
+                            <input type="radio" value="female" asp-for="Gender"> Female
                         </label>
                     </div>
                 </div>

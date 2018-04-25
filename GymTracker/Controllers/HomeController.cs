@@ -147,15 +147,27 @@ namespace GymTracker.Controllers
             return View(homeIndexViewModel);
         }
 
-        public IActionResult AddNewExercise(ExercisesViewModel model)
+        [HttpPost]
+        public async Task<IActionResult> AddNewExercise(ExercisesViewModel model)
         {
             Exercise exercise = new Exercise
             {
                 Name = model.Name,
                 CalorieBySet = model.CalorieBySet,
-                GifPicture = model.GifPicture,
+                //GifPicture = model.GifPicture,
                 Category = model.Category
             };
+            if (model.GifPicture != null && model.GifPicture.Length > 0)
+            {
+                var guid = Guid.NewGuid().ToString();
+                exercise.GifPicture = "Uploads/" + guid + Path.GetExtension(model.GifPicture.FileName);
+                var userPath = Path.Combine(_hostingEnvironment.ContentRootPath, "Uploads", guid + Path.GetExtension(model.GifPicture.FileName));
+
+                using (var stream = new FileStream(userPath, FileMode.Create))
+                {
+                    await model.GifPicture.CopyToAsync(stream);
+                }
+            }
             _exerciseRepository.CreateExercise(exercise);
             return RedirectToAction("Exercises", "Home");
         }

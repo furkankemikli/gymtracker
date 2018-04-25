@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -17,7 +18,7 @@ namespace GymTracker.Models
 
         public double CalorieBySet { get; set; }
 
-        public string GifPicture { get; set; }
+        public IFormFile GifPicture { get; set; }
 
         [Required]
         [StringLength(150)]

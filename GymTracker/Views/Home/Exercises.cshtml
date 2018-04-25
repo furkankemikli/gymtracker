@@ -32,7 +32,7 @@
                     <td>@ex.Category</td>
                     <td>@ex.CalorieBySet</td>
                     <td>
-                        <img border=3 height=100 width=100 src="@imgSrc">
+                        <img border=3 height=100 width=100 src="~/../@imgSrc">
                     </td>
                 </tr>
                 }
@@ -50,13 +50,13 @@
             </div>
             <div class="modal-body">
                 <div id="testmodal" style="padding: 5px 20px;">
-                    <form class="form-horizontal" role="form">
+                    <form class="form-horizontal" role="form" enctype="multipart/form-data" asp-controller="Home" asp-action="AddNewExercise">
                         <div class="form-group">
                             <label class="control-label col-md-3 col-sm-3 col-xs-12" asp-for="Name">
                                 Name <span class="required">*</span>
                             </label>
                             <div class="col-md-6 col-sm-6 col-xs-12">
-                                <input type="text" id="name" required="required" class="form-control col-md-7 col-xs-12">
+                                <input type="text" id="name" asp-for="Name" required="required" class="form-control col-md-7 col-xs-12">
                             </div>
                         </div>
                         <div class="form-group">
@@ -64,7 +64,7 @@
                                 Category<span class="required">*</span>
                             </label>
                             <div class="col-md-6 col-sm-6 col-xs-12">
-                                <input type="text" class="form-control col-md-7 col-xs-12" asp-for="Category" id="category" name="category">
+                                <input type="text" class="form-control col-md-7 col-xs-12" asp-for="Category" id="category">
                             </div>
                         </div>
                         <div class="form-group">
@@ -81,15 +81,15 @@
                             </label>
                             <div class="col-md-6 col-sm-6 col-xs-12">
                                 <img id="preview" style="height:100px;" src="~/images/user.png" alt="ProfileImage" />
-                                <input type="file" accept="image/*" size="100" id="image" name="image" asp-for="GifPicture" class="form-control col-md-7 col-xs-12">
+                                <input type="file" accept="image/*" size="100" id="image" asp-for="GifPicture" class="form-control col-md-7 col-xs-12">
                             </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-danger antoclose" data-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-success antosubmit">Save changes</button>
                         </div>
                     </form>
                 </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-danger antoclose" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-success antosubmit">Save changes</button>
             </div>
         </div>
     </div>
