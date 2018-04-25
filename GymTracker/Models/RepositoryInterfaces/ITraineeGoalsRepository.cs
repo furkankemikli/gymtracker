@@ -7,7 +7,7 @@ namespace GymTracker.Models.Repositories
 {
     public interface ITraineeGoalsRepository
     {
-        TraineeGoals GetTraineeGoals(string TraineeId);
+        TraineeGoals GetTraineeGoals(string traineeId);
 
         void CreateGoal(TraineeGoals traineeGoals);
 

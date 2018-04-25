@@ -40,7 +40,13 @@ namespace GymTracker
 
             // Add application services.
             services.AddTransient<IEmailSender, EmailSender>();
+            services.AddTransient<IDailyProgressRepository, DailyProgressRepository>();
+            services.AddTransient<IDailyRoutineRepository, DailyRoutineRepository>();
             services.AddTransient<IEventRepository, EventRepository>();
+            services.AddTransient<IExerciseRepository, ExerciseRepository>();
+            services.AddTransient<IGymRepository, GymRepository>();
+            services.AddTransient<ITraineeGoalsRepository, TraineeGoalsRepository>();
+            services.AddTransient<ITraineeRepository, TraineeRepository>();
 
             services.AddMvc();
 

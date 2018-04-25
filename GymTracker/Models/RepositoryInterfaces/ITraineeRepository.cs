@@ -11,10 +11,10 @@ namespace GymTracker.Models.Repositories
 
         Trainee GetTraineeById(string traineeId);
 
-        void NewTraineeInsert(Trainee trainee);
+        void CreateTrainee(Trainee trainee);
 
-        void UpdateTrainee(Trainee trainee);
+        void UpdateTrainee(Trainee trainee, ApplicationUser user);
 
-        void DeleteTrainee(int traineeId);
+        void DeleteTrainee(string traineeId);
     }
 }
