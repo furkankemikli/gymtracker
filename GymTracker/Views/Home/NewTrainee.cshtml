@@ -1,4 +1,5 @@
-﻿@{
+﻿@model NewTraineeViewModel
+@{
     ViewData["Title"] = "New Trainee";
 }
 
@@ -9,38 +10,57 @@
     </div>
     <div class="x_content">
         <br />
-        <form id="new-trainee" data-parsley-validate class="form-horizontal form-label-left">
+        <form method="post" asp-controller="Home" enctype="multipart/form-data" asp-action="NewTrainee" data-parsley-validate class="form-horizontal form-label-left">
+            <div asp-validation-summary="All" class="text-danger"></div>
             <div class="form-group">
-                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">
+                <label class="control-label col-md-3 col-sm-3 col-xs-12" asp-for="Name">
                     Name <span class="required">*</span>
                 </label>
                 <div class="col-md-6 col-sm-6 col-xs-12">
-                    <input type="text" id="first-name" required="required" class="form-control col-md-7 col-xs-12">
+                    <input type="text" id="first-name" required="required" asp-for="Name" class="form-control col-md-7 col-xs-12">
                 </div>
             </div>
             <div class="form-group">
-                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="surname">
+                <label class="control-label col-md-3 col-sm-3 col-xs-12" asp-for="Surname">
                     Surname <span class="required">*</span>
                 </label>
                 <div class="col-md-6 col-sm-6 col-xs-12">
-                    <input type="text" id="surname" name="surname" required="required" class="form-control col-md-7 col-xs-12">
+                    <input type="text" id="surname" name="surname" required="required" asp-for="Surname" class="form-control col-md-7 col-xs-12">
                 </div>
             </div>
             <div class="form-group">
-                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="email">
+                <label class="control-label col-md-3 col-sm-3 col-xs-12" asp-for="Email">
                     Email <span class="required">*</span>
                 </label>
                 <div class="col-md-6 col-sm-6 col-xs-12">
-                    <input type="text" id="email" name="email" required="required" class="form-control col-md-7 col-xs-12">
+                    <input type="text" id="email" name="email" required="required" asp-for="Email" class="form-control col-md-7 col-xs-12">
                 </div>
             </div>
             <div class="form-group">
-                <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                <label class="control-label col-md-3 col-sm-3 col-xs-12" asp-for="Password">
+                    Password <span class="required">*</span>
+                </label>
+                <div class="col-md-6 col-sm-6 col-xs-12">
+                    <input type="password" id="password" name="password" required="required" asp-for="Password" class="form-control col-md-7 col-xs-12">
+                    <span asp-validation-for="Password" class="focus-input100" data-placeholder="Password"></span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-md-3 col-sm-3 col-xs-12" asp-for="ConfirmPassword">
+                    Confirm Password <span class="required">*</span>
+                </label>
+                <div class="col-md-6 col-sm-6 col-xs-12">
+                    <input type="password" id="confirmpassword" name="confirmpassword" required="required" asp-for="ConfirmPassword" class="form-control col-md-7 col-xs-12">
+                    <span asp-validation-for="ConfirmPassword" class="focus-input100" data-placeholder="Confirm Password"></span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-md-3 col-sm-3 col-xs-12" asp-for="DateOfBirth">
                     Date Of Birth <span class="required">*</span>
                 </label>
                 <div class="col-md-6 col-sm-6 col-xs-12">
-                    <div class='input-group date' id='myDatepicker'>
-                        <input id="birthday" type='text' class="form-control" data-inputmask="'mask': '99/99/9999'" placeholder="DD/MM/YYYY" required="required" />
+                    <div class='input-group date' id='myDatepicker2'>
+                        <input id="birthday" type='text' class="form-control" asp-for="DateOfBirth" data-inputmask="'mask': '99.99.9999'" placeholder="DD.MM.YYYY" required="required" />
                         <span class="input-group-addon">
                             <span class="glyphicon glyphicon-calendar"></span>
                         </span>
@@ -48,63 +68,63 @@
                 </div>
             </div>
             <div class="form-group">
-                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="image">
+                <label class="control-label col-md-3 col-sm-3 col-xs-12" asp-for="Image">
                     Image
                 </label>
                 <div class="col-md-6 col-sm-6 col-xs-12">
                     <img id="preview" style="height:100px;" src="~/images/user.png" alt="ProfileImage" />
-                    <input type="file" accept="image/*" size="100" id="image" name="image" class="form-control col-md-7 col-xs-12">
+                    <input type="file" accept="image/*" size="100" id="image" asp-for="Image" class="form-control col-md-7 col-xs-12">
                 </div>
-            </div>
+            </div>s
             <div class="form-group">
-                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="phone">
+                <label class="control-label col-md-3 col-sm-3 col-xs-12" asp-for="Phone">
                     Phone
                 </label>
                 <div class="col-md-6 col-sm-6 col-xs-12">
-                    <input type="tel" id="phone" name="phone" class="form-control col-md-7 col-xs-12" data-inputmask="'mask' : '(999) 999-9999'">
+                    <input type="tel" id="phone" name="phone" asp-for="Phone" class="form-control col-md-7 col-xs-12">
                 </div>
             </div>
             <div class="form-group">
-                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="weight">
+                <label class="control-label col-md-3 col-sm-3 col-xs-12" asp-for="Weight">
                     Weight
                 </label>
                 <div class="col-md-6 col-sm-6 col-xs-12">
-                    <input type="number" step="0.1" id="weight" name="weight" class="form-control col-md-7 col-xs-12">
+                    <input type="number" step="0.1" id="weight" name="weight" asp-for="Weight" class="form-control col-md-7 col-xs-12">
                 </div>
             </div>
             <div class="form-group">
-                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="height">
+                <label class="control-label col-md-3 col-sm-3 col-xs-12" asp-for="Height">
                     Height
                 </label>
                 <div class="col-md-6 col-sm-6 col-xs-12">
-                    <input type="number" id="height" name="height" class="form-control col-md-7 col-xs-12">
+                    <input type="number" id="height" name="height" asp-for="Height" class="form-control col-md-7 col-xs-12">
                 </div>
             </div>
             <div class="form-group">
-                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="fat-ratio">
+                <label class="control-label col-md-3 col-sm-3 col-xs-12" asp-for="FatRatio">
                     Fat Ratio
                 </label>
                 <div class="col-md-6 col-sm-6 col-xs-12">
-                    <input type="number" step="0.01" id="fat-ratio" name="fat-ratio" class="form-control col-md-7 col-xs-12">
+                    <input type="number" step="0.01" id="fat-ratio" asp-for="FatRatio" class="form-control col-md-7 col-xs-12">
                 </div>
             </div>
             <div class="form-group">
-                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="city">
+                <label class="control-label col-md-3 col-sm-3 col-xs-12" asp-for="City">
                     City
                 </label>
                 <div class="col-md-6 col-sm-6 col-xs-12">
-                    <input type="text" id="city" name="city" class="form-control col-md-7 col-xs-12">
+                    <input type="text" id="city" name="city" asp-for="City" class="form-control col-md-7 col-xs-12">
                 </div>
             </div>
             <div class="form-group">
-                <label class="control-label col-md-3 col-sm-3 col-xs-12">Gender</label>
+                <label class="control-label col-md-3 col-sm-3 col-xs-12" asp-for="Gender">Gender</label>
                 <div class="col-md-6 col-sm-6 col-xs-12">
                     <div id="gender" class="btn-group" data-toggle="buttons">
                         <label class="btn btn-default" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default">
-                            <input type="radio" name="gender" value="male"> &nbsp; Male &nbsp;
+                            <input type="radio" value="male" asp-for="Gender"> &nbsp; Male &nbsp;
                         </label>
                         <label class="btn btn-primary" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default">
-                            <input type="radio" name="gender" value="female"> Female
+                            <input type="radio" value="female" asp-for="Gender"> Female
                         </label>
                     </div>
                 </div>

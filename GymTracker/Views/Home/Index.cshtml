@@ -1,4 +1,5 @@
-﻿@{
+﻿@model HomeIndexViewModel
+@{
     ViewData["Title"] = "Home Page";
 }
 
@@ -9,7 +10,7 @@
 </div>
 <!-- /page content -->
 <!-- calendar modal -->
-<div id="CalenderModalNew" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div id="CalendarModalNew" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -18,30 +19,38 @@
             </div>
             <div class="modal-body">
                 <div id="testmodal" style="padding: 5px 20px;">
-                    <form id="antoform" class="form-horizontal calender" role="form">
+                    <form id="antoform" class="form-horizontal calender" asp-controller="Home" asp-action="AddNewEvent" role="form">
                         <div class="form-group">
-                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="Title">
-                                Title <span class="required">*</span>
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" asp-for="Name">
+                                Title<span class="required">*</span>
                             </label>
                             <div class="col-md-6 col-sm-6 col-xs-12">
-                                <input type="text" id="title" name="title" required="required" class="form-control col-md-7 col-xs-12">
+                                <input type="text" id="title" required="required" asp-for="Name" class="form-control col-md-7 col-xs-12">
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="descr">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" asp-for="Description">
                                 Description
                             </label>
                             <div class="col-md-6 col-sm-6 col-xs-12">
-                                <textarea style="height:55px;" id="descr" name="descr" class="form-control col-md-7 col-xs-12"></textarea>
+                                <textarea class="form-control col-md-7 col-xs-12" id="description" asp-for="Description"></textarea>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" asp-for="Location">
+                                Location
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <input type="text" class="form-control col-md-7 col-xs-12" id="location" asp-for="Location">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" asp-for="StrStartDate">
                                 Start Date <span class="required">*</span>
                             </label>
                             <div class="col-md-6 col-sm-6 col-xs-12">
-                                <div class='input-group date' id='myDatepicker6'>
-                                    <input id="startdate" type='text' class="form-control" placeholder="DD/MM/YYYY HH:MM" required="required" />
+                                <div class='input-group date' id='myDatepicker3'>
+                                    <input id="startdate" type='text' class="form-control" asp-for="StrStartDate" placeholder="DD.MM.YYYY HH:MM" required="required" />
                                     <span class="input-group-addon">
                                         <span class="glyphicon glyphicon-calendar"></span>
                                     </span>
@@ -49,29 +58,29 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" asp-for="StrEndDate">
                                 End Date <span class="required">*</span>
                             </label>
                             <div class="col-md-6 col-sm-6 col-xs-12">
-                                <div class='input-group date' id='myDatepicker3'>
-                                    <input id="enddate" type='text' class="form-control" placeholder="DD/MM/YYYY HH:MM" required="required" />
+                                <div class='input-group date' id='myDatepicker4'>
+                                    <input id="enddate" type='text' class="form-control" asp-for="StrEndDate" placeholder="DD.MM.YYYY HH:MM" required="required" />
                                     <span class="input-group-addon">
                                         <span class="glyphicon glyphicon-calendar"></span>
                                     </span>
                                 </div>
                             </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-info antoclose2" data-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary antosubmit2">Save changes</button>
                         </div>
                     </form>
                 </div>
             </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-danger antoclose" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary antosubmit">Save changes</button>
-            </div>
         </div>
     </div>
 </div>
-<div id="CalenderModalEdit" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div id="CalendarModalEdit" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -80,30 +89,39 @@
             </div>
             <div class="modal-body">
                 <div id="testmodal2" style="padding: 5px 20px;">
-                    <form id="antoform2" class="form-horizontal calender" role="form">
+                    <form id="antoform2" class="form-horizontal calender" asp-controller="Home" asp-action="UpdateEvent" role="form">
+                        <input type="hidden" class="form-control" asp-for="EventId" id="eventId2" readonly>
                         <div class="form-group">
-                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" asp-for="Name">
                                 Title<span class="required">*</span>
                             </label>
                             <div class="col-md-6 col-sm-6 col-xs-12">
-                                <input type="text" id="title2" name="title2" required="required" class="form-control col-md-7 col-xs-12">
+                                <input type="text" id="title2" required="required" asp-for="Name" class="form-control col-md-7 col-xs-12">
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="descr2">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" asp-for="Description">
                                 Description
                             </label>
                             <div class="col-md-6 col-sm-6 col-xs-12">
-                                <textarea class="form-control col-md-7 col-xs-12" style="height:55px;" id="descr2" name="descr"></textarea>
+                                <textarea class="form-control col-md-7 col-xs-12" id="description2" asp-for="Description"></textarea>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" asp-for="Location">
+                                Location
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <input type="text" class="form-control col-md-7 col-xs-12" id="location2" asp-for="Location">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" asp-for="StrStartDate">
                                 Start Date <span class="required">*</span>
                             </label>
                             <div class="col-md-6 col-sm-6 col-xs-12">
-                                <div class='input-group date' id='myDatepicker4'>
-                                    <input id="startdate2" type='text' class="form-control" placeholder="DD/MM/YYYY HH:MM" required="required" />
+                                <div class='input-group date' id='myDatepicker5'>
+                                    <input id="startdate2" type='text' class="form-control" asp-for="StrStartDate" placeholder="DD.MM.YYYY HH:MM" required="required" />
                                     <span class="input-group-addon">
                                         <span class="glyphicon glyphicon-calendar"></span>
                                     </span>
@@ -111,28 +129,36 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" asp-for="StrEndDate">
                                 End Date <span class="required">*</span>
                             </label>
                             <div class="col-md-6 col-sm-6 col-xs-12">
-                                <div class='input-group date' id='myDatepicker5'>
-                                    <input id="enddate2" type='text' class="form-control" placeholder="DD/MM/YYYY HH:MM" required="required" />
+                                <div class='input-group date' id='myDatepicker6'>
+                                    <input id="enddate2" type='text' class="form-control" asp-for="StrEndDate" placeholder="DD.MM.YYYY HH:MM" required="required" />
                                     <span class="input-group-addon">
                                         <span class="glyphicon glyphicon-calendar"></span>
                                     </span>
                                 </div>
                             </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" id="deleteBtn" class="pull-left btn btn-danger" onclick="location.href='@Url.Action("DeleteEvent", "Home")?eventId=' + $('#eventId2').val()">Delete Event</button>
+                            <button type="button" class="btn btn-info antoclose2" data-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary antosubmit2">Save changes</button>
                         </div>
                     </form>
                 </div>
             </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-danger antoclose2" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary antosubmit2">Save changes</button>
-            </div>
         </div>
     </div>
 </div>
-<div id="fc_create" data-toggle="modal" data-target="#CalenderModalNew"></div>
-<div id="fc_edit" data-toggle="modal" data-target="#CalenderModalEdit"></div>
+<div id="fc_create" data-toggle="modal" data-target="#CalendarModalNew"></div>
+<div id="fc_edit" data-toggle="modal" data-target="#CalendarModalEdit"></div>
 <!-- /calendar modal -->
+@section Scripts
+    {
+    <script>
+        var eventList = '@Model.jsonEvents';
+    </script>
+    <script src="~/js/initCalendar.js" charset="utf-8"></script>
+}

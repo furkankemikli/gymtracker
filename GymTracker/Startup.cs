@@ -11,6 +11,10 @@ using Microsoft.Extensions.DependencyInjection;
 using GymTracker.Data;
 using GymTracker.Models;
 using GymTracker.Services;
+using GymTracker.Models.Repositories;
+using Microsoft.Extensions.FileProviders;
+using Microsoft.AspNetCore.Http;
+using System.IO;
 
 namespace GymTracker
 {
@@ -26,17 +30,38 @@ namespace GymTracker
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            var connection = @"Server=(localdb)\mssqllocaldb;Database=aspnet-GymTracker;Trusted_Connection=True;";
+            services.AddDbContext<Aspnet_GymTrackerContext>(options => options.UseSqlServer(connection));
+
+
+           //services.AddDbContext<ApplicationDbContext>(options =>
+           //     options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
             services.AddIdentity<ApplicationUser, IdentityRole>()
-                .AddEntityFrameworkStores<ApplicationDbContext>()
+                .AddEntityFrameworkStores<Aspnet_GymTrackerContext>()
                 .AddDefaultTokenProviders();
 
             // Add application services.
             services.AddTransient<IEmailSender, EmailSender>();
+            services.AddTransient<IDailyProgressRepository, DailyProgressRepository>();
+            services.AddTransient<IDailyRoutineRepository, DailyRoutineRepository>();
+            services.AddTransient<IEventRepository, EventRepository>();
+            services.AddTransient<IExerciseRepository, ExerciseRepository>();
+            services.AddTransient<IGymRepository, GymRepository>();
+            services.AddTransient<ITraineeGoalsRepository, TraineeGoalsRepository>();
+            services.AddTransient<ITraineeRepository, TraineeRepository>();
 
             services.AddMvc();
+
+            services.Configure<IdentityOptions>(options =>
+            {
+                options.Password.RequireDigit = false;
+                options.Password.RequiredLength = 5;
+                options.Password.RequireLowercase = true;
+                options.Password.RequireUppercase = false;
+                options.Password.RequireNonAlphanumeric = false;
+                options.SignIn.RequireConfirmedEmail = true;
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -54,6 +79,12 @@ namespace GymTracker
             }
 
             app.UseStaticFiles();
+
+            app.UseStaticFiles(new StaticFileOptions
+            {
+                FileProvider = new PhysicalFileProvider(Path.Combine(env.ContentRootPath, "Uploads")),
+                RequestPath = new PathString("/Uploads")
+            });
 
             app.UseAuthentication();
 

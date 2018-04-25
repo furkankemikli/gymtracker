@@ -1,4 +1,5 @@
-﻿@{
+﻿@model TraineeDetailsPageViewModel
+@{
     ViewData["Title"] = "Trainee Details";
 }
 <div class="">
@@ -15,25 +16,25 @@
                         <div class="profile_img">
                             <div id="crop-avatar">
                                 <!-- Current avatar -->
-                                <img class="img-responsive avatar-view" src="~/images/picture.jpg" alt="Avatar" title="Change the avatar">
+                                <img class="img-responsive avatar-view" width="150" height="150" src="/../@Model.Image" alt="Avatar" title="Change the avatar">
                             </div>
                         </div>
-                        <h3>Samuel Doe</h3>
+                        <h3>@Model.Name @Model.Surname</h3>
                         <ul class="list-unstyled user_data">
                             <li>
-                                <i class="fa fa-envelope user-profile-icon"></i> Email
+                                <i class="fa fa-envelope user-profile-icon"></i> @Model.Email
                             </li>
                             @*<li>
                                     <i class="fa fa-phone user-profile-icon"></i> Phone
                                 </li>*@
                             <li>
-                                <i class="fa fa-birthday-cake user-profile-icon"></i> Date Of Birth
+                                <i class="fa fa-birthday-cake user-profile-icon"></i> @Model.DateOfBirth
                             </li>
                             <li>
-                                <i class="fa fa-child user-profile-icon"></i> Weight
+                                <i class="fa fa-child user-profile-icon"></i> @Model.Weight
                             </li>
                             <li>
-                                <i class="fa fa-child user-profile-icon"></i> Height
+                                <i class="fa fa-child user-profile-icon"></i> @Model.Height
                             </li>
                             @*<li>
                                     <i class="fa fa-child user-profile-icon"></i> Fat Ratio
@@ -42,7 +43,7 @@
                                     <i class="fa fa-map-marker user-profile-icon"></i> City
                                 </li>*@
                         </ul>
-                        <a class="btn btn-success" asp-controller="Home" asp-action="EditTrainee"><i class="fa fa-edit m-right-xs"></i>Edit Profile</a>
+                        <a class="btn btn-success" onclick="location.href='@(Url.Action("EditTrainee", "Home", new { Id = Model.Id }))'"><i class="fa fa-edit m-right-xs"></i>Edit Profile</a>
                         <br />
                         @*<!-- start skills -->
                             <h4>Skills</h4>
@@ -92,7 +93,7 @@
                         <div class="" role="tabpanel" data-example-id="togglable-tabs">
                             <ul id="myTab" class="nav nav-tabs bar_tabs" role="tablist">
                                 <li role="presentation" class="active">
-                                    <a href="#tab_content1" role="tab" id="profile-tab" data-toggle="tab" aria-expanded="false">Exercises Working on</a>
+                                    <a href="#tab_content1" role="tab" id="profile-tab" data-toggle="tab" aria-expanded="false">Exercises Done</a>
                                 </li>
                                 <li role="presentation" class="">
                                     <a href="#tab_content4" role="tab" id="profile-tab3" data-toggle="tab" aria-expanded="false">Set Exercises</a>
@@ -118,51 +119,23 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr>
-                                                <td>1</td>
-                                                <td>New Company Takeover Review</td>
-                                                <td>Deveint Inc</td>
-                                                <td class="hidden-phone">18</td>
-                                                <td class="vertical-align-mid">
-                                                    <div class="progress">
-                                                        <div class="progress-bar progress-bar-success" data-transitiongoal="35"></div>
-                                                        <!--Populate progress bar just calculated percentage in data-transitiongoal value(instead of 35 put our value)-->
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>2</td>
-                                                <td>New Partner Contracts Consultanci</td>
-                                                <td>Deveint Inc</td>
-                                                <td class="hidden-phone">13</td>
-                                                <td class="vertical-align-mid">
-                                                    <div class="progress">
-                                                        <div class="progress-bar progress-bar-danger" data-transitiongoal="15"></div>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>3</td>
-                                                <td>Partners and Inverstors report</td>
-                                                <td>Deveint Inc</td>
-                                                <td class="hidden-phone">30</td>
-                                                <td class="vertical-align-mid">
-                                                    <div class="progress">
-                                                        <div class="progress-bar progress-bar-success" data-transitiongoal="45"></div>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>4</td>
-                                                <td>New Company Takeover Review</td>
-                                                <td>Deveint Inc</td>
-                                                <td class="hidden-phone">28</td>
-                                                <td class="vertical-align-mid">
-                                                    <div class="progress">
-                                                        <div class="progress-bar progress-bar-success" data-transitiongoal="80"></div>
-                                                    </div>
-                                                </td>
-                                            </tr>
+                                            @{int i = 1;}
+                                            @foreach (var ex in Model.DailyProgresses)
+                                            {
+                                                <tr>
+                                                    <td>@i</td>
+                                                    @i++;
+                                                    <td>@ex.Exercise.Name</td>
+                                                    <td>@ex.Exercise.Category</td>
+                                                    <td>@ex.AssignedSets</td>
+                                                    <td class="vertical-align-mid">
+                                                        <div class="progress">
+                                                            <div class="progress-bar progress-bar-success" data-transitiongoal="@ex.CompletedSets*100/@ex.AssignedSets"></div>
+                                                            <!--Populate progress bar just calculated percentage in data-transitiongoal value(instead of 35 put our value)-->
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            }
                                         </tbody>
                                     </table>
                                     <!-- end user exercises -->
@@ -170,75 +143,75 @@
                                 <div role="tabpanel" class="tab-pane fade" id="tab_content2" aria-labelledby="profile-tab">
                                     <div class="form-horizontal form-label-left">
                                         <div class="form-group">
-                                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">
+                                            <label class="control-label col-md-3 col-sm-3 col-xs-12" asp-for="Name">
                                                 Name <span class="required">*</span>
                                             </label>
                                             <div class="col-md-6 col-sm-6 col-xs-12">
-                                                <text type="text" id="first-name" required="required" class="form-control col-md-7 col-xs-12">John</text>
+                                                <text type="text" id="first-name" class="form-control col-md-7 col-xs-12">@Model.Name</text>
                                             </div>
                                         </div>
                                         <div class="form-group">
-                                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="surname">
+                                            <label class="control-label col-md-3 col-sm-3 col-xs-12" asp-for="Surname">
                                                 Surname <span class="required">*</span>
                                             </label>
                                             <div class="col-md-6 col-sm-6 col-xs-12">
-                                                <text type="text" id="surname" name="surname" required="required" class="form-control col-md-7 col-xs-12">Wick
+                                                <text type="text" id="surname" name="surname" required="required" class="form-control col-md-7 col-xs-12">@Model.Name
                                             </div>
                                         </div>
                                         <div class="form-group">
-                                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="email">
+                                            <label class="control-label col-md-3 col-sm-3 col-xs-12" asp-for="Email">
                                                 Email <span class="required">*</span>
                                             </label>
                                             <div class="col-md-6 col-sm-6 col-xs-12">
-                                                <text type="text" id="email" name="email" required="required" class="form-control col-md-7 col-xs-12">johnwick@gmail.com
+                                                <text type="text" id="email" name="email" class="form-control col-md-7 col-xs-12">@Model.Email
                                             </div>
                                         </div>
                                         <div class="form-group">
-                                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                            <label class="control-label col-md-3 col-sm-3 col-xs-12" asp-for="DateOfBirth">
                                                 Date Of Birth <span class="required">*</span>
                                             </label>
                                             <div class="col-md-6 col-sm-6 col-xs-12">
-                                                <text id="birthday" type='text' class="form-control" data-inputmask="'mask': '99/99/9999'" required="required">29-04-1983</text>
+                                                <text id="birthday" type='text' class="form-control">@Model.DateOfBirth</text>
                                             </div>
                                         </div>
                                         <div class="form-group">
-                                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="image">
+                                            <label class="control-label col-md-3 col-sm-3 col-xs-12" asp-for="Image">
                                                 Image
                                             </label>
                                             <div class="col-md-6 col-sm-6 col-xs-12">
-                                                <img id="preview" style="height:100px;" src="~/images/user.png" alt="ProfileImage" />
+                                                <img id="preview" style="height:100px;" src="~/../@Model.Image" alt="ProfileImage" />
                                             </div>
                                         </div>
                                         <div class="form-group">
-                                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="phone">
+                                            <label class="control-label col-md-3 col-sm-3 col-xs-12" asp-for="Phone">
                                                 Phone
                                             </label>
                                             <div class="col-md-6 col-sm-6 col-xs-12">
-                                                <text type="tel" id="phone" name="phone" class="form-control col-md-7 col-xs-12" data-inputmask="'mask' : '(999) 999-9999'">555-555-5555
+                                                <text type="tel" id="phone" name="phone" class="form-control col-md-7 col-xs-12">@Model.Phone
                                             </div>
                                         </div>
                                         <div class="form-group">
-                                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="weight">
+                                            <label class="control-label col-md-3 col-sm-3 col-xs-12" asp-for="Weight">
                                                 Weight
                                             </label>
                                             <div class="col-md-6 col-sm-6 col-xs-12">
-                                                <text type="number" step="0.1" id="weight" name="weight" class="form-control col-md-7 col-xs-12">74.4
+                                                <text id="weight" name="weight" class="form-control col-md-7 col-xs-12">@Model.Weight
                                             </div>
                                         </div>
                                         <div class="form-group">
-                                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="height">
+                                            <label class="control-label col-md-3 col-sm-3 col-xs-12" asp-for="Height">
                                                 Height
                                             </label>
                                             <div class="col-md-6 col-sm-6 col-xs-12">
-                                                <text type="number" id="height" name="height" class="form-control col-md-7 col-xs-12">186</text>
+                                                <text id="height" name="height" class="form-control col-md-7 col-xs-12">@Model.Height</text>
                                             </div>
                                         </div>
                                         <div class="form-group">
-                                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="fat-ratio">
+                                            <label class="control-label col-md-3 col-sm-3 col-xs-12" asp-for="FatRatio">
                                                 Fat Ratio
                                             </label>
                                             <div class="col-md-6 col-sm-6 col-xs-12">
-                                                <text type="number" step="0.01" id="fat-ratio" name="fat-ratio" class="form-control col-md-7 col-xs-12">21.39</text>
+                                                <text id="FatRatio" name="FatRatio" class="form-control col-md-7 col-xs-12">@Model.FatRatio</text>
                                             </div>
                                         </div>
                                         <div class="form-group">
@@ -260,27 +233,27 @@
                                             </div>
                                         </div>
                                         <div class="form-group">
-                                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="weight">
+                                            <label class="control-label col-md-3 col-sm-3 col-xs-12" asp-for="GoalWeight">
                                                 Weight
                                             </label>
                                             <div class="col-md-6 col-sm-6 col-xs-12">
-                                                <text type="number" step="0.1" id="weight" name="weight" class="form-control col-md-7 col-xs-12">74.4
+                                                <text id="weight" name="weight" class="form-control col-md-7 col-xs-12">@Model.GoalWeight
                                             </div>
                                         </div>
                                         <div class="form-group">
-                                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="fat-ratio">
+                                            <label class="control-label col-md-3 col-sm-3 col-xs-12" asp-for="GoalFatRatio">
                                                 Fat Ratio
                                             </label>
                                             <div class="col-md-6 col-sm-6 col-xs-12">
-                                                <text type="number" step="0.01" id="fat-ratio" name="fat-ratio" class="form-control col-md-7 col-xs-12">21.39</text>
+                                                <text id="fat-ratio" name="fat-ratio" class="form-control col-md-7 col-xs-12">@Model.GoalFatRatio</text>
                                             </div>
                                         </div>
                                         <div class="form-group">
-                                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                            <label class="control-label col-md-3 col-sm-3 col-xs-12" asp-for="GoalDate">
                                                 Goal Date <span class="required">*</span>
                                             </label>
                                             <div class="col-md-6 col-sm-6 col-xs-12">
-                                                <text id="goaldate" type='text' class="form-control" data-inputmask="'mask': '99/99/9999'" required="required">04-29-2018</text>
+                                                <text id="goaldate" type='text' class="form-control">@Model.GoalDate</text>
                                             </div>
                                         </div>
                                     </div>
@@ -304,50 +277,23 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr>
-                                                <td>1</td>
-                                                <td>New Company Takeover Review</td>
-                                                <td>Deveint Inc</td>
-                                                <td class="hidden-phone">18</td>
-                                                <td>10/04/2018</td>
-                                                <td>30/04/2018</td>
-                                                <td>10</td>
-                                                <th><button class="btn btn-info" data-toggle="modal" data-target="#EditExerciseModal">Edit</button></th>
-                                                <th><button class="btn btn-danger">Delete</button></th>
-                                            </tr>
-                                            <tr>
-                                                <td>2</td>
-                                                <td>New Partner Contracts Consultanci</td>
-                                                <td>Deveint Inc</td>
-                                                <td class="hidden-phone">13</td>
-                                                <td>10/04/2018</td>
-                                                <td>30/04/2018</td>
-                                                <td>3</td>
-                                                <th><button class="btn btn-info" data-toggle="modal" data-target="#EditExerciseModal">Edit</button></th>
-                                                <th><button class="btn btn-danger">Delete</button></th>
-                                            </tr>
-                                            <tr>
-                                                <td>3</td>
-                                                <td>Partners and Inverstors report</td>
-                                                <td>Deveint Inc</td>
-                                                <td class="hidden-phone">30</td>
-                                                <td>10/04/2018</td>
-                                                <td>30/04/2018</td>
-                                                <td>1</td>
-                                                <th><button class="btn btn-info" data-toggle="modal" data-target="#EditExerciseModal">Edit</button></th>
-                                                <th><button class="btn btn-danger">Delete</button></th>
-                                            </tr>
-                                            <tr>
-                                                <td>4</td>
-                                                <td>New Company Takeover Review</td>
-                                                <td>Deveint Inc</td>
-                                                <td class="hidden-phone">28</td>
-                                                <td>10/04/2018</td>
-                                                <td>30/04/2018</td>
-                                                <td>7</td>
-                                                <th><button class="btn btn-info" data-toggle="modal" data-target="#EditExerciseModal">Edit</button></th>
-                                                <th><button class="btn btn-danger">Delete</button></th>
-                                            </tr>
+                                            @foreach (var ex in Model.DailyRoutines)
+                                            {
+                                                if (ex.EndDate >= DateTime.Now.Date)
+                                                {
+                                                    <tr>
+                                                        <td>
+                                                            <img border=3 height=100 width=100 src="~/../@ex.Exercise.GifPicture">
+                                                        </td>
+                                                        <td>@ex.Exercise.Name</td>
+                                                        <td>@ex.Exercise.Category</td>
+                                                        <td>@ex.Sets</td>
+                                                        <td>@ex.StartDate</td>
+                                                        <td>@ex.EndDate</td>
+                                                        <td>@ex.Interval</td>
+                                                    </tr>
+                                                }
+                                            }
                                         </tbody>
                                     </table>
                                     <!--end user current assigned exercises-->
@@ -366,50 +312,23 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr>
-                                                <td>1</td>
-                                                <td>New Company Takeover Review</td>
-                                                <td>Deveint Inc</td>
-                                                <td class="hidden-phone">18</td>
-                                                <td>10/04/2018</td>
-                                                <td>30/04/2018</td>
-                                                <td>10</td>
-                                                <th><button class="btn btn-info" data-toggle="modal" data-target="#EditExerciseModal">Edit</button></th>
-                                                <th><button class="btn btn-danger">Delete</button></th>
-                                            </tr>
-                                            <tr>
-                                                <td>2</td>
-                                                <td>New Partner Contracts Consultanci</td>
-                                                <td>Deveint Inc</td>
-                                                <td class="hidden-phone">13</td>
-                                                <td>10/04/2018</td>
-                                                <td>30/04/2018</td>
-                                                <td>3</td>
-                                                <th><button class="btn btn-info" data-toggle="modal" data-target="#EditExerciseModal">Edit</button></th>
-                                                <th><button class="btn btn-danger">Delete</button></th>
-                                            </tr>
-                                            <tr>
-                                                <td>3</td>
-                                                <td>Partners and Inverstors report</td>
-                                                <td>Deveint Inc</td>
-                                                <td class="hidden-phone">30</td>
-                                                <td>10/04/2018</td>
-                                                <td>30/04/2018</td>
-                                                <td>1</td>
-                                                <th><button class="btn btn-info" data-toggle="modal" data-target="#EditExerciseModal">Edit</button></th>
-                                                <th><button class="btn btn-danger">Delete</button></th>
-                                            </tr>
-                                            <tr>
-                                                <td>4</td>
-                                                <td>New Company Takeover Review</td>
-                                                <td>Deveint Inc</td>
-                                                <td class="hidden-phone">28</td>
-                                                <td>10/04/2018</td>
-                                                <td>30/04/2018</td>
-                                                <td>7</td>
-                                                <th><button class="btn btn-info" data-toggle="modal" data-target="#EditExerciseModal">Edit</button></th>
-                                                <th><button class="btn btn-danger">Delete</button></th>
-                                            </tr>
+                                            @foreach (var ex in Model.DailyRoutines)
+                                            {
+                                                if (ex.EndDate < DateTime.Now.Date)
+                                                {
+                                                    <tr>
+                                                        <td>
+                                                            <img border=3 height=100 width=100 src="~/../@ex.Exercise.GifPicture">
+                                                        </td>
+                                                        <td>@ex.Exercise.Name</td>
+                                                        <td>@ex.Exercise.Category</td>
+                                                        <td>@ex.Sets</td>
+                                                        <td>@ex.StartDate</td>
+                                                        <td>@ex.EndDate</td>
+                                                        <td>@ex.Interval</td>
+                                                    </tr>
+                                                }
+                                            }
                                         </tbody>
                                     </table>
                                     <!--end user passed assigned exercises-->
@@ -435,28 +354,28 @@
                 <div id="testmodal" style="padding: 5px 20px;">
                     <form class="form-horizontal" role="form">
                         <div class="form-group">
-                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="weight">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" asp-for="GoalWeight">
                                 Weight
                             </label>
                             <div class="col-md-6 col-sm-6 col-xs-12">
-                                <input type="number" step="0.1" id="weight" name="weight" value="74.4" class="form-control col-md-7 col-xs-12">
+                                <input type="number" step="0.1" id="goalFatRatio" name="goalFatRatio" asp-for="GoalWeight" value="@Model.GoalWeight" class="form-control col-md-7 col-xs-12">
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="fat-ratio">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" asp-for="GoalFatRatio">
                                 Fat Ratio
                             </label>
                             <div class="col-md-6 col-sm-6 col-xs-12">
-                                <input type="number" step="0.01" id="fat-ratio" name="fat-ratio" value="21.39" class="form-control col-md-7 col-xs-12">
+                                <input type="number" step="0.01" id="goalFatRatio" name="goalFatRatio" asp-for="GoalFatRatio" value="@Model.GoalFatRatio" class="form-control col-md-7 col-xs-12">
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" asp-for="GoalDate">
                                 Goal Date <span class="required">*</span>
                             </label>
                             <div class="col-md-6 col-sm-6 col-xs-12">
                                 <div class='input-group date' id='myDatepicker2'>
-                                    <input id="goaldate" type='text' class="form-control" value="29-04-2018" data-inputmask="'mask': '99/99/9999'" placeholder="DD/MM/YYYY" required="required" />
+                                    <input id="goaldate" type='text' class="form-control" asp-for="GoalDate" value="@Model.GoalDate" data-inputmask="'mask': '99.99.9999'" placeholder="DD.MM.YYYY" required="required" />
                                     <span class="input-group-addon">
                                         <span class="glyphicon glyphicon-calendar"></span>
                                     </span>
@@ -496,62 +415,25 @@
                             </tr>
                         </thead>
                         <tbody>
+                            @foreach (var ex in Model.Exercises)
+                                {
                             <tr>
-                                <td>1</td>
-                                <td>New Company Takeover Review</td>
-                                <td>Deveint Inc</td>
-                                <td class="hidden-phone"><input type="number" min="0" max="100" /></td>
                                 <td>
-                                    <input type="text" class="startdate" data-inputmask="'mask': '99/99/9999'" placeholder="DD/MM/YYYY">
+                                    <img border=3 height=100 width=100 src="~/../@ex.GifPicture">
+                                </td>
+                                <td>@ex.Name</td>
+                                <td>@ex.Category</td>
+                                <td class="hidden-phone"><input type="number" min="0" max="100" name="sets" asp-for="ExSets" /></td>
+                                <td>
+                                    <input type="text" class="startdate" data-inputmask="'mask': '99/99/9999'" asp-for="ExStartDate" placeholder="DD/MM/YYYY">
                                 </td>
                                 <td>
-                                    <input type="text" class="enddate" data-inputmask="'mask': '99/99/9999'" placeholder="DD/MM/YYYY">
+                                    <input type="text" class="enddate" data-inputmask="'mask': '99/99/9999'" asp-for="ExEndDate" placeholder="DD/MM/YYYY">
                                 </td>
-                                <td><input type="number" min="0" max="30" /></td>
+                                <td><input type="number" min="0" max="30" asp-for="ExInterval" /></td>
                                 <td><button class="btn btn-info">Assign</button></td>
                             </tr>
-                            <tr>
-                                <td>2</td>
-                                <td>New Partner Contracts Consultanci</td>
-                                <td>Deveint Inc</td>
-                                <td class="hidden-phone"><input type="number" min="0" max="100" /></td>
-                                <td>
-                                    <input type="text" class="startdate" data-inputmask="'mask': '99/99/9999'" placeholder="DD/MM/YYYY">
-                                </td>
-                                <td>
-                                    <input type="text" class="enddate" data-inputmask="'mask': '99/99/9999'" placeholder="DD/MM/YYYY">
-                                </td>
-                                <td><input type="number" min="0" max="30" /></td>
-                                <td><button class="btn btn-info">Assign</button></td>
-                            </tr>
-                            <tr>
-                                <td>3</td>
-                                <td>Partners and Inverstors report</td>
-                                <td>Deveint Inc</td>
-                                <td class="hidden-phone"><input type="number" min="0" max="100" /></td>
-                                <td>
-                                    <input type="text" class="startdate" data-inputmask="'mask': '99/99/9999'" placeholder="DD/MM/YYYY">
-                                </td>
-                                <td>
-                                    <input type="text" class="enddate" data-inputmask="'mask': '99/99/9999'" placeholder="DD/MM/YYYY">
-                                </td>
-                                <td><input type="number" min="0" max="30" /></td>
-                                <td><button class="btn btn-info">Assign</button></td>
-                            </tr>
-                            <tr>
-                                <td>4</td>
-                                <td>New Company Takeover Review</td>
-                                <td>Deveint Inc</td>
-                                <td class="hidden-phone"><input type="number" min="0" max="100" /></td>
-                                <td>
-                                    <input type="text" class="startdate" data-inputmask="'mask': '99/99/9999'" placeholder="DD/MM/YYYY">
-                                </td>
-                                <td>
-                                    <input type="text" class="enddate" data-inputmask="'mask': '99/99/9999'" placeholder="DD/MM/YYYY">
-                                </td>
-                                <td><input type="number" min="0" max="30" /></td>
-                                <td><button class="btn btn-info">Assign</button></td>
-                            </tr>
+                            }
                         </tbody>
                     </table>
                 </div>
@@ -574,44 +456,44 @@
                 <div id="testmodal" style="padding: 5px 20px;">
                     <form class="form-horizontal" role="form">
                         <div class="form-group">
-                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="exerciseName">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" asp-for="EditExName">
                                 Name <span class="required">*</span>
                             </label>
                             <div class="col-md-6 col-sm-6 col-xs-12">
-                                <text type="text" id="first-name" required="required" class="form-control col-md-7 col-xs-12">Push Up</text>
+                                <text type="text" id="first-name" required="required" class="form-control col-md-7 col-xs-12"> @Model.EditExName</text>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="exerciseCategory">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" asp-for="EditExCategory">
                                 Category <span class="required">*</span>
                             </label>
                             <div class="col-md-6 col-sm-6 col-xs-12">
-                                <text type="text" id="first-name" required="required" class="form-control col-md-7 col-xs-12">Body-Weight</text>
+                                <text type="text" id="first-name" required="required" class="form-control col-md-7 col-xs-12">@Model.EditExCategory</text>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="exerciseSets">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" asp-for="EditExSets">
                                 Sets <span class="required">*</span>
                             </label>
                             <div class="col-md-6 col-sm-6 col-xs-12">
-                                <input type="number" min="0" max="100" id="exerciseSet" required="required" class="form-control col-md-7 col-xs-12" value="10">
+                                <input type="number" min="0" max="100" id="exerciseSet" required="required" class="form-control col-md-7 col-xs-12" value="@Model.EditExSets">
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="exerciseCategory">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" asp-for="EditExInterval">
                                 Interval <span class="required">*</span>
                             </label>
                             <div class="col-md-6 col-sm-6 col-xs-12">
-                                <input type="number" id="exerciseInterval" required="required" class="form-control col-md-7 col-xs-12" value="15">
+                                <input type="number" id="exerciseInterval" required="required" class="form-control col-md-7 col-xs-12" value="@Model.EditExInterval">
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" asp-for="EditExStartDate">
                                 Start Date <span class="required">*</span>
                             </label>
                             <div class="col-md-6 col-sm-6 col-xs-12">
                                 <div class='input-group startdate'>
-                                    <input id="exerciseStartDate" type='text' class="form-control" value="10-04-2018" data-inputmask="'mask': '99/99/9999'" placeholder="DD/MM/YYYY" required="required" />
+                                    <input id="exerciseStartDate" type='text' class="form-control" value="@Model.EditExStartDate" data-inputmask="'mask': '99/99/9999'" placeholder="DD/MM/YYYY" required="required" />
                                     <span class="input-group-addon">
                                         <span class="glyphicon glyphicon-calendar"></span>
                                     </span>
@@ -619,12 +501,12 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" asp-for="EditExEndDate">
                                 End Date <span class="required">*</span>
                             </label>
                             <div class="col-md-6 col-sm-6 col-xs-12">
                                 <div class='input-group enddate'>
-                                    <input id="exerciseEndDate" type='text' class="form-control" value="29-04-2018" data-inputmask="'mask': '99/99/9999'" placeholder="DD/MM/YYYY" required="required" />
+                                    <input id="exerciseEndDate" type='text' class="form-control" value="@Model.EditExEndDate" data-inputmask="'mask': '99/99/9999'" placeholder="DD/MM/YYYY" required="required" />
                                     <span class="input-group-addon">
                                         <span class="glyphicon glyphicon-calendar"></span>
                                     </span>

@@ -76,7 +76,7 @@
                             <ul class="nav side-menu">
                                 <li><a asp-area="" asp-controller="Home" asp-action="Index"><i class="fa fa-home"></i>Home</a></li>
                                 <li><a asp-area="" asp-controller="Home" asp-action="Trainees"><i class="fa fa-group"></i>Trainees</a></li>
-                                <li><a asp-area="" asp-controller="Home" asp-action="TraineeDetails"><i class="fa fa-flash"></i>Trainee Details</a></li>
+                                @*<li><a asp-area="" asp-controller="Home" asp-action="TraineeDetails"><i class="fa fa-flash"></i>Trainee Details</a></li>*@
                                 <li><a asp-area="" asp-controller="Home" asp-action="NewTrainee"><i class="fa fa-user"></i>New Trainee</a></li>
                                 <li><a asp-area="" asp-controller="Home" asp-action="Exercises"><i class="fa fa-flash"></i>Exercises</a></li>
                                 @*<li><a asp-area="" asp-controller="Home" asp-action="EditTrainee"><i class="fa fa-edit"></i>Edit Trainee</a></a></li>*@
@@ -112,7 +112,7 @@
                         <ul class="nav navbar-nav navbar-right">
                             <li class="">
                                 <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                                    <img src="images/img.jpg" alt="">@User.Identity.Name
+                                    <img src="~/images/img.jpg" alt="">@User.Identity.Name
                                     <span class=" fa fa-angle-down"></span>
                                 </a>
                                 <ul class="dropdown-menu dropdown-usermenu pull-right">
@@ -177,6 +177,7 @@
         <!--FullCalendar-->
         <script src="~/bower_components/moment/min/moment.min.js"></script>
         <script src="~/bower_components/fullcalendar/dist/fullcalendar.min.js"></script>
+        <script src="~/js/initCalendar.js"></script>
         <!--DatePicker-->
         <script src="~/bower_components/bootstrap-daterangepicker/daterangepicker.js"></script>
         <script src="~/bower_components/bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js"></script>
@@ -187,10 +188,18 @@
             $('#myDatepicker2').datetimepicker({
                 format: 'DD.MM.YYYY'
             });
-            $('#myDatepicker3').datetimepicker();
-            $('#myDatepicker4').datetimepicker();
-            $('#myDatepicker5').datetimepicker();
-            $('#myDatepicker6').datetimepicker();
+            $('#myDatepicker3').datetimepicker({
+                format: 'DD.MM.YYYY hh:mm a'
+            });
+            $('#myDatepicker4').datetimepicker({
+                format: 'DD.MM.YYYY hh:mm a'
+            });
+            $('#myDatepicker5').datetimepicker({
+                format: 'DD.MM.YYYY hh:mm a'
+            });
+            $('#myDatepicker6').datetimepicker({
+                format: 'DD.MM.YYYY hh:mm a'
+            });
         </script>
         <!--Datatables-->
         @*<script src="~/bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
