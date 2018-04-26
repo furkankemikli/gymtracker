@@ -32,10 +32,9 @@ namespace GymTracker
         {
             var connection = @"Server=tcp:gymtracker.database.windows.net,1433;Initial Catalog=aspnet-GymTracker;Persist Security Info=False;User ID=mainlogin;Password=Coca2018Cola;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
             services.AddDbContext<Aspnet_GymTrackerContext>(options => options.UseSqlServer(connection));
-
-
-           //services.AddDbContext<ApplicationDbContext>(options =>
-           //     options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            
+            //services.AddDbContext<ApplicationDbContext>(options =>
+            //     options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
             services.AddIdentity<ApplicationUser, IdentityRole>()
                 .AddEntityFrameworkStores<Aspnet_GymTrackerContext>()
@@ -50,7 +49,6 @@ namespace GymTracker
             services.AddTransient<IGymRepository, GymRepository>();
             services.AddTransient<ITraineeGoalsRepository, TraineeGoalsRepository>();
             services.AddTransient<ITraineeRepository, TraineeRepository>();
-
             services.AddMvc();
 
             services.Configure<IdentityOptions>(options =>
