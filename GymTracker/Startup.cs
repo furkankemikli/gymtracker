@@ -30,7 +30,7 @@ namespace GymTracker
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            var connection = @"Server=(localdb)\mssqllocaldb;Database=aspnet-GymTracker;Trusted_Connection=True;";
+            var connection = @"Server=tcp:gymtracker.database.windows.net,1433;Initial Catalog=aspnet-GymTracker;Persist Security Info=False;User ID=mainlogin;Password=Coca2018Cola;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
             services.AddDbContext<Aspnet_GymTrackerContext>(options => options.UseSqlServer(connection));
 
 
@@ -80,11 +80,11 @@ namespace GymTracker
 
             app.UseStaticFiles();
 
-            app.UseStaticFiles(new StaticFileOptions
-            {
-                FileProvider = new PhysicalFileProvider(Path.Combine(env.ContentRootPath, "Uploads")),
-                RequestPath = new PathString("/Uploads")
-            });
+            //app.UseStaticFiles(new StaticFileOptions
+            //{
+            //    FileProvider = new PhysicalFileProvider(Path.Combine(env.ContentRootPath, "Uploads")),
+            //    RequestPath = new PathString("/Uploads")
+            //});
 
             app.UseAuthentication();
 

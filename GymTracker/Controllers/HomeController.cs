@@ -19,7 +19,7 @@ using Microsoft.AspNetCore.Hosting;
 
 namespace GymTracker.Controllers
 {
-    [Authorize]
+    //[Authorize]
     public class HomeController : Controller
     {
         private readonly IEventRepository _eventRepository;
