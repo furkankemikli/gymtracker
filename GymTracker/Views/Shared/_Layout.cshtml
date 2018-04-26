@@ -26,11 +26,6 @@
         <link href="~/js/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet">
         <link href="~/js/bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.css" rel="stylesheet">
         <!--DataTable-->
-        @*<link href="~/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css" rel="stylesheet">
-        <link href="~/bower_components/datatables.net-buttons-bs/css/buttons.bootstrap.min.css" rel="stylesheet">
-        <link href="~/bower_components/datatables.net-fixedheader-bs/css/fixedHeader.bootstrap.min.css" rel="stylesheet">
-        <link href="~/bower_components/datatables.net-responsive-bs/css/responsive.bootstrap.min.css" rel="stylesheet">
-        <link href="~/bower_components/datatables.net-scroller-bs/css/scroller.bootstrap.min.css" rel="stylesheet">*@
         <link rel="stylesheet" type="text/css" href="~/js/datatable/datatables.min.css" />
         <link rel="stylesheet" type="text/css" href="~/js/Flot/examples/shared/jquery-ui/jquery-ui.min.css" />
     </environment>
@@ -152,11 +147,11 @@
     </div>
 
     <environment>
-        <script src="js/site.js" asp-append-version="true"></script>
+        <script src="~/js/site.min.js" asp-append-version="true"></script>
         <!-- jQuery -->
-        <script src="~/js/jquery/dist/jquery.min.js"></script>
+        <script src="~/js/jquery/dist/jquery.js"></script>
         <!-- Bootstrap -->
-        <script src="~/js/bootstrap.js"></script>
+        <script src="~/js/bootstrap.min.js"></script>
         <script>
             $('.modal').on('hidden.bs.modal', function () {
                 $(this).find('input').val(null);
@@ -173,7 +168,7 @@
         <!-- bootstrap-progressbar -->
         <script src="~/js/bootstrap-progressbar/bootstrap-progressbar.min.js"></script>
         <!-- Custom Theme Scripts -->
-        <script src="~/js/custom.min.js"></script>
+        <script src="~/js/custom.js"></script>
         <!--FullCalendar-->
         <script src="~/js/moment/min/moment.min.js"></script>
         <script src="~/js/fullcalendar/dist/fullcalendar.min.js"></script>
@@ -201,22 +196,6 @@
                 format: 'DD.MM.YYYY hh:mm a'
             });
         </script>
-        <!--Datatables-->
-        @*<script src="~/bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
-        <script src="~/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
-        <script src="~/bower_components/datatables.net-buttons/js/dataTables.buttons.min.js"></script>
-        <script src="~/bower_components/datatables.net-buttons-bs/js/buttons.bootstrap.min.js"></script>
-        <script src="~/bower_components/datatables.net-buttons/js/buttons.flash.min.js"></script>
-        <script src="~/bower_components/datatables.net-buttons/js/buttons.html5.min.js"></script>
-        <script src="~/bower_components/datatables.net-buttons/js/buttons.print.min.js"></script>
-        <script src="~/bower_components/datatables.net-fixedheader/js/dataTables.fixedHeader.min.js"></script>
-        <script src="~/bower_components/datatables.net-keytable/js/dataTables.keyTable.min.js"></script>
-        <script src="~/bower_components/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
-        <script src="~/bower_components/datatables.net-responsive-bs/js/responsive.bootstrap.js"></script>
-        <script src="~/bower_components/datatables.net-scroller/js/dataTables.scroller.min.js"></script>
-        <script src="~/bower_components/jszip/dist/jszip.min.js"></script>
-        <script src="~/bower_components/pdfmake/build/pdfmake.min.js"></script>
-        <script src="~/bower_components/pdfmake/build/vfs_fonts.js"></script>*@
         <script src="~/js/jquery.inputmask/dist/min/jquery.inputmask.bundle.min.js"></script>
         <script type="text/javascript" src="~/js/datatable/datatables.min.js"></script>
         <script>
