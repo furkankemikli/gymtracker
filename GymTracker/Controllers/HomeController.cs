@@ -160,8 +160,8 @@ namespace GymTracker.Controllers
             if (model.GifPicture != null && model.GifPicture.Length > 0)
             {
                 var guid = Guid.NewGuid().ToString();
-                exercise.GifPicture = "Uploads/" + guid + Path.GetExtension(model.GifPicture.FileName);
-                var userPath = Path.Combine(_hostingEnvironment.ContentRootPath, "Uploads", guid + Path.GetExtension(model.GifPicture.FileName));
+                exercise.GifPicture = "/../Uploads/" + guid + Path.GetExtension(model.GifPicture.FileName);
+                var userPath = Path.Combine(_hostingEnvironment.ContentRootPath, "wwwroot/Uploads", guid + Path.GetExtension(model.GifPicture.FileName));
 
                 using (var stream = new FileStream(userPath, FileMode.Create))
                 {
@@ -192,8 +192,6 @@ namespace GymTracker.Controllers
         [HttpPost]
         public async Task<IActionResult> NewTrainee(NewTraineeViewModel model)
         {
-            if (ModelState.IsValid)
-            {
                 var trainer = await _userManager.GetUserAsync(User);
                 var user = new ApplicationUser { UserName = model.Email, Email = model.Email,
                     Name = model.Name, Surname = model.Surname,
@@ -204,8 +202,8 @@ namespace GymTracker.Controllers
                 if (model.Image != null && model.Image.Length > 0)
                 {
                     var guid = Guid.NewGuid().ToString();
-                    user.Picture = "Uploads/" + guid + Path.GetExtension(model.Image.FileName);
-                    var userPath = Path.Combine(_hostingEnvironment.ContentRootPath, "Uploads", guid + Path.GetExtension(model.Image.FileName));
+                    user.Picture = "/../Uploads/" + guid + Path.GetExtension(model.Image.FileName);
+                    var userPath = Path.Combine(_hostingEnvironment.ContentRootPath, "wwwroot/Uploads", guid + Path.GetExtension(model.Image.FileName));
                     
                     using (var stream = new FileStream(userPath, FileMode.Create))
                     {
@@ -236,7 +234,6 @@ namespace GymTracker.Controllers
                     _traineeRepository.CreateTrainee(trainee);
                     return RedirectToAction("Trainees", "Home");
                 }
-            }
             return View(model);
         }
 
@@ -283,8 +280,8 @@ namespace GymTracker.Controllers
             if (model.Image != null && model.Image.Length > 0)
             {
                 var guid = Guid.NewGuid().ToString();
-                trainee.Picture = "Uploads/" + guid + Path.GetExtension(model.Image.FileName);
-                var userPath = Path.Combine(_hostingEnvironment.ContentRootPath, "Uploads", guid + Path.GetExtension(model.Image.FileName));
+                trainee.Picture = "/../Uploads/" + guid + Path.GetExtension(model.Image.FileName);
+                var userPath = Path.Combine(_hostingEnvironment.ContentRootPath, "wwwroot/Uploads", guid + Path.GetExtension(model.Image.FileName));
 
                 using (var stream = new FileStream(userPath, FileMode.Create))
                 {
