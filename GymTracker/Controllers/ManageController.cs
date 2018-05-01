@@ -13,6 +13,11 @@ using Microsoft.Extensions.Options;
 using GymTracker.Models;
 using GymTracker.Models.ManageViewModels;
 using GymTracker.Services;
+using GymTracker.Models.RepositoryInterfaces;
+using System.IO;
+using Microsoft.AspNetCore.Hosting;
+using GymTracker.Models.Repositories;
+using System.Security.Claims;
 
 namespace GymTracker.Controllers
 {
@@ -22,9 +27,12 @@ namespace GymTracker.Controllers
     {
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
+        private readonly IUserProfileRepository _userProfileRepository;
+        private readonly IGymRepository _gymRepository;
         private readonly IEmailSender _emailSender;
         private readonly ILogger _logger;
         private readonly UrlEncoder _urlEncoder;
+        private readonly IHostingEnvironment _hostingEnvironment;
 
         private const string AuthenticatorUriFormat = "otpauth://totp/{0}:{1}?secret={2}&issuer={0}&digits=6";
         private const string RecoveryCodesKey = nameof(RecoveryCodesKey);
@@ -34,13 +42,19 @@ namespace GymTracker.Controllers
           SignInManager<ApplicationUser> signInManager,
           IEmailSender emailSender,
           ILogger<ManageController> logger,
-          UrlEncoder urlEncoder)
+          UrlEncoder urlEncoder,
+          IUserProfileRepository userProfileRepository,
+          IHostingEnvironment hostingEnvironment,
+          IGymRepository gymRepository)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _emailSender = emailSender;
             _logger = logger;
             _urlEncoder = urlEncoder;
+            _userProfileRepository = userProfileRepository;
+            _hostingEnvironment = hostingEnvironment;
+            _gymRepository = gymRepository;
         }
 
         [TempData]
@@ -59,6 +73,10 @@ namespace GymTracker.Controllers
             {
                 Username = user.UserName,
                 Email = user.Email,
+                Name = user.Name,
+                Surname = user.Surname,
+                City = user.City,
+                CurrentImage = user.Picture,
                 PhoneNumber = user.PhoneNumber,
                 IsEmailConfirmed = user.EmailConfirmed,
                 StatusMessage = StatusMessage
@@ -80,6 +98,59 @@ namespace GymTracker.Controllers
             if (user == null)
             {
                 throw new ApplicationException($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
+            }
+
+            var name = user.Name;
+            if (model.Name != name)
+            {
+                var setNameResult = _userProfileRepository.ChangeName(user, model.Name);
+                if (setNameResult == 0)
+                {
+                    throw new ApplicationException($"Unexpected error occurred setting name for user with ID '{user.Id}'.");
+                }
+            }
+
+            var surname = user.Surname;
+            if (model.Surname != surname)
+            {
+                var setSurnameResult = _userProfileRepository.ChangeSurname(user, model.Surname);
+                if (setSurnameResult == 0)
+                {
+                    throw new ApplicationException($"Unexpected error occurred setting surname for user with ID '{user.Id}'.");
+                }
+            }
+
+            var newImagePath = "";
+            if (model.Image != null && model.Image.Length > 0)
+            {
+                var guid = Guid.NewGuid().ToString();
+                newImagePath = "/../Uploads/" + guid + Path.GetExtension(model.Image.FileName);
+                var userPath = Path.Combine(_hostingEnvironment.ContentRootPath, "wwwroot/Uploads", guid + Path.GetExtension(model.Image.FileName));
+
+                using (var stream = new FileStream(userPath, FileMode.Create))
+                {
+                    await model.Image.CopyToAsync(stream);
+                }
+            }
+
+            var picture = user.Picture;
+            if (newImagePath != picture)
+            {
+                var setPictureResult = _userProfileRepository.ChangePicture(user, newImagePath);
+                if (setPictureResult == 0)
+                {
+                    throw new ApplicationException($"Unexpected error occurred setting image for user with ID '{user.Id}'.");
+                }
+            }
+
+            var city = user.City;
+            if (model.City != city)
+            {
+                var setCityResult = _userProfileRepository.ChangeCity(user, model.City);
+                if (setCityResult == 0)
+                {
+                    throw new ApplicationException($"Unexpected error occurred setting city for user with ID '{user.Id}'.");
+                }
             }
 
             var email = user.Email;
@@ -110,8 +181,38 @@ namespace GymTracker.Controllers
         public async Task<IActionResult> GymProfile()
         {
             var user = await _userManager.GetUserAsync(User);
+            GymProfileViewModel gymProfile = null;
+            if (user.GymId != null)
+            {
+                Gym gym = _gymRepository.GetGymById((int)user.GymId);
+                gymProfile = new GymProfileViewModel
+                {
+                    Name = gym.Name,
+                    Address = gym.Address,
+                    City = gym.City,
+                    Country = gym.Country,
+                    Phone = gym.Phone,
+                    Email = gym.Email
+                };
+            }
 
-            return View();
+            return View(gymProfile);
+        }
+
+        public IActionResult UpdateGym(GymProfileViewModel model)
+        {
+            Gym gym = new Gym
+            {
+                Name = model.Name,
+                Address = model.Address,
+                City = model.City,
+                Country = model.Country,
+                Phone = model.Phone,
+                Email = model.Email
+            };
+            _gymRepository.UpdateGym(gym, this.User.FindFirst(ClaimTypes.NameIdentifier).Value);
+
+            return RedirectToAction("GymProfile", "Manage");
         }
 
         [HttpPost]

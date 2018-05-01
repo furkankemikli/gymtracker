@@ -14,7 +14,6 @@ namespace GymTracker.Models.Repositories
             _aspnetGymTrackerContext = aspnet_GymTrackerContext;
         }
         
-
         public IEnumerable<TraineeInfoModel> GetTrainees(string trainerId)
         {
             var traineesGeneral = (from t in _aspnetGymTrackerContext.Trainee

@@ -27,10 +27,23 @@ namespace GymTracker.Models.Repositories
             return _aspnetGymTrackerContext.Gym.FirstOrDefault(d => d.GymId == gymId);
         }
 
-        public void CreateGym(Gym gym)
+        public void UpdateGym(Gym gym, string UserId)
         {
-            _aspnetGymTrackerContext.Gym.Add(gym);
-
+            var result = _aspnetGymTrackerContext.ApplicationUser.FirstOrDefault(d => d.Id == UserId);
+            if(result.GymId == null)
+            {
+                _aspnetGymTrackerContext.Gym.Add(gym);
+                result.GymId = gym.GymId;
+            }
+            else
+            {
+                var dataGym = _aspnetGymTrackerContext.Gym.FirstOrDefault(d => d.GymId == result.GymId);
+                dataGym.Name = gym.Name;
+                dataGym.Address = gym.Address;
+                dataGym.City = gym.City;
+                dataGym.Phone = gym.Phone;
+                dataGym.Email = gym.Email;
+            }
             _aspnetGymTrackerContext.SaveChanges();
         }
     }

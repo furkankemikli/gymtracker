@@ -15,6 +15,7 @@ using GymTracker.Models.Repositories;
 using Microsoft.Extensions.FileProviders;
 using Microsoft.AspNetCore.Http;
 using System.IO;
+using GymTracker.Models.RepositoryInterfaces;
 
 namespace GymTracker
 {
@@ -49,6 +50,7 @@ namespace GymTracker
             services.AddTransient<IGymRepository, GymRepository>();
             services.AddTransient<ITraineeGoalsRepository, TraineeGoalsRepository>();
             services.AddTransient<ITraineeRepository, TraineeRepository>();
+            services.AddTransient<IUserProfileRepository, UserProfileRepository>();
             services.AddMvc();
 
             services.Configure<IdentityOptions>(options =>
