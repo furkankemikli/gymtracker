@@ -45,6 +45,8 @@ namespace GymTracker.Models.TraineeViewModels
         public IEnumerable<Exercise> Exercises { get; set; }
 
         //to assign exercise
+        public int ExId { get; set; }
+
         public double ExSets { get; set; }
 
         public DateTime ExStartDate { get; set; }
@@ -61,6 +63,8 @@ namespace GymTracker.Models.TraineeViewModels
         public DateTime GoalDate { get; set; }
 
         //to edit assigned exercise
+        public int RoutineId { get; set; }
+
         public string EditExName { get; set; }
         
         public string EditExCategory { get; set; }

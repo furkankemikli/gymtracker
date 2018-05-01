@@ -36,6 +36,10 @@ namespace GymTracker.Models.Repositories
                 result.ByDate = traineeGoals.ByDate;
                 _aspnetGymTrackerContext.SaveChanges();
             }
+            else
+            {
+                CreateGoal(traineeGoals);
+            }
         }
     }
 }
