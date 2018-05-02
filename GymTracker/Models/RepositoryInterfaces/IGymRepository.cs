@@ -11,6 +11,6 @@ namespace GymTracker.Models.Repositories
 
         Gym GetGymById(int gymId);
 
-        void CreateGym(Gym gym);
+        void UpdateGym(Gym gym, string userId);
     }
 }

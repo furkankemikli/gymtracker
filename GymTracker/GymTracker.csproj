@@ -5,6 +5,12 @@
     <UserSecretsId>aspnet-GymTracker-6BB20DCF-FA02-4378-B016-EB59A7081874</UserSecretsId>
   </PropertyGroup>
 
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DefineConstants>TRACE;DEBUG;NETCOREAPP2_0</DefineConstants>
+    <DebugType>full</DebugType>
+    <DebugSymbols>true</DebugSymbols>
+  </PropertyGroup>
+
   <ItemGroup>
     <Content Include="wwwroot\bower_components\bootstrap-daterangepicker\.bower.json" />
     <Content Include="wwwroot\bower_components\bootstrap-daterangepicker\bower.json" />

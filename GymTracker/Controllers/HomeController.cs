@@ -53,6 +53,7 @@ namespace GymTracker.Controllers
             _emailSender = emailSender;
             _userManager = userManager;
             _hostingEnvironment = hostingEnvironment;
+            _userManager.PasswordHasher = new CustomPasswordHasher<ApplicationUser>();
         }
 
         public IActionResult Index()
@@ -210,8 +211,6 @@ namespace GymTracker.Controllers
                         await model.Image.CopyToAsync(stream);
                     }
                 }
-                #warning "Remove after adding password field."
-                model.Password = "hello";
 
                 var result = await _userManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
@@ -297,8 +296,7 @@ namespace GymTracker.Controllers
             _traineeRepository.DeleteTrainee(traineeId);
             return RedirectToAction("Trainees", "Home");
         }
-
-        [HttpGet]
+        
         public IActionResult TraineeDetails(string Id)
         {
             TraineeInfoModel personalInfo = _traineeRepository.GetTraineeById(Id);
@@ -329,6 +327,57 @@ namespace GymTracker.Controllers
                 model.GoalDate = (DateTime)goals.ByDate;
             }
             return View(model);
+        }
+
+        [HttpPost]
+        public IActionResult EditGoal(EditGoalModel model)
+        {
+            TraineeGoals goal = new TraineeGoals
+            {
+                ByDate = model.GoalDate,
+                FatRatio = model.GoalFatRatio,
+                Weight = model.GoalWeight,
+                TraineeId = model.Id
+            };
+            _traineeGoalsRepository.UpdateGoal(goal);
+            return RedirectToAction("TraineeDetails", "Home", new { Id = model.Id });
+        }
+
+        public IActionResult AssignExercise(TraineeDetailsPageViewModel model)
+        {
+            DailyRoutine dailyRoutine = new DailyRoutine
+            {
+                ExerciseId = model.ExId,
+                TraineeId = model.Id,
+                StartDate = model.ExStartDate,
+                EndDate = model.ExEndDate,
+                Interval = model.ExInterval,
+                Sets = model.ExSets
+            };
+            _dailyRoutineRepository.CreateDailyRoutine(dailyRoutine);
+            return RedirectToAction("TraineeDetails", "Home", new { Id = model.Id });
+        }
+
+        public IActionResult EditAssignedExercise(TraineeDetailsPageViewModel model)
+        {
+            DailyRoutine dailyRoutine = new DailyRoutine
+            {
+                RoutineId = model.RoutineId,
+                StartDate = model.EditExStartDate,
+                EndDate = model.EditExEndDate,
+                Interval = model.EditExInterval,
+                Sets = model.EditExSets
+            };
+            _dailyRoutineRepository.UpdateDailyRoutine(dailyRoutine);
+
+            return RedirectToAction("TraineeDetails", "Home", new { Id = model.Id });
+        }
+
+        public IActionResult DeleteAssignedExercise(int routineId, string traineeId)
+        {
+            _dailyRoutineRepository.DeleteDailyRoutine(routineId);
+
+            return RedirectToAction("TraineeDetails", "Home", new { Id = traineeId });
         }
 
         public IActionResult About()

@@ -28,7 +28,7 @@
                                     <i class="fa fa-phone user-profile-icon"></i> Phone
                                 </li>*@
                             <li>
-                                <i class="fa fa-birthday-cake user-profile-icon"></i> @Model.DateOfBirth
+                                <i class="fa fa-birthday-cake user-profile-icon"></i> @Model.DateOfBirth.ToShortDateString()
                             </li>
                             <li>
                                 <i class="fa fa-child user-profile-icon"></i> @Model.Weight
@@ -76,27 +76,30 @@
                             <!-- end of skills -->*@
                     </div>
                     <div class="col-md-9 col-sm-9 col-xs-12">
-                        <div class="profile_title">
-                            <div class="col-md-6">
-                                <h2>User Activity Report</h2>
-                            </div>
-                            <div class="col-md-6">
-                                <div id="reportrange" class="pull-right" style="margin-top: 5px; background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #E6E9ED">
-                                    <i class="glyphicon glyphicon-calendar fa fa-calendar"></i>
-                                    <span>December 30, 2014 - January 28, 2015</span> <b class="caret"></b>
+                        @*<div class="profile_title">
+                                <div class="col-md-6">
+                                    <h2>User Activity Report</h2>
+                                </div>
+                                <div class="col-md-6">
+                                    <div id="reportrange" class="pull-right" style="margin-top: 5px; background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #E6E9ED">
+                                        <i class="glyphicon glyphicon-calendar fa fa-calendar"></i>
+                                        <span>December 30, 2014 - January 28, 2015</span> <b class="caret"></b>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <!-- start of user-activity-graph -->
-                        <div id="graph_bar" style="width:100%; height:280px;"></div>
-                        <!-- end of user-activity-graph -->
+                            <!-- start of user-activity-graph -->
+                            <div id="graph_bar" style="width:100%; height:280px;"></div>
+                            <!-- end of user-activity-graph -->*@
                         <div class="" role="tabpanel" data-example-id="togglable-tabs">
                             <ul id="myTab" class="nav nav-tabs bar_tabs" role="tablist">
                                 <li role="presentation" class="active">
                                     <a href="#tab_content1" role="tab" id="profile-tab" data-toggle="tab" aria-expanded="false">Exercises Done</a>
                                 </li>
                                 <li role="presentation" class="">
-                                    <a href="#tab_content4" role="tab" id="profile-tab3" data-toggle="tab" aria-expanded="false">Set Exercises</a>
+                                    <a href="#tab_content4" role="tab" id="profile-tab4" data-toggle="tab" aria-expanded="false">Exercises in Progress</a>
+                                </li>
+                                <li role="presentation" class="">
+                                    <a href="#tab_content5" role="tab" id="profile-tab5" data-toggle="tab" aria-expanded="false">Assign Exercise</a>
                                 </li>
                                 <li role="presentation" class="">
                                     <a href="#tab_content3" role="tab" id="profile-tab3" data-toggle="tab" aria-expanded="false">Goals</a>
@@ -171,7 +174,7 @@
                                                 Date Of Birth <span class="required">*</span>
                                             </label>
                                             <div class="col-md-6 col-sm-6 col-xs-12">
-                                                <text id="birthday" type='text' class="form-control">@Model.DateOfBirth</text>
+                                                <text id="birthday" type='text' class="form-control">@Model.DateOfBirth.ToShortDateString()</text>
                                             </div>
                                         </div>
                                         <div class="form-group">
@@ -227,11 +230,7 @@
                                 </div>
                                 <div role="tabpanel" class="tab-pane fade" id="tab_content3" aria-labelledby="profile-tab">
                                     <div class="form-horizontal form-label-left">
-                                        <div class="form-group">
-                                            <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
-                                                <button class="btn btn-success pull-right" data-toggle="modal" data-target="#EditGoalModal">Edit Goal</button>
-                                            </div>
-                                        </div>
+
                                         <div class="form-group">
                                             <label class="control-label col-md-3 col-sm-3 col-xs-12" asp-for="GoalWeight">
                                                 Weight
@@ -253,15 +252,17 @@
                                                 Goal Date <span class="required">*</span>
                                             </label>
                                             <div class="col-md-6 col-sm-6 col-xs-12">
-                                                <text id="goaldate" type='text' class="form-control">@Model.GoalDate</text>
+                                                <text id="goaldate" type='text' class="form-control">@Model.GoalDate.ToShortDateString()</text>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+                                                <button class="btn btn-success pull-right" data-toggle="modal" data-target="#EditGoalModal">Edit Goal</button>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                                 <div id="tab_content4" class="tab-pane fade">
-                                    <div>
-                                        <button class="btn btn-success pull-right" data-toggle="modal" data-target="#AssignExerciseModal">Assign Exercise</button>
-                                    </div>
                                     <!--start user current assigned exercises-->
                                     <h3>Active Exercises</h3>
                                     <table class="data table table-striped no-margin">
@@ -274,6 +275,7 @@
                                                 <th>Start Date</th>
                                                 <th>End Date</th>
                                                 <th>Interval</th>
+                                                <th></th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -281,17 +283,20 @@
                                             {
                                                 if (ex.EndDate >= DateTime.Now.Date)
                                                 {
-                                                    <tr>
-                                                        <td>
-                                                            <img border=3 height=100 width=100 src="@ex.Exercise.GifPicture">
-                                                        </td>
-                                                        <td>@ex.Exercise.Name</td>
-                                                        <td>@ex.Exercise.Category</td>
-                                                        <td>@ex.Sets</td>
-                                                        <td>@ex.StartDate</td>
-                                                        <td>@ex.EndDate</td>
-                                                        <td>@ex.Interval</td>
-                                                    </tr>
+                                            <tr>
+                                                <td class="editExId" hidden>"@ex.RoutineId"</td>
+                                                <td>
+                                                    <img border=3 height=100 width=130 src="@ex.Exercise.GifPicture">
+                                                </td>
+                                                <td class="editExName">@ex.Exercise.Name</td>
+                                                <td class="editExCategory">@ex.Exercise.Category</td>
+                                                <td class="editExSet">@ex.Sets</td>
+                                                <td class="editExStart">@ex.StartDate.ToShortDateString()</td>
+                                                <td class="editExEnd">@ex.EndDate.ToShortDateString()</td>
+                                                <td class="editExInterval">@ex.Interval</td>
+                                                <td><button class="btn btn bg-danger pull-right" onclick="location.href='@(Url.Action("DeleteAssignedExercise", "Home", new { routineId = ex.RoutineId, traineeId = Model.Id }))'">Delete</button></td>
+                                                <td><button class="open-EditExercise btn btn-success pull-right" onclick="EditModalFill(this)">Edit</button></td>
+                                            </tr>
                                                 }
                                             }
                                         </tbody>
@@ -309,6 +314,7 @@
                                                 <th>Start Date</th>
                                                 <th>End Date</th>
                                                 <th>Interval</th>
+                                                <th></th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -316,18 +322,49 @@
                                             {
                                                 if (ex.EndDate < DateTime.Now.Date)
                                                 {
-                                                    <tr>
-                                                        <td>
-                                                            <img border=3 height=100 width=100 src="@ex.Exercise.GifPicture">
-                                                        </td>
-                                                        <td>@ex.Exercise.Name</td>
-                                                        <td>@ex.Exercise.Category</td>
-                                                        <td>@ex.Sets</td>
-                                                        <td>@ex.StartDate</td>
-                                                        <td>@ex.EndDate</td>
-                                                        <td>@ex.Interval</td>
-                                                    </tr>
+                                            <tr>
+                                                <td class="editExId" hidden>"@ex.RoutineId"</td>
+                                                <td>
+                                                    <img border=3 height=100 width=130 src="@ex.Exercise.GifPicture">
+                                                </td>
+                                                <td class="editExName">@ex.Exercise.Name</td>
+                                                <td class="editExCategory">@ex.Exercise.Category</td>
+                                                <td class="editExSet">@ex.Sets</td>
+                                                <td class="editExStart">@ex.StartDate.ToShortDateString()</td>
+                                                <td class="editExEnd">@ex.EndDate.ToShortDateString()</td>
+                                                <td class="editExInterval">@ex.Interval</td>
+                                                <td><button class="btn btn bg-danger pull-right" onclick="location.href='@(Url.Action("DeleteAssignedExercise", "Home", new { routineId = ex.RoutineId, traineeId = Model.Id }))'">Delete</button></td>
+                                                <td><button class="open-EditExercise btn btn-success pull-right" onclick="EditModalFill(this)">Edit</button></td>
+                                            </tr>
                                                 }
+                                            }
+                                        </tbody>
+                                    </table>
+                                    <!--end user passed assigned exercises-->
+                                </div>
+                                <div id="tab_content5" class="tab-pane fade">
+                                    <!--start user current assigned exercises-->
+                                    <h3>Assign Exercise</h3>
+                                    <table class="data table table-striped no-margin">
+                                        <thead>
+                                            <tr>
+                                                <th>Gif/Image</th>
+                                                <th>Exercise Name</th>
+                                                <th>Exercise Category</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach (var ex in Model.Exercises)
+                                            {
+                                                <tr>
+                                                    <td class="exerId" hidden>@ex.ExerciseId</td>
+                                                    <td class="exerciseImage">
+                                                        <img border=3 height=100 width=130 src="@ex.GifPicture">
+                                                    </td>
+                                                    <td class="exerciseName">@ex.Name</td>
+                                                    <td class="exerciseCategory">@ex.Category</td>
+                                                    <td><button class="open-AssignExercise btn btn-success pull-right" onclick="ModalFill(this)">Assign</button></td>
+                                                </tr>
                                             }
                                         </tbody>
                                     </table>
@@ -342,7 +379,6 @@
     </div>
 </div>
 
-
 <div id="EditGoalModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -352,13 +388,14 @@
             </div>
             <div class="modal-body">
                 <div id="testmodal" style="padding: 5px 20px;">
-                    <form class="form-horizontal" role="form">
+                    <form class="form-horizontal" role="form" method="post" asp-controller="Home" asp-action="EditGoal">
+                        <input asp-for="Id" hidden />
                         <div class="form-group">
                             <label class="control-label col-md-3 col-sm-3 col-xs-12" asp-for="GoalWeight">
                                 Weight
                             </label>
                             <div class="col-md-6 col-sm-6 col-xs-12">
-                                <input type="number" step="0.1" id="goalFatRatio" name="goalFatRatio" asp-for="GoalWeight" value="@Model.GoalWeight" class="form-control col-md-7 col-xs-12">
+                                <input type="number" step="0.1" id="goalWeight" asp-for="GoalWeight" value="@Model.GoalWeight" class="form-control col-md-7 col-xs-12">
                             </div>
                         </div>
                         <div class="form-group">
@@ -375,19 +412,19 @@
                             </label>
                             <div class="col-md-6 col-sm-6 col-xs-12">
                                 <div class='input-group date' id='myDatepicker2'>
-                                    <input id="goaldate" type='text' class="form-control" asp-for="GoalDate" value="@Model.GoalDate" data-inputmask="'mask': '99.99.9999'" placeholder="DD.MM.YYYY" required="required" />
+                                    <input id="goaldate" type='text' class="form-control" asp-for="GoalDate" value="@Model.GoalDate.ToShortDateString()" data-inputmask="'mask': '99.99.9999'" placeholder="DD.MM.YYYY" required="required" />
                                     <span class="input-group-addon">
                                         <span class="glyphicon glyphicon-calendar"></span>
                                     </span>
                                 </div>
                             </div>
                         </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-danger antoclose" data-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-success antosubmit">Save changes</button>
+                        </div>
                     </form>
                 </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-danger antoclose" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-success antosubmit">Save changes</button>
             </div>
         </div>
     </div>
@@ -395,51 +432,86 @@
 
 <div id="AssignExerciseModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog" style="position: relative;">
-        <div class="modal-content" style="position: relative; overflow-y: auto; overflow-x: auto; width: 1000px; padding: 15px;">
+        <div class="modal-content" style="position: relative; overflow-y: auto; overflow-x: auto; width: auto; padding: 15px;">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                 <h4 class="modal-title" id="myModalLabel">Assign Exercise</h4>
             </div>
-            <div class="modal-body" style="position: relative; overflow-y: auto; max-height: 400px; padding: 15px;">
+            <div class="modal-body" style="position: relative; overflow-y: auto; max-height: 480px; padding: 15px;">
                 <div id="testmodal" style="padding: 5px 20px;">
-                    <table class="data table table-striped no-margin">
-                        <thead>
-                            <tr>
-                                <th>Gif/Image</th>
-                                <th>Exercise Name</th>
-                                <th>Exercise Category</th>
-                                <th class="hidden-phone">Sets</th>
-                                <th>Start Date</th>
-                                <th>End Date</th>
-                                <th>Interval</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach (var ex in Model.Exercises)
-                                {
-                            <tr>
-                                <td>
-                                    <img border=3 height=100 width=100 src="@ex.GifPicture">
-                                </td>
-                                <td>@ex.Name</td>
-                                <td>@ex.Category</td>
-                                <td class="hidden-phone"><input type="number" min="0" max="100" name="sets" asp-for="ExSets" /></td>
-                                <td>
-                                    <input type="text" class="startdate" data-inputmask="'mask': '99/99/9999'" asp-for="ExStartDate" placeholder="DD/MM/YYYY">
-                                </td>
-                                <td>
-                                    <input type="text" class="enddate" data-inputmask="'mask': '99/99/9999'" asp-for="ExEndDate" placeholder="DD/MM/YYYY">
-                                </td>
-                                <td><input type="number" min="0" max="30" asp-for="ExInterval" /></td>
-                                <td><button class="btn btn-info">Assign</button></td>
-                            </tr>
-                            }
-                        </tbody>
-                    </table>
+                    <form class="form-horizontal" asp-controller="Home" asp-action="">
+                        <input id="traineeId" asp-for="Id" hidden />
+                        <input id="exId" class="ExId" asp-for="ExId" hidden />
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" asp-for="ExSets">
+                                Image/Gif
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <img border=3 class="ExImage" height=100 width=130>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                Name
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <input id="ExName" class="ExName form-control col-md-7 col-xs-12" readonly>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                Category
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <input id="ExCategory" class="ExCategory form-control col-md-7 col-xs-12" readonly>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" asp-for="ExSets">
+                                Sets
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <input type="number" step="1" id="exSets" asp-for="ExSets" class="form-control col-md-7 col-xs-12">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" asp-for="ExStartDate">
+                                Start Date <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <div class='input-group date' id='myDatepicker7'>
+                                    <input id="exStartDate" type='text' class="form-control ExStartDate" asp-for="ExStartDate" data-inputmask="'mask': '99.99.9999'" placeholder="DD.MM.YYYY" required="required" />
+                                    <span class="input-group-addon">
+                                        <span class="glyphicon glyphicon-calendar"></span>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" asp-for="ExEndDate">
+                                End Date <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <div class='input-group date' id='myDatepicker8'>
+                                    <input id="exEndDate" type='text' class="form-control ExEndDate" asp-for="ExEndDate" data-inputmask="'mask': '99.99.9999'" placeholder="DD.MM.YYYY" required="required" />
+                                    <span class="input-group-addon">
+                                        <span class="glyphicon glyphicon-calendar"></span>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" asp-for="ExInterval">
+                                Interval
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <input type="number" min="1" max="30" id="exInterval" asp-for="ExInterval" class="form-control col-md-7 col-xs-12">
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-info pull-right" asp-controller="Home" asp-action="AssignExercise">Assign</button>
+                        <button type="button" class="btn btn-danger antoclose pull-right" data-dismiss="modal">Close</button>
+                    </form>
                 </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-danger antoclose" data-dismiss="modal">Close</button>
             </div>
         </div>
     </div>
@@ -454,13 +526,15 @@
             </div>
             <div class="modal-body">
                 <div id="testmodal" style="padding: 5px 20px;">
-                    <form class="form-horizontal" role="form">
+                    <form class="form-horizontal" role="form" asp-controller="Home" asp-action="EditAssignedExercise">
+                        <input asp-for="Id" hidden/>
+                        <input asp-for="RoutineId" class="EditExId" hidden/>
                         <div class="form-group">
                             <label class="control-label col-md-3 col-sm-3 col-xs-12" asp-for="EditExName">
                                 Name <span class="required">*</span>
                             </label>
                             <div class="col-md-6 col-sm-6 col-xs-12">
-                                <text type="text" id="first-name" required="required" class="form-control col-md-7 col-xs-12"> @Model.EditExName</text>
+                                <input type="text" id="first-name" required="required" class="form-control col-md-7 col-xs-12 EditExName" readonly>
                             </div>
                         </div>
                         <div class="form-group">
@@ -468,7 +542,7 @@
                                 Category <span class="required">*</span>
                             </label>
                             <div class="col-md-6 col-sm-6 col-xs-12">
-                                <text type="text" id="first-name" required="required" class="form-control col-md-7 col-xs-12">@Model.EditExCategory</text>
+                                <input type="text" id="first-name" required="required" asp-for="EditExCategory" class="form-control col-md-7 col-xs-12 EditExCategory" readonly>
                             </div>
                         </div>
                         <div class="form-group">
@@ -476,7 +550,7 @@
                                 Sets <span class="required">*</span>
                             </label>
                             <div class="col-md-6 col-sm-6 col-xs-12">
-                                <input type="number" min="0" max="100" id="exerciseSet" required="required" class="form-control col-md-7 col-xs-12" value="@Model.EditExSets">
+                                <input type="number" min="0" max="100" id="exerciseSet" required="required" asp-for="EditExSets" class="form-control col-md-7 col-xs-12 EditExSets" value="@Model.EditExSets">
                             </div>
                         </div>
                         <div class="form-group">
@@ -484,7 +558,7 @@
                                 Interval <span class="required">*</span>
                             </label>
                             <div class="col-md-6 col-sm-6 col-xs-12">
-                                <input type="number" id="exerciseInterval" required="required" class="form-control col-md-7 col-xs-12" value="@Model.EditExInterval">
+                                <input type="number" id="exerciseInterval" required="required" asp-for="EditExInterval" class="form-control col-md-7 col-xs-12 EditExInterval" value="@Model.EditExInterval">
                             </div>
                         </div>
                         <div class="form-group">
@@ -493,7 +567,7 @@
                             </label>
                             <div class="col-md-6 col-sm-6 col-xs-12">
                                 <div class='input-group startdate'>
-                                    <input id="exerciseStartDate" type='text' class="form-control" value="@Model.EditExStartDate" data-inputmask="'mask': '99/99/9999'" placeholder="DD/MM/YYYY" required="required" />
+                                    <input id="exerciseStartDate" type='text' class="form-control EditExStartDate" asp-for="EditExStartDate" value="@Model.EditExStartDate" data-inputmask="'mask': '99/99/9999'" placeholder="DD/MM/YYYY" required="required" />
                                     <span class="input-group-addon">
                                         <span class="glyphicon glyphicon-calendar"></span>
                                     </span>
@@ -506,22 +580,115 @@
                             </label>
                             <div class="col-md-6 col-sm-6 col-xs-12">
                                 <div class='input-group enddate'>
-                                    <input id="exerciseEndDate" type='text' class="form-control" value="@Model.EditExEndDate" data-inputmask="'mask': '99/99/9999'" placeholder="DD/MM/YYYY" required="required" />
+                                    <input id="exerciseEndDate" type='text' class="form-control EditExEndDate" asp-for="EditExEndDate" value="@Model.EditExEndDate" data-inputmask="'mask': '99/99/9999'" placeholder="DD/MM/YYYY" required="required" />
                                     <span class="input-group-addon">
                                         <span class="glyphicon glyphicon-calendar"></span>
                                     </span>
                                 </div>
                             </div>
                         </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-danger antoclose" data-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-success antosubmit">Save changes</button>
+                        </div>
                     </form>
                 </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-danger antoclose" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-success antosubmit">Save changes</button>
             </div>
         </div>
     </div>
 </div>
 
 <!-- /page content -->
+<script>
+    function ModalFill(elem) {
+
+        var myModal = $("#AssignExerciseModal");
+
+        // now get the values from the table
+        var name = $(elem).closest("tr").find("td.exerciseName").html();
+        var category = $(elem).closest("tr").find("td.exerciseCategory").html();
+        var exerId = $(elem).closest("tr").find("td.exerId").html();
+        var exImage = $(elem).closest("tr").find("td.exerciseImage").html();
+
+        //console.log(exerId);
+        //to get img src
+        var el = document.createElement('html');
+        el.innerHTML = exImage;
+        exImage = el.getElementsByTagName('img');
+        exImage = exImage[0].src
+        //image src includes unnecesssary parts so split and add required parts
+        exImage = "/../Uploads" + exImage.split("Uploads")[1]
+        console.log(exImage);
+        //alert(name);
+        //alert(category);
+        //alert(exerId);
+
+        var today = new Date();
+        var dd = today.getDate();
+        var mm = today.getMonth() + 1; //January is 0!
+        var yyyy = today.getFullYear();
+
+        if (dd < 10) {
+            dd = '0' + dd
+        }
+
+        if (mm < 10) {
+            mm = '0' + mm
+        }
+
+        var dateVal = dd + "/" + mm + "/" + yyyy;
+
+        // and set them in the modal:
+        $('.ExName', myModal).val(name);
+        $('.ExCategory', myModal).val(category);
+        $('.ExId', myModal).val(exerId);
+        $('.ExImage', myModal).attr('src', exImage);
+        $('.ExEndDate', myModal).val(dateVal);
+        $('.ExStartDate', myModal).val(dateVal);
+
+        // and finally show the modal
+        myModal.modal('show');
+    }
+    function EditModalFill(elem) {
+
+        var myModal = $("#EditExerciseModal");
+
+        // now get the values from the table
+        var name = $(elem).closest("tr").find("td.editExName").html();
+        var category = $(elem).closest("tr").find("td.editExCategory").html();
+        var exerId = $(elem).closest("tr").find("td.editExId").html();
+        var startDate = $(elem).closest("tr").find("td.editExStart").html();
+        var endDate = $(elem).closest("tr").find("td.editExEnd").html();
+        var interval = $(elem).closest("tr").find("td.editExInterval").html();
+        var set = $(elem).closest("tr").find("td.editExSet").html();
+
+
+        exerId = exerId.slice(1, -1);
+        //console.log(exerId);
+        //console.log(category);
+
+        startDate = startDate.split('.');
+        if (startDate[0].length < 2) {
+            startDate[0] = '0' + startDate[0];
+        }
+        startDate = startDate[0] + '.' + startDate[1] + '.' + startDate[2];
+
+        endDate = endDate.split('.');
+        if (endDate[0].length < 2) {
+            endDate[0] = '0' + endDate[0];
+        }
+        endDate = endDate[0] + '.' + endDate[1] + '.' + endDate[2];
+
+        // and set them in the modal:
+        $('.EditExName', myModal).val(name);
+        $('.EditExCategory', myModal).val(category);
+        $('.EditExId', myModal).val(exerId);
+        $('.EditExEndDate', myModal).val(endDate);
+        $('.EditExStartDate', myModal).val(startDate);
+        $('.EditExSets', myModal).val(set);
+        $('.EditExInterval', myModal).val(interval);
+
+        // and finally show the modal
+        myModal.modal('show');
+    }
+</script>

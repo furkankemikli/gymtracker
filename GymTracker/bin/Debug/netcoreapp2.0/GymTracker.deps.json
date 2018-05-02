@@ -7,6 +7,8 @@
     "defines": [
       "TRACE",
       "DEBUG",
+      "NETCOREAPP2_0",
+      "DEBUG",
       "NETCOREAPP2_0"
     ],
     "languageVersion": "",
@@ -17,7 +19,7 @@
     "keyFile": "",
     "emitEntryPoint": true,
     "xmlDoc": false,
-    "debugType": "portable"
+    "debugType": "full"
   },
   "targets": {
     ".NETCoreApp,Version=v2.0": {

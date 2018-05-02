@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -18,7 +19,9 @@ namespace GymTracker.Models.ManageViewModels
         [StringLength(150)]
         public string Surname { get; set; }
 
-        public byte[] Image { get; set; }
+        public string CurrentImage { get; set; }
+
+        public IFormFile Image { get; set; }
 
         [StringLength(150)]
         public string City { get; set; }
