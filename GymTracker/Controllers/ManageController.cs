@@ -131,11 +131,7 @@ namespace GymTracker.Controllers
                 {
                     await model.Image.CopyToAsync(stream);
                 }
-            }
-
-            var picture = user.Picture;
-            if (newImagePath != picture)
-            {
+                
                 var setPictureResult = _userProfileRepository.ChangePicture(user, newImagePath);
                 if (setPictureResult == 0)
                 {
