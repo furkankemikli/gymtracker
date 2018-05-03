@@ -12,13 +12,14 @@
         @*<p class="text-muted font-13 m-b-30">
                 Responsive is a extension for DataTables that resolves that problem by optimising the table's layout for different screen sizes through the dynamic insertion and removal of columns from the table.
             </p>*@
+        <h6 class="pull-right">The calories per set values are calculated for 15 minutes durations.</h6>
         <table id="datatable-fixed-header" class="table table-striped table-bordered">
             <thead>
                 <tr>
+                    <th>Gif/Picture</th>
                     <th>Name</th>
                     <th>Category</th>
                     <th>Calorie By Set</th>
-                    <th>Gif/Picture</th>
                 </tr>
             </thead>
             <tbody>
@@ -26,14 +27,14 @@
                 {
                 <tr>
                     @{
-                        var imgSrc = ex.GifPicture;
+        var imgSrc = ex.GifPicture;
                     }
+                    <td>
+                        <img border=3 height=100 width=200 src="@imgSrc">
+                    </td>
                     <td>@ex.Name</td>
                     <td>@ex.Category</td>
                     <td>@ex.CalorieBySet</td>
-                    <td>
-                        <img border=3 height=100 width=100 src="@imgSrc">
-                    </td>
                 </tr>
                 }
             </tbody>
