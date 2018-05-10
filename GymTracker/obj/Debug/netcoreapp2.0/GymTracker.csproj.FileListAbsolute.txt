@@ -22,3 +22,15 @@ C:\Users\Furkan\source\repos\renamed\GymTracker\obj\Debug\netcoreapp2.0\GymTrack
 C:\Users\Furkan\source\repos\renamed\GymTracker\obj\Debug\netcoreapp2.0\GymTracker.csprojResolveAssemblyReference.cache
 C:\Users\Furkan\source\repos\renamed\GymTracker\obj\Debug\netcoreapp2.0\UserSecretsAssemblyInfo.cs
 C:\Users\Furkan\source\repos\GymTracker\GymTracker\obj\Debug\netcoreapp2.0\UserSecretsAssemblyInfo.cs
+C:\Users\Furkan\source\repos\GymTrackerNew\GymTracker\bin\Debug\netcoreapp2.0\GymTracker.deps.json
+C:\Users\Furkan\source\repos\GymTrackerNew\GymTracker\bin\Debug\netcoreapp2.0\GymTracker.runtimeconfig.json
+C:\Users\Furkan\source\repos\GymTrackerNew\GymTracker\bin\Debug\netcoreapp2.0\GymTracker.runtimeconfig.dev.json
+C:\Users\Furkan\source\repos\GymTrackerNew\GymTracker\bin\Debug\netcoreapp2.0\GymTracker.dll
+C:\Users\Furkan\source\repos\GymTrackerNew\GymTracker\bin\Debug\netcoreapp2.0\GymTracker.pdb
+C:\Users\Furkan\source\repos\GymTrackerNew\GymTracker\obj\Debug\netcoreapp2.0\GymTracker.csprojResolveAssemblyReference.cache
+C:\Users\Furkan\source\repos\GymTrackerNew\GymTracker\obj\Debug\netcoreapp2.0\GymTracker.csproj.CoreCompileInputs.cache
+C:\Users\Furkan\source\repos\GymTrackerNew\GymTracker\obj\Debug\netcoreapp2.0\UserSecretsAssemblyInfo.cs
+C:\Users\Furkan\source\repos\GymTrackerNew\GymTracker\obj\Debug\netcoreapp2.0\GymTracker.AssemblyInfoInputs.cache
+C:\Users\Furkan\source\repos\GymTrackerNew\GymTracker\obj\Debug\netcoreapp2.0\GymTracker.AssemblyInfo.cs
+C:\Users\Furkan\source\repos\GymTrackerNew\GymTracker\obj\Debug\netcoreapp2.0\GymTracker.dll
+C:\Users\Furkan\source\repos\GymTrackerNew\GymTracker\obj\Debug\netcoreapp2.0\GymTracker.pdb

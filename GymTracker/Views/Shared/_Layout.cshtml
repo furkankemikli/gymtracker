@@ -10,6 +10,39 @@
 
 
     <environment>
+        <style>
+            .loader {
+                border: 16px solid #f3f3f3;
+                border-radius: 50%;
+                border-top: 16px solid #3498db;
+                width: 120px;
+                height: 120px;
+                margin-left: 150px;
+                -webkit-animation: spin 2s linear infinite; /* Safari */
+                animation: spin 2s linear infinite;
+            }
+
+            /* Safari */
+            @@-webkit-keyframes spin {
+                0% {
+                    -webkit-transform: rotate(0deg);
+                }
+
+                100% {
+                    -webkit-transform: rotate(360deg);
+                }
+            }
+
+            @@keyframes spin {
+                0% {
+                    transform: rotate(0deg);
+                }
+
+                100% {
+                    transform: rotate(360deg);
+                }
+            }
+        </style>
         <!-- Bootstrap -->
         <link href="~/js/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
         <!-- Font Awesome -->
@@ -151,7 +184,7 @@
             $('.modal').on('hidden.bs.modal', function () {
                 $(this).find('input').val(null);
                 $(this).find('textarea').val(null);
-                $(this).find('img').attr("src", "~/images/user.png");
+                $(this).find('img').attr("src", "");
             });
         </script>
         <!-- FastClick -->
@@ -225,7 +258,7 @@
             });
         </script>
         <script>
-//trainee details page assign modal datepicker in tables
+            //trainee details page assign modal datepicker in tables
             $(".startdate").datetimepicker({
                 format: 'DD.MM.YYYY'
             });
