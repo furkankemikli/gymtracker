@@ -47,11 +47,12 @@
                     <!-- menu profile quick info -->
                     <div class="profile clearfix">
                         <div class="profile_pic">
-                            <img src="~/images/user.png" alt="User Profile Picture" class="img-circle profile_img">
+                            <img id="userImage2" src="~/images/user.png" alt="User Profile Picture" class="img-circle profile_img">
                         </div>
                         <div class="profile_info">
                             <span>Welcome,</span>
-                            <h2>@User.Identity.Name</h2>
+                            <h2 id="userName2"></h2>
+                            @*@User.Identity.Name*@
                         </div>
                     </div>
                     <!-- /menu profile quick info -->
@@ -101,7 +102,7 @@
                         <ul class="nav navbar-nav navbar-right">
                             <li class="">
                                 <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                                    <img src="~/images/user.png" alt="">@User.Identity.Name
+                                    <img id="userImage1" src="~/images/user.png" alt=""><label id="userName1"></label>
                                     <span class=" fa fa-angle-down"></span>
                                 </a>
                                 <ul class="dropdown-menu dropdown-usermenu pull-right">
@@ -231,6 +232,21 @@
             $(".enddate").datetimepicker({
                 format: 'DD.MM.YYYY'
             });
+        </script>
+        <script>
+            $.ajax({
+            url: '@Url.Action("GetUserInfo", "Home")',
+            type: 'GET',
+            data: { },
+            cache: false,
+                success: function (result) {
+                    //console.log(result);
+                    document.getElementById("userImage1").src = "data:image/png;base64," + result.image;
+                    document.getElementById("userImage2").src = "data:image/png;base64," + result.image;
+                    document.getElementById("userName1").innerHTML = result.name + " " + result.surname;
+                    document.getElementById("userName2").innerHTML = result.name + " " + result.surname;
+            }
+        });
         </script>
     </environment>
 

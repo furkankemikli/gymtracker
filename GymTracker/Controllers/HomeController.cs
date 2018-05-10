@@ -75,6 +75,17 @@ namespace GymTracker.Controllers
             return View(homeIndexViewModel);
         }
 
+        public async Task<ApplicationUser> GetUserInfo()
+        {
+            var trainer = await _userManager.GetUserAsync(User);
+            return new ApplicationUser
+            {
+                Name = trainer.Name,
+                Surname = trainer.Surname,
+                Image = trainer.Image
+            };
+        }
+
         [HttpPost]
         public IActionResult AddNewEvent(HomeIndexViewModel model)
         {
