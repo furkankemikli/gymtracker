@@ -7,23 +7,30 @@ namespace GymTracker.Models.Repositories
 {
     public class DailyRoutineRepository : IDailyRoutineRepository
     {
-        private readonly Aspnet_GymTrackerContext _aspnetGymTrackerContext;
+        private readonly GymTrackerContext _aspnetGymTrackerContext;
 
-        public DailyRoutineRepository(Aspnet_GymTrackerContext aspnet_GymTrackerContext)
+        public DailyRoutineRepository(GymTrackerContext aspnet_GymTrackerContext)
         {
             _aspnetGymTrackerContext = aspnet_GymTrackerContext;
         }
 
         public IEnumerable<DailyRoutine> DailyRoutines(string traineeId)
         {
-            return _aspnetGymTrackerContext.DailyRoutine.Where(f => f.TraineeId == traineeId).ToList();
+            IEnumerable<DailyRoutine> result =  _aspnetGymTrackerContext.DailyRoutine.Where(f => f.TraineeId == traineeId && f.Status != "passive").ToList();
+            foreach(DailyRoutine routine in result){
+                routine.Exercise = _aspnetGymTrackerContext.Exercise.Select(e => new Exercise(e.ExerciseId, e.Name, e.Category, e.CalorieBySet) { ExerciseId = e.ExerciseId, Name = e.Name, Category = e.Category, CalorieBySet = e.CalorieBySet }).Where(e => e.ExerciseId == routine.ExerciseId).FirstOrDefault();
+            }
+            return result;
         }
 
-        public void CreateDailyRoutine(DailyRoutine dailyRoutine)
+        public int CreateDailyRoutine(DailyRoutine dailyRoutine)
         {
             _aspnetGymTrackerContext.DailyRoutine.Add(dailyRoutine);
 
             _aspnetGymTrackerContext.SaveChanges();
+
+            return dailyRoutine.RoutineId;
+
         }
 
         public void UpdateDailyRoutine(DailyRoutine dailyRoutine)
@@ -41,7 +48,12 @@ namespace GymTracker.Models.Repositories
 
         public void DeleteDailyRoutine(int routineId)
         {
-            _aspnetGymTrackerContext.DailyRoutine.Remove(_aspnetGymTrackerContext.DailyRoutine.Where(c => c.RoutineId == routineId).FirstOrDefault());
+            _aspnetGymTrackerContext.DailyProgress.RemoveRange(_aspnetGymTrackerContext.DailyProgress.Where(c => c.RoutineId == routineId && c.Date >= DateTime.Today));
+            var result = _aspnetGymTrackerContext.DailyRoutine.SingleOrDefault(b => b.RoutineId == routineId);
+            if(result != null)
+            {
+                result.Status = "passive";
+            }
             _aspnetGymTrackerContext.SaveChanges();
         }
     }

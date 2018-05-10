@@ -26,18 +26,12 @@ namespace GymTracker.Models.TraineeViewModels
 
         public DateTime DateOfBirth { get; set; }
 
-        public string CurrentImage { get; set; }
+        public byte[] CurrentImage { get; set; }
 
         public IFormFile Image { get; set; }
 
         [Phone]
         public string Phone { get; set; }
-
-        public double Weight { get; set; }
-
-        public double Height { get; set; }
-
-        public double FatRatio { get; set; }
         
         [StringLength(150)]
         public string City { get; set; }

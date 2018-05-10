@@ -8,10 +8,7 @@ namespace GymTracker.Models
         public string TraineeId { get; set; }
         public string TrainerId { get; set; }
         public DateTime? Birthday { get; set; }
-        public double? Weight { get; set; }
-        public double? Height { get; set; }
         public string Gender { get; set; }
-        public double? FatRatio { get; set; }
         public DateTime EntryDate { get; set; }
 
         public ApplicationUser TraineeNavigation { get; set; }

@@ -38,12 +38,13 @@ namespace GymTracker.Models.TraineeViewModels
 
         public IFormFile Image { get; set; }
 
+        public string Gender { get; set; }
+
+        //for trainee measurements
         public double Weight { get; set; }
 
         public double Height { get; set; }
 
-        public double FatRatio { get; set; }
-
-        public string Gender { get; set; }
+        public int FatRatio { get; set; }
     }
 }

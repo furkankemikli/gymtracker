@@ -8,9 +8,9 @@ namespace GymTracker.Models.Repositories
 {
     public class UserProfileRepository : IUserProfileRepository
     {
-        private readonly Aspnet_GymTrackerContext _aspnetGymTrackerContext;
+        private readonly GymTrackerContext _aspnetGymTrackerContext;
 
-        public UserProfileRepository(Aspnet_GymTrackerContext aspnet_GymTrackerContext)
+        public UserProfileRepository(GymTrackerContext aspnet_GymTrackerContext)
         {
             _aspnetGymTrackerContext = aspnet_GymTrackerContext;
         }
@@ -51,13 +51,13 @@ namespace GymTracker.Models.Repositories
             return count;
         }
 
-        public int ChangePicture(ApplicationUser user, string picture)
+        public int ChangePicture(ApplicationUser user, byte[] picture)
         {
             var result = _aspnetGymTrackerContext.ApplicationUser.SingleOrDefault(b => b.Id == user.Id);
             var count = 0;
             if (result != null)
             {
-                result.Picture = picture;
+                result.Image = picture;
                 count = _aspnetGymTrackerContext.SaveChanges();
             }
             return count;

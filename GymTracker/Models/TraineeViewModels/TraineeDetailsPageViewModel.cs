@@ -19,21 +19,24 @@ namespace GymTracker.Models.TraineeViewModels
 
         public DateTime DateOfBirth { get; set; }
 
-        public string Image { get; set; }
+        public byte[] Image { get; set; }
 
         public string Phone { get; set; }
-
-        public double Weight { get; set; }
-
-        public double Height { get; set; }
-
-        public double FatRatio { get; set; }
 
         public string City { get; set; }
 
         public string Gender { get; set; }
 
         public DateTime EntryDate { get; set; }
+
+        //from trainee measurements to show last measurements of the trainee
+        public double Weight { get; set; }
+
+        public double Height { get; set; }
+
+        public int FatRatio { get; set; }
+
+        public DateTime MeasureDate { get; set; }
 
         //to list done exercises with percentage
         public IEnumerable<DailyProgress> DailyProgresses { get; set; }
@@ -55,12 +58,18 @@ namespace GymTracker.Models.TraineeViewModels
 
         public int ExInterval { get; set; }
 
-        //to show and edit trainee goals
-        public double GoalWeight { get; set; }
+        //to show and edit trainee measurements
+        public IEnumerable<TraineeMeasurements> Measurements { get; set; }
 
-        public double GoalFatRatio { get; set; }
+        public int MeasurementId { get; set; }
 
-        public DateTime GoalDate { get; set; }
+        public double EditWeight { get; set; }
+
+        public double EditHeight { get; set; }
+
+        public int EditFatRatio { get; set; }
+
+        public DateTime EditMeasureDate { get; set; }
 
         //to edit assigned exercise
         public int RoutineId { get; set; }

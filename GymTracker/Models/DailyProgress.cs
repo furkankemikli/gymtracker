@@ -11,8 +11,10 @@ namespace GymTracker.Models
         public double AssignedSets { get; set; }
         public double CompletedSets { get; set; }
         public DateTime Date { get; set; }
+        public int RoutineId { get; set; }
 
         public Exercise Exercise { get; set; }
+        public DailyRoutine Routine { get; set; }
         public ApplicationUser Trainee { get; set; }
     }
 }

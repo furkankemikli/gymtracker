@@ -7,9 +7,9 @@ namespace GymTracker.Models.Repositories
 {
     public class ExerciseRepository : IExerciseRepository
     {
-        private readonly Aspnet_GymTrackerContext _aspnetGymTrackerContext;
+        private readonly GymTrackerContext _aspnetGymTrackerContext;
 
-        public ExerciseRepository(Aspnet_GymTrackerContext aspnet_GymTrackerContext)
+        public ExerciseRepository(GymTrackerContext aspnet_GymTrackerContext)
         {
             _aspnetGymTrackerContext = aspnet_GymTrackerContext;
         }
@@ -18,7 +18,7 @@ namespace GymTracker.Models.Repositories
         {
             get
             {
-                return _aspnetGymTrackerContext.Exercise.ToList();
+                return _aspnetGymTrackerContext.Exercise.Select(e => new Exercise(e.ExerciseId, e.Name, e.Category, e.CalorieBySet) { ExerciseId = e.ExerciseId, Name = e.Name, Category = e.Category, CalorieBySet = e.CalorieBySet}).ToList();
 
             }
         }

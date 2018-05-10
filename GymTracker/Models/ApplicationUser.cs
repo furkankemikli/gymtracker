@@ -11,7 +11,7 @@ namespace GymTracker.Models
             DailyProgress = new HashSet<DailyProgress>();
             DailyRoutine = new HashSet<DailyRoutine>();
             Event = new HashSet<Event>();
-            TraineeGoals = new HashSet<TraineeGoals>();
+            TraineeMeasurements = new HashSet<TraineeMeasurements>();
             TraineeTrainer = new HashSet<Trainee>();
         }
 
@@ -34,14 +34,14 @@ namespace GymTracker.Models
         public string City { get; set; }
         public string Name { get; set; }
         public string Surname { get; set; }
-        public string Picture { get; set; }
+        public byte[] Image { get; set; }
 
         public Gym Gym { get; set; }
         public Trainee TraineeTraineeNavigation { get; set; }
         public ICollection<DailyProgress> DailyProgress { get; set; }
         public ICollection<DailyRoutine> DailyRoutine { get; set; }
         public ICollection<Event> Event { get; set; }
-        public ICollection<TraineeGoals> TraineeGoals { get; set; }
+        public ICollection<TraineeMeasurements> TraineeMeasurements { get; set; }
         public ICollection<Trainee> TraineeTrainer { get; set; }
     }
 }

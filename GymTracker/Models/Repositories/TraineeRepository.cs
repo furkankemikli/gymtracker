@@ -7,9 +7,9 @@ namespace GymTracker.Models.Repositories
 {
     public class TraineeRepository : ITraineeRepository
     {
-        private readonly Aspnet_GymTrackerContext _aspnetGymTrackerContext;
+        private readonly GymTrackerContext _aspnetGymTrackerContext;
 
-        public TraineeRepository(Aspnet_GymTrackerContext aspnet_GymTrackerContext)
+        public TraineeRepository(GymTrackerContext aspnet_GymTrackerContext)
         {
             _aspnetGymTrackerContext = aspnet_GymTrackerContext;
         }
@@ -20,7 +20,7 @@ namespace GymTracker.Models.Repositories
                                    join u in _aspnetGymTrackerContext.ApplicationUser
                                    on t.TraineeId equals u.Id
                                    where t.TrainerId == trainerId
-                                   select new { t.TraineeId, t.TrainerId, u.Name, u.Surname, t.Birthday, t.Weight, t.Height, t.Gender, t.FatRatio, u.Email, u.PhoneNumber, u.GymId, u.City, u.Picture, t.EntryDate }).ToList();
+                                   select new { t.TraineeId, t.TrainerId, u.Name, u.Surname ,t.Birthday, t.Gender, u.Email, u.PhoneNumber, u.GymId, u.City, u.Image, t.EntryDate }).ToList();
             List<TraineeInfoModel> trainees = new List<TraineeInfoModel>();
             foreach (var elmt in traineesGeneral)
             {
@@ -31,17 +31,21 @@ namespace GymTracker.Models.Repositories
                     Name = elmt.Name,
                     Surname = elmt.Surname,
                     Birthday = elmt.Birthday,
-                    Weight = elmt.Weight,
-                    Height = elmt.Height,
                     Gender = elmt.Gender,
-                    FatRatio = elmt.FatRatio,
                     Email = elmt.Email,
                     PhoneNumber = elmt.PhoneNumber,
                     GymId = elmt.GymId,
                     City = elmt.City,
-                    Picture = elmt.Picture,
-                    EntryDate = elmt.EntryDate
+                    EntryDate = elmt.EntryDate,
+                    Image = elmt.Image
                 };
+                TraineeMeasurements measurements = _aspnetGymTrackerContext.TraineeMeasurements.Where(u => u.TraineeId == trainee.TraineeId).OrderByDescending(u => u.Date).FirstOrDefault();
+                if (measurements != null)
+                {
+                    trainee.Weight = measurements.Weight;
+                    trainee.Height = measurements.Height;
+                    trainee.FatRatio = measurements.FatRatio;
+                }
                 trainees.Add(trainee);
             }
             return trainees;
@@ -53,25 +57,30 @@ namespace GymTracker.Models.Repositories
                                    join u in _aspnetGymTrackerContext.ApplicationUser
                                    on t.TraineeId equals u.Id
                                    where t.TraineeId == traineeId
-                                   select new { t.TraineeId, t.TrainerId, u.Name, u.Surname, t.Birthday, t.Weight, t.Height, t.Gender, t.FatRatio, u.Email, u.PhoneNumber, u.GymId, u.City, u.Picture, t.EntryDate }).FirstOrDefault();
-            return new TraineeInfoModel
+                                   select new { t.TraineeId, t.TrainerId ,u.Name, u.Surname, t.Birthday, t.Gender, u.Email, u.PhoneNumber, u.GymId, u.City, u.Image, t.EntryDate }).FirstOrDefault();
+            TraineeInfoModel model = new TraineeInfoModel
             {
                 TraineeId = elmt.TraineeId,
                 TrainerId = elmt.TrainerId,
                 Name = elmt.Name,
                 Surname = elmt.Surname,
                 Birthday = elmt.Birthday,
-                Weight = elmt.Weight,
-                Height = elmt.Height,
                 Gender = elmt.Gender,
-                FatRatio = elmt.FatRatio,
                 Email = elmt.Email,
                 PhoneNumber = elmt.PhoneNumber,
                 GymId = elmt.GymId,
                 City = elmt.City,
-                Picture = elmt.Picture,
-                EntryDate = elmt.EntryDate
+                EntryDate = elmt.EntryDate,
+                Image = elmt.Image
             };
+            var measurements = _aspnetGymTrackerContext.TraineeMeasurements.Where(u => u.TraineeId == traineeId).OrderByDescending(u => u.Date).FirstOrDefault();
+            if (measurements != null)
+            {
+                model.Weight = measurements.Weight;
+                model.Height = measurements.Height;
+                model.FatRatio = measurements.FatRatio;
+            }
+            return model;
         }
 
         public string GetUserId(string email, string name, string surname)
@@ -92,10 +101,7 @@ namespace GymTracker.Models.Repositories
             if (result != null)
             {
                 result.Birthday = trainee.Birthday;
-                result.Weight = trainee.Weight;
-                result.Height = trainee.Height;
                 result.Gender = trainee.Gender;
-                result.FatRatio = trainee.FatRatio;
                 _aspnetGymTrackerContext.SaveChanges();
             }
             var result2 = _aspnetGymTrackerContext.ApplicationUser.SingleOrDefault(b => b.Id == trainee.TraineeId);
@@ -105,13 +111,15 @@ namespace GymTracker.Models.Repositories
                 result2.Email = trainee.Email;
                 result2.PhoneNumber = trainee.PhoneNumber;
                 result2.City = trainee.City;
-                result2.Picture = trainee.Picture;
+                result2.Image = trainee.Image;
                 _aspnetGymTrackerContext.SaveChanges();
             }
         }
 
         public void DeleteTrainee(string traineeId)
         {
+            _aspnetGymTrackerContext.Event.RemoveRange(_aspnetGymTrackerContext.Event.Where(c => c.UserId == traineeId));
+            _aspnetGymTrackerContext.TraineeMeasurements.RemoveRange(_aspnetGymTrackerContext.TraineeMeasurements.Where(c => c.TraineeId == traineeId));
             _aspnetGymTrackerContext.Trainee.Remove(_aspnetGymTrackerContext.Trainee.Where(c => c.TraineeId == traineeId).FirstOrDefault());
             _aspnetGymTrackerContext.ApplicationUser.Remove(_aspnetGymTrackerContext.ApplicationUser.Where(c => c.Id == traineeId).FirstOrDefault());
             _aspnetGymTrackerContext.SaveChanges();

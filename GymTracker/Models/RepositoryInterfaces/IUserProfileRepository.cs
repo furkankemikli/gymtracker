@@ -13,7 +13,7 @@ namespace GymTracker.Models.RepositoryInterfaces
 
         int ChangeCity(ApplicationUser user, string city);
 
-        int ChangePicture(ApplicationUser user, string picture);
+        int ChangePicture(ApplicationUser user, byte[] picture);
         
     }
 }

@@ -19,7 +19,7 @@ namespace GymTracker.Models.ManageViewModels
         [StringLength(150)]
         public string Surname { get; set; }
 
-        public string CurrentImage { get; set; }
+        public byte[] CurrentImage { get; set; }
 
         public IFormFile Image { get; set; }
 

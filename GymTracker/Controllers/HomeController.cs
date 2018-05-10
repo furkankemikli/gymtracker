@@ -16,6 +16,7 @@ using GymTracker.Services;
 using Microsoft.AspNetCore.Identity;
 using System.IO;
 using Microsoft.AspNetCore.Hosting;
+using GymTracker.Models.RepositoryInterfaces;
 
 namespace GymTracker.Controllers
 {
@@ -24,10 +25,10 @@ namespace GymTracker.Controllers
     {
         private readonly IEventRepository _eventRepository;
         private readonly IExerciseRepository _exerciseRepository;
-        private readonly ITraineeGoalsRepository _traineeGoalsRepository;
         private readonly ITraineeRepository _traineeRepository;
         private readonly IDailyProgressRepository _dailyProgressRepository;
         private readonly IDailyRoutineRepository _dailyRoutineRepository;
+        private readonly ITraineeMeasurementsRepository _traineeMeasurementsRepository;
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly IEmailSender _emailSender;
         private readonly IHostingEnvironment _hostingEnvironment;
@@ -36,20 +37,20 @@ namespace GymTracker.Controllers
         public HomeController(
             IEventRepository eventRepository,
             IExerciseRepository exerciseRepository,
-            ITraineeGoalsRepository traineeGoalsRepository,
             ITraineeRepository traineeRepository,
             IDailyProgressRepository dailyProgressRepository,
             IDailyRoutineRepository dailyRoutineRepository,
+            ITraineeMeasurementsRepository traineeMeasurementsRepository,
             UserManager<ApplicationUser> userManager,
             IEmailSender emailSender,
             IHostingEnvironment hostingEnvironment)
         {
             _eventRepository = eventRepository;
             _exerciseRepository = exerciseRepository;
-            _traineeGoalsRepository = traineeGoalsRepository;
             _traineeRepository = traineeRepository;
             _dailyProgressRepository = dailyProgressRepository;
             _dailyRoutineRepository = dailyRoutineRepository;
+            _traineeMeasurementsRepository = traineeMeasurementsRepository;
             _emailSender = emailSender;
             _userManager = userManager;
             _hostingEnvironment = hostingEnvironment;
@@ -96,7 +97,7 @@ namespace GymTracker.Controllers
                     Location = model.Location,
                     StartDate = model.StartDate,
                     EndDate = model.EndDate,
-                    TrainerId = this.User.FindFirst(ClaimTypes.NameIdentifier).Value
+                    UserId = this.User.FindFirst(ClaimTypes.NameIdentifier).Value
                 };
                 _eventRepository.CreateEvent(newEvent);
             }
@@ -126,7 +127,7 @@ namespace GymTracker.Controllers
                     Location = model.Location,
                     StartDate = model.StartDate,
                     EndDate = model.EndDate,
-                    TrainerId = this.User.FindFirst(ClaimTypes.NameIdentifier).Value
+                    UserId = this.User.FindFirst(ClaimTypes.NameIdentifier).Value
                 };
                 _eventRepository.UpdateEvent(newEvent);
             }
@@ -160,13 +161,10 @@ namespace GymTracker.Controllers
             };
             if (model.GifPicture != null && model.GifPicture.Length > 0)
             {
-                var guid = Guid.NewGuid().ToString();
-                exercise.GifPicture = "/../Uploads/" + guid + Path.GetExtension(model.GifPicture.FileName);
-                var userPath = Path.Combine(_hostingEnvironment.ContentRootPath, "wwwroot/Uploads", guid + Path.GetExtension(model.GifPicture.FileName));
-
-                using (var stream = new FileStream(userPath, FileMode.Create))
+                using (var memoryStream = new MemoryStream())
                 {
-                    await model.GifPicture.CopyToAsync(stream);
+                    await model.GifPicture.CopyToAsync(memoryStream);
+                    exercise.GifPicture = memoryStream.ToArray();
                 }
             }
             _exerciseRepository.CreateExercise(exercise);
@@ -201,16 +199,13 @@ namespace GymTracker.Controllers
                 };
 
                 if (model.Image != null && model.Image.Length > 0)
-                {
-                    var guid = Guid.NewGuid().ToString();
-                    user.Picture = "/../Uploads/" + guid + Path.GetExtension(model.Image.FileName);
-                    var userPath = Path.Combine(_hostingEnvironment.ContentRootPath, "wwwroot/Uploads", guid + Path.GetExtension(model.Image.FileName));
-                    
-                    using (var stream = new FileStream(userPath, FileMode.Create))
+                {       
+                    using (var memoryStream = new MemoryStream())
                     {
-                        await model.Image.CopyToAsync(stream);
+                        await model.Image.CopyToAsync(memoryStream);
+                        user.Image = memoryStream.ToArray();
                     }
-                }
+            }
 
                 var result = await _userManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
@@ -222,15 +217,20 @@ namespace GymTracker.Controllers
                     {
                         Birthday = model.DateOfBirth,
                         EntryDate = DateTime.Today,
-                        FatRatio = model.FatRatio,
                         Gender = model.Gender,
-                        Height = model.Height,
                         TrainerId = trainer.Id,
-                        TraineeId = _traineeRepository.GetUserId(model.Email, model.Name, model.Surname),
-                        Weight = model.Weight
-
+                        TraineeId = _traineeRepository.GetUserId(model.Email, model.Name, model.Surname)                        
                     };
                     _traineeRepository.CreateTrainee(trainee);
+                    TraineeMeasurements traineeMeasurements = new TraineeMeasurements
+                    {
+                        Weight = model.Weight,
+                        Height = model.Height,
+                        FatRatio = model.FatRatio,
+                        Date = DateTime.Today,
+                        TraineeId = _traineeRepository.GetUserId(model.Email, model.Name, model.Surname)
+                    };
+                    _traineeMeasurementsRepository.CreateTraineeMeasurements(traineeMeasurements);
                     return RedirectToAction("Trainees", "Home");
                 }
             return View(model);
@@ -249,11 +249,8 @@ namespace GymTracker.Controllers
                 City = model.City,
                 DateOfBirth = (DateTime)model.Birthday,
                 Gender = model.Gender,
-                CurrentImage = model.Picture,
-                TraineeId = model.TraineeId,
-                FatRatio = (double)model.FatRatio,
-                Height = (double)model.Height,
-                Weight = (double)model.Weight
+                CurrentImage = model.Image,
+                TraineeId = model.TraineeId
             };
             return View(trainee);
         }
@@ -269,22 +266,16 @@ namespace GymTracker.Controllers
                 City = model.City,
                 PhoneNumber = model.Phone,                
                 Birthday = model.DateOfBirth,
-                FatRatio = model.FatRatio,
                 Gender = model.Gender,
-                Height = model.Height,
-                TraineeId = model.TraineeId,
-                Weight = model.Weight
+                TraineeId = model.TraineeId
             };
 
             if (model.Image != null && model.Image.Length > 0)
             {
-                var guid = Guid.NewGuid().ToString();
-                trainee.Picture = "/../Uploads/" + guid + Path.GetExtension(model.Image.FileName);
-                var userPath = Path.Combine(_hostingEnvironment.ContentRootPath, "wwwroot/Uploads", guid + Path.GetExtension(model.Image.FileName));
-
-                using (var stream = new FileStream(userPath, FileMode.Create))
+                using (var memoryStream = new MemoryStream())
                 {
-                    await model.Image.CopyToAsync(stream);
+                    await model.Image.CopyToAsync(memoryStream);
+                    trainee.Image = memoryStream.ToArray();
                 }
             }
             _traineeRepository.UpdateTrainee(trainee);
@@ -300,7 +291,6 @@ namespace GymTracker.Controllers
         public IActionResult TraineeDetails(string Id)
         {
             TraineeInfoModel personalInfo = _traineeRepository.GetTraineeById(Id);
-            TraineeGoals goals = _traineeGoalsRepository.GetTraineeGoals(Id);
             TraineeDetailsPageViewModel model = new TraineeDetailsPageViewModel
             {
                 Id = personalInfo.TraineeId,
@@ -308,39 +298,63 @@ namespace GymTracker.Controllers
                 Surname = personalInfo.Surname,
                 Email = personalInfo.Email,
                 DateOfBirth = (DateTime)personalInfo.Birthday,
-                Image = personalInfo.Picture,
+                Image = personalInfo.Image,
                 Phone = personalInfo.PhoneNumber,
-                Weight = (double)personalInfo.Weight,
-                Height = (double)personalInfo.Height,
-                FatRatio = (double)personalInfo.FatRatio,
+                Weight = (personalInfo.Weight != null ? (double)personalInfo.Weight : double.NaN),
+                Height = (personalInfo.Height != null ? (double)personalInfo.Height : double.NaN),
+                FatRatio = personalInfo.FatRatio,
                 City = personalInfo.City,
                 Gender = personalInfo.Gender,
                 EntryDate = personalInfo.EntryDate,
                 DailyProgresses = _dailyProgressRepository.DailyProgresses(Id),
                 DailyRoutines = _dailyRoutineRepository.DailyRoutines(Id),
-                Exercises = _exerciseRepository.Exercises        
+                Exercises = _exerciseRepository.Exercises,
+                Measurements = _traineeMeasurementsRepository.GetTraineeMeasurements(Id)
             };
-            if (goals != null)
-            {
-                model.GoalWeight = (double)goals.Weight;
-                model.GoalFatRatio = (double)goals.FatRatio;
-                model.GoalDate = (DateTime)goals.ByDate;
-            }
             return View(model);
         }
 
-        [HttpPost]
-        public IActionResult EditGoal(EditGoalModel model)
+        [HttpGet]
+        public byte[] GetExerciseGif(int exerciseId)
         {
-            TraineeGoals goal = new TraineeGoals
+            Exercise exercise = _exerciseRepository.GetExerciseById(exerciseId);
+            return exercise.GifPicture;
+        }
+
+        public IActionResult CreateMeasurements(TraineeDetailsPageViewModel model)
+        {
+            TraineeMeasurements measurements = new TraineeMeasurements
             {
-                ByDate = model.GoalDate,
-                FatRatio = model.GoalFatRatio,
-                Weight = model.GoalWeight,
-                TraineeId = model.Id
+                FatRatio = model.FatRatio,
+                Weight = model.Weight,
+                Height = model.Height,
+                TraineeId = model.Id,
+                Date = model.MeasureDate
             };
-            _traineeGoalsRepository.UpdateGoal(goal);
+            _traineeMeasurementsRepository.CreateTraineeMeasurements(measurements);
             return RedirectToAction("TraineeDetails", "Home", new { Id = model.Id });
+        }
+
+        [HttpPost]
+        public IActionResult EditMeasurements(TraineeDetailsPageViewModel model)
+        {
+            TraineeMeasurements measurements = new TraineeMeasurements
+            {
+                FatRatio = model.EditFatRatio,
+                Weight = model.EditWeight,
+                Height = model.EditHeight,
+                MeasurementId = model.MeasurementId,
+                Date = model.EditMeasureDate
+            };
+            _traineeMeasurementsRepository.UpdateTraineeMeasurements(measurements);
+            return RedirectToAction("TraineeDetails", "Home", new { Id = model.Id });
+        }
+
+        public IActionResult DeleteMeasurements(int measurementId, string traineeId)
+        {
+            _traineeMeasurementsRepository.DeleteTraineeMeasurements(measurementId);
+
+            return RedirectToAction("TraineeDetails", "Home", new { Id = traineeId });
         }
 
         public IActionResult AssignExercise(TraineeDetailsPageViewModel model)
@@ -354,7 +368,8 @@ namespace GymTracker.Controllers
                 Interval = model.ExInterval,
                 Sets = model.ExSets
             };
-            _dailyRoutineRepository.CreateDailyRoutine(dailyRoutine);
+            dailyRoutine.RoutineId = _dailyRoutineRepository.CreateDailyRoutine(dailyRoutine);
+            _dailyProgressRepository.CreateDailyProgress(dailyRoutine);
             return RedirectToAction("TraineeDetails", "Home", new { Id = model.Id });
         }
 
@@ -366,9 +381,12 @@ namespace GymTracker.Controllers
                 StartDate = model.EditExStartDate,
                 EndDate = model.EditExEndDate,
                 Interval = model.EditExInterval,
-                Sets = model.EditExSets
+                Sets = model.EditExSets,
+                TraineeId = model.Id,
+                ExerciseId = model.ExId
             };
             _dailyRoutineRepository.UpdateDailyRoutine(dailyRoutine);
+            _dailyProgressRepository.UpdateDailyProgress(dailyRoutine);
 
             return RedirectToAction("TraineeDetails", "Home", new { Id = model.Id });
         }

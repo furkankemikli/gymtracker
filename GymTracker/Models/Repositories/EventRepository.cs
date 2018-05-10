@@ -7,16 +7,16 @@ namespace GymTracker.Models.Repositories
 {
     public class EventRepository : IEventRepository
     {
-        private readonly Aspnet_GymTrackerContext _aspnetGymTrackerContext;
+        private readonly GymTrackerContext _aspnetGymTrackerContext;
 
-        public EventRepository(Aspnet_GymTrackerContext aspnet_GymTrackerContext)
+        public EventRepository(GymTrackerContext aspnet_GymTrackerContext)
         {
             _aspnetGymTrackerContext = aspnet_GymTrackerContext;
         }
 
         public List<Event> Events(string trainerId)
         {
-            return _aspnetGymTrackerContext.Event.Where(f => f.TrainerId == trainerId).ToList();
+            return _aspnetGymTrackerContext.Event.Where(f => f.UserId == trainerId).ToList();
         }
 
         public Event GetEventById(int eventId)

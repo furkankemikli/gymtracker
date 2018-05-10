@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Metadata;
 
 namespace GymTracker.Models
 {
-    public partial class Aspnet_GymTrackerContext : IdentityDbContext<ApplicationUser>
+    public partial class GymTrackerContext : IdentityDbContext<ApplicationUser>
     {
         public virtual DbSet<ApplicationUser> ApplicationUser { get; set; }
         public virtual DbSet<DailyProgress> DailyProgress { get; set; }
@@ -14,18 +14,18 @@ namespace GymTracker.Models
         public virtual DbSet<Exercise> Exercise { get; set; }
         public virtual DbSet<Gym> Gym { get; set; }
         public virtual DbSet<Trainee> Trainee { get; set; }
-        public virtual DbSet<TraineeGoals> TraineeGoals { get; set; }
+        public virtual DbSet<TraineeMeasurements> TraineeMeasurements { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
             {
                 // #warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
-                optionsBuilder.UseSqlServer(@"Server=(localdb)\mssqllocaldb;Database=aspnet-GymTracker;Trusted_Connection=True;");
+                optionsBuilder.UseSqlServer(@"Server=tcp:gymtracker.database.windows.net,1433;Initial Catalog=GymTracker;Persist Security Info=False;User ID=mainlogin;Password=Coca2018Cola;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;");
             }
         }
 
-        public Aspnet_GymTrackerContext(DbContextOptions<Aspnet_GymTrackerContext> options)
+        public GymTrackerContext(DbContextOptions<GymTrackerContext> options)
         : base(options)
         { }
 
@@ -54,8 +54,6 @@ namespace GymTracker.Models
 
                 entity.Property(e => e.NormalizedUserName).HasMaxLength(256);
 
-                entity.Property(e => e.Picture).HasMaxLength(250);
-
                 entity.Property(e => e.Surname).HasMaxLength(150);
 
                 entity.Property(e => e.UserName).HasMaxLength(256);
@@ -82,6 +80,12 @@ namespace GymTracker.Models
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_DailyProgress_Exercise");
 
+                entity.HasOne(d => d.Routine)
+                    .WithMany(p => p.DailyProgress)
+                    .HasForeignKey(d => d.RoutineId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_DailyProgress_DailyRoutine");
+
                 entity.HasOne(d => d.Trainee)
                     .WithMany(p => p.DailyProgress)
                     .HasForeignKey(d => d.TraineeId)
@@ -96,6 +100,8 @@ namespace GymTracker.Models
                 entity.Property(e => e.EndDate).HasColumnType("date");
 
                 entity.Property(e => e.StartDate).HasColumnType("date");
+
+                entity.Property(e => e.Status).HasMaxLength(50);
 
                 entity.Property(e => e.TraineeId)
                     .IsRequired()
@@ -116,6 +122,8 @@ namespace GymTracker.Models
 
             modelBuilder.Entity<Event>(entity =>
             {
+                entity.Property(e => e.ApporavalStatus).HasMaxLength(50);
+
                 entity.Property(e => e.Description).HasMaxLength(450);
 
                 entity.Property(e => e.EndDate).HasColumnType("datetime");
@@ -128,13 +136,18 @@ namespace GymTracker.Models
 
                 entity.Property(e => e.StartDate).HasColumnType("datetime");
 
-                entity.Property(e => e.TrainerId)
+                entity.Property(e => e.UserId)
                     .IsRequired()
                     .HasMaxLength(450);
 
-                entity.HasOne(d => d.Trainer)
+                entity.HasOne(d => d.HolderEvent)
+                    .WithMany(p => p.InverseHolderEvent)
+                    .HasForeignKey(d => d.HolderEventId)
+                    .HasConstraintName("FK_Event_Event");
+
+                entity.HasOne(d => d.User)
                     .WithMany(p => p.Event)
-                    .HasForeignKey(d => d.TrainerId)
+                    .HasForeignKey(d => d.UserId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_Event_AspNetUsers");
             });
@@ -145,9 +158,7 @@ namespace GymTracker.Models
                     .IsRequired()
                     .HasMaxLength(150);
 
-                entity.Property(e => e.GifPicture)
-                    .IsRequired()
-                    .HasMaxLength(250);
+                entity.Property(e => e.GifPicture).IsRequired();
 
                 entity.Property(e => e.Name)
                     .IsRequired()
@@ -208,21 +219,21 @@ namespace GymTracker.Models
                     .HasConstraintName("FK_Trainee_AspNetUsers1");
             });
 
-            modelBuilder.Entity<TraineeGoals>(entity =>
+            modelBuilder.Entity<TraineeMeasurements>(entity =>
             {
-                entity.HasKey(e => e.GoalId);
+                entity.HasKey(e => e.MeasurementId);
 
-                entity.Property(e => e.ByDate).HasColumnType("date");
+                entity.Property(e => e.Date).HasColumnType("date");
 
                 entity.Property(e => e.TraineeId)
                     .IsRequired()
                     .HasMaxLength(450);
 
                 entity.HasOne(d => d.Trainee)
-                    .WithMany(p => p.TraineeGoals)
+                    .WithMany(p => p.TraineeMeasurements)
                     .HasForeignKey(d => d.TraineeId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_TraineeGoals_AspNetUsers");
+                    .HasConstraintName("FK_TraineeMeasurements_ApplicationUser");
             });
         }
     }

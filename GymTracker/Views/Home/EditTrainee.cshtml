@@ -54,7 +54,16 @@
                     Image
                 </label>
                 <div class="col-md-6 col-sm-6 col-xs-12">
-                    <img id="preview" style="height:100px;" src="@Model.CurrentImage" alt="ProfileImage" />
+                    @{ 
+
+                        string base64 = null;
+                        if (Model.CurrentImage != null)
+                        {
+                            base64 = Convert.ToBase64String(Model.CurrentImage);
+                        }
+                        var profImage = String.Format("data:image/jpg;base64,{0}", base64);
+                    }
+                    <img id="preview" style="height:100px;" src="@profImage" alt="ProfileImage" />
                     <input type="file" accept="image/*" id="image" asp-for="Image" class="form-control col-md-7 col-xs-12">
                 </div>
             </div>
@@ -64,30 +73,6 @@
                 </label>
                 <div class="col-md-6 col-sm-6 col-xs-12">
                     <input type="tel" id="phone" asp-for="Phone" class="form-control col-md-7 col-xs-12" value="@Model.Phone">
-                </div>
-            </div>
-            <div class="form-group">
-                <label class="control-label col-md-3 col-sm-3 col-xs-12" asp-for="Weight">
-                    Weight
-                </label>
-                <div class="col-md-6 col-sm-6 col-xs-12">
-                    <input type="number" step="0.1" id="weight" asp-for="Weight" value="@Model.Weight" class="form-control col-md-7 col-xs-12">
-                </div>
-            </div>
-            <div class="form-group">
-                <label class="control-label col-md-3 col-sm-3 col-xs-12" asp-for="Height">
-                    Height
-                </label>
-                <div class="col-md-6 col-sm-6 col-xs-12">
-                    <input type="number" id="height" asp-for="Height" value="@Model.Height" class="form-control col-md-7 col-xs-12">
-                </div>
-            </div>
-            <div class="form-group">
-                <label class="control-label col-md-3 col-sm-3 col-xs-12" asp-for="FatRatio">
-                    Fat Ratio
-                </label>
-                <div class="col-md-6 col-sm-6 col-xs-12">
-                    <input type="number" step="0.01" id="FatRatio" asp-for="FatRatio" value="@Model.FatRatio" class="form-control col-md-7 col-xs-12">
                 </div>
             </div>
             <div class="form-group">
@@ -111,25 +96,6 @@
                     </div>
                 </div>
             </div>
-            <!--    For toggle button in our case check gender value and set value of checked attribute of button according to this
-                     public ActionResult CheckBoxTestAct()
-                    {
-                        CheckBoxViewModel vm1 = new CheckBoxViewModel();
-                        vm1.TestValue = "AAA";
-                        vm1.IsSelected = true;
-                        return View(vm1);
-                    }
-                    [HttpPost]
-                    public ActionResult CheckBoxTestAct(CheckBoxViewModel vm)
-                    {
-                        return View(vm);
-                    }
-                View
-
-                <div class="col-md-10">
-                    <input type="checkbox" name="IsSelected" checked="Model.IsSelected" data-toggle="toggle">
-                </div>
-            -->
             <div class="ln_solid"></div>
             <div class="form-group">
                 <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">

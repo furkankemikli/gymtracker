@@ -9,7 +9,7 @@ namespace GymTracker.Models.Repositories
     {
         IEnumerable<DailyRoutine> DailyRoutines(string traineeId);
 
-        void CreateDailyRoutine(DailyRoutine dailyRoutine);
+        int CreateDailyRoutine(DailyRoutine dailyRoutine);
 
         void UpdateDailyRoutine(DailyRoutine dailyRoutine);
 

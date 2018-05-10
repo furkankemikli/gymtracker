@@ -23,7 +23,7 @@ namespace GymTracker.Models
 
         public string Gender { get; set; }
 
-        public double? FatRatio { get; set; }
+        public int FatRatio { get; set; }
         
         public string Email { get; set; }
 
@@ -33,7 +33,7 @@ namespace GymTracker.Models
 
         public string City { get; set; }
 
-        public string Picture { get; set; }
+        public byte[] Image { get; set; }
 
         public DateTime EntryDate { get; set; }
 

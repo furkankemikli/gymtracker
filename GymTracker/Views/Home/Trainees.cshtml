@@ -33,9 +33,15 @@
             <tbody>
                 @foreach (var trainee in Model.Trainees)
                 {
+
+                    string base64 = null;
+                    if (trainee.Image != null)
+                    {
+                        base64 = Convert.ToBase64String(trainee.Image);
+                    }
                     <tr onclick="location.href='@(Url.Action("TraineeDetails", "Home", new { Id = trainee.TraineeId }))'">
                         @{
-                            var imgSrc = trainee.Picture;
+                            var imgSrc = String.Format("data:image/jpg;base64,{0}", base64);
                         }
                         <td>
                             <img border=3 height=128 width=128 src="@imgSrc">

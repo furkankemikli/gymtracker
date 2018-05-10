@@ -7,9 +7,9 @@ namespace GymTracker.Models.Repositories
 {
     public class GymRepository : IGymRepository
     {
-        private readonly Aspnet_GymTrackerContext _aspnetGymTrackerContext;
+        private readonly GymTrackerContext _aspnetGymTrackerContext;
 
-        public GymRepository(Aspnet_GymTrackerContext aspnet_GymTrackerContext)
+        public GymRepository(GymTrackerContext aspnet_GymTrackerContext)
         {
             _aspnetGymTrackerContext = aspnet_GymTrackerContext;
         }

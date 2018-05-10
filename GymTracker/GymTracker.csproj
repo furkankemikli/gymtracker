@@ -12,6 +12,17 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Uploads\**" />
+    <Compile Remove="wwwroot\Uploads\**" />
+    <Content Remove="Uploads\**" />
+    <Content Remove="wwwroot\Uploads\**" />
+    <EmbeddedResource Remove="Uploads\**" />
+    <EmbeddedResource Remove="wwwroot\Uploads\**" />
+    <None Remove="Uploads\**" />
+    <None Remove="wwwroot\Uploads\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Content Include="wwwroot\bower_components\bootstrap-daterangepicker\.bower.json" />
     <Content Include="wwwroot\bower_components\bootstrap-daterangepicker\bower.json" />
     <Content Include="wwwroot\bower_components\bootstrap-daterangepicker\daterangepicker.css" />
@@ -1289,11 +1300,6 @@
 
   <ItemGroup>
     <TypeScriptCompile Include="wwwroot\bower_components\moment\moment.d.ts" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Uploads\" />
-    <Folder Include="wwwroot\Uploads\" />
   </ItemGroup>
 
 </Project>

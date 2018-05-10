@@ -76,7 +76,7 @@ namespace GymTracker.Controllers
                 Name = user.Name,
                 Surname = user.Surname,
                 City = user.City,
-                CurrentImage = user.Picture,
+                CurrentImage = user.Image,
                 PhoneNumber = user.PhoneNumber,
                 IsEmailConfirmed = user.EmailConfirmed,
                 StatusMessage = StatusMessage
@@ -120,19 +120,19 @@ namespace GymTracker.Controllers
                 }
             }
 
-            var newImagePath = "";
+            byte[] newPic = null;
             if (model.Image != null && model.Image.Length > 0)
             {
-                var guid = Guid.NewGuid().ToString();
-                newImagePath = "/../Uploads/" + guid + Path.GetExtension(model.Image.FileName);
-                var userPath = Path.Combine(_hostingEnvironment.ContentRootPath, "wwwroot/Uploads", guid + Path.GetExtension(model.Image.FileName));
-
-                using (var stream = new FileStream(userPath, FileMode.Create))
+                using (var memoryStream = new MemoryStream())
                 {
-                    await model.Image.CopyToAsync(stream);
+                    await model.Image.CopyToAsync(memoryStream);
+                    newPic = memoryStream.ToArray();
                 }
-                
-                var setPictureResult = _userProfileRepository.ChangePicture(user, newImagePath);
+            }
+            
+            if ((newPic != null && user.Image != null && !newPic.SequenceEqual(user.Image)) || (newPic !=null && user.Image == null))
+            {
+                var setPictureResult = _userProfileRepository.ChangePicture(user, newPic);
                 if (setPictureResult == 0)
                 {
                     throw new ApplicationException($"Unexpected error occurred setting image for user with ID '{user.Id}'.");

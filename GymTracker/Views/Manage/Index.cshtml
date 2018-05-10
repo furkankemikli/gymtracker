@@ -39,8 +39,16 @@
                 <input asp-for="Surname" class="form-control" />
             </div>
             <div class="form-group">
+                @{ 
+                    string base64 = null;
+                    if (Model.CurrentImage != null)
+                    {
+                        base64 = Convert.ToBase64String(Model.CurrentImage);
+                    }
+                    var profImage = String.Format("data:image/jpg;base64,{0}", base64);
+                }
                 <label asp-for="Image">Profile Image</label>
-                <img id="preview" style="height:100px;" src="@Model.CurrentImage" alt="ProfileImage" />
+                <img id="preview" style="height:100px;" src="@profImage" alt="ProfileImage" />
                 <input type="file" accept="image/*" id="image" asp-for="Image" class="form-control" />
             </div>
             <div class="form-group">
