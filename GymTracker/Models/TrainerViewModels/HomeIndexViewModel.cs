@@ -12,7 +12,7 @@ namespace GymTracker.Models.TrainerViewModels
 
         public string Name { get; set; }
 
-        public string Description { get; set; } 
+        public string Description { get; set; }
 
         public string Location { get; set; }
 
@@ -28,6 +28,8 @@ namespace GymTracker.Models.TrainerViewModels
         public List<Event> Events { get; set; }
 
         public string jsonEvents { get; set; }
+
+        public List<ApplicationUser> TraineeList { get; set;}
 
     }
 }

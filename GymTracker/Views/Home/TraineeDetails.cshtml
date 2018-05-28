@@ -432,12 +432,12 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="control-label col-md-3 col-sm-3 col-xs-12" asp-for="ExStartDate">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" asp-for="StrExStartDate">
                                 Start Date <span class="required">*</span>
                             </label>
                             <div class="col-md-6 col-sm-6 col-xs-12">
                                 <div class='input-group date' id='myDatepicker7'>
-                                    <input id="exStartDate" type='text' class="form-control ExStartDate" asp-for="ExStartDate" data-inputmask="'mask': '99.99.9999'" placeholder="DD.MM.YYYY" required="required" />
+                                    <input id="exStartDate" type='text' class="form-control ExStartDate" asp-for="StrExStartDate" data-inputmask="'mask': '99/99/9999'" placeholder="DD/MM/YYYY" required="required" />
                                     <span class="input-group-addon">
                                         <span class="glyphicon glyphicon-calendar"></span>
                                     </span>
@@ -445,12 +445,12 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="control-label col-md-3 col-sm-3 col-xs-12" asp-for="ExEndDate">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" asp-for="StrExEndDate">
                                 End Date <span class="required">*</span>
                             </label>
                             <div class="col-md-6 col-sm-6 col-xs-12">
                                 <div class='input-group date' id='myDatepicker8'>
-                                    <input id="exEndDate" type='text' class="form-control ExEndDate" asp-for="ExEndDate" data-inputmask="'mask': '99.99.9999'" placeholder="DD.MM.YYYY" required="required" />
+                                    <input id="exEndDate" type='text' class="form-control ExEndDate" asp-for="StrExEndDate" data-inputmask="'mask': '99/99/9999'" placeholder="DD/MM/YYYY" required="required" />
                                     <span class="input-group-addon">
                                         <span class="glyphicon glyphicon-calendar"></span>
                                     </span>
@@ -520,12 +520,12 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="control-label col-md-3 col-sm-3 col-xs-12" asp-for="EditExStartDate">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" asp-for="StrEditExStartDate">
                                 Start Date <span class="required">*</span>
                             </label>
                             <div class="col-md-6 col-sm-6 col-xs-12">
                                 <div class='input-group startdate'>
-                                    <input id="exerciseStartDate" type='text' class="form-control EditExStartDate" asp-for="EditExStartDate" value="@Model.EditExStartDate" data-inputmask="'mask': '99/99/9999'" placeholder="DD/MM/YYYY" required="required" />
+                                    <input id="exerciseStartDate" type='text' class="form-control EditExStartDate" asp-for="StrEditExStartDate" value="@Model.EditExStartDate" data-inputmask="'mask': '99/99/9999'" placeholder="DD/MM/YYYY" required="required" />
                                     <span class="input-group-addon">
                                         <span class="glyphicon glyphicon-calendar"></span>
                                     </span>
@@ -533,12 +533,12 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="control-label col-md-3 col-sm-3 col-xs-12" asp-for="EditExEndDate">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" asp-for="StrEditExEndDate">
                                 End Date <span class="required">*</span>
                             </label>
                             <div class="col-md-6 col-sm-6 col-xs-12">
                                 <div class='input-group enddate'>
-                                    <input id="exerciseEndDate" type='text' class="form-control EditExEndDate" asp-for="EditExEndDate" value="@Model.EditExEndDate" data-inputmask="'mask': '99/99/9999'" placeholder="DD/MM/YYYY" required="required" />
+                                    <input id="exerciseEndDate" type='text' class="form-control EditExEndDate" asp-for="StrEditExEndDate" value="@Model.StrEditExEndDate" data-inputmask="'mask': '99/99/9999'" placeholder="DD/MM/YYYY" required="required" />
                                     <span class="input-group-addon">
                                         <span class="glyphicon glyphicon-calendar"></span>
                                     </span>
@@ -598,7 +598,7 @@
                             </label>
                             <div class="col-md-6 col-sm-6 col-xs-12">
                                 <div class='input-group date' id='myDatepicker9'>
-                                    <input id="editMeasureDate" type='text' class="form-control EditMeasureDate" asp-for="EditMeasureDate" data-inputmask="'mask': '99.99.9999'" placeholder="DD.MM.YYYY" required="required" />
+                                    <input id="editMeasureDate" type='text' class="form-control EditMeasureDate" asp-for="StrEditMeasureDate" data-inputmask="'mask': '99/99/9999'" placeholder="DD/MM/YYYY" required="required" />
                                     <span class="input-group-addon">
                                         <span class="glyphicon glyphicon-calendar"></span>
                                     </span>
@@ -652,12 +652,12 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="control-label col-md-4 col-sm-4 col-xs-12" asp-for="MeasureDate">
+                            <label class="control-label col-md-4 col-sm-4 col-xs-12" asp-for="StrMeasureDate">
                                 Measurement Date <span class="required">*</span>
                             </label>
                             <div class="col-md-6 col-sm-6 col-xs-12">
                                 <div class='input-group date' id='myDatepicker10'>
-                                    <input id="measureDate" type='text' class="form-control MeasureDate" asp-for="MeasureDate" data-inputmask="'mask': '99.99.9999'" placeholder="DD.MM.YYYY" required="required" />
+                                    <input id="measureDate" type='text' class="form-control MeasureDate" asp-for="StrMeasureDate" data-inputmask="'mask': '99/99/9999'" placeholder="DD/MM/YYYY" required="required" />
                                     <span class="input-group-addon">
                                         <span class="glyphicon glyphicon-calendar"></span>
                                     </span>

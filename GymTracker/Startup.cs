@@ -16,6 +16,8 @@ using Microsoft.Extensions.FileProviders;
 using Microsoft.AspNetCore.Http;
 using System.IO;
 using GymTracker.Models.RepositoryInterfaces;
+using System.Globalization;
+using Microsoft.AspNetCore.Localization;
 
 namespace GymTracker
 {
@@ -31,7 +33,7 @@ namespace GymTracker
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            var connection = @"Server=tcp:gymtracker.database.windows.net,1433;Initial Catalog=GymTracker;Persist Security Info=False;User ID=mainlogin;Password=Coca2018Cola;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
+            var connection = @"Server=tcp:gymtrackers.database.windows.net,1433;Initial Catalog=GymTracker;Persist Security Info=False;User ID=mainlogin;Password=CocaCola2018;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
             services.AddDbContext<GymTrackerContext>(options => options.UseSqlServer(connection));
             //services.AddDbContext<ApplicationDbContext>(options =>
             //     options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
@@ -56,10 +58,24 @@ namespace GymTracker
             {
                 options.Password.RequireDigit = false;
                 options.Password.RequiredLength = 5;
-                options.Password.RequireLowercase = true;
+                options.Password.RequireLowercase = false;
                 options.Password.RequireUppercase = false;
                 options.Password.RequireNonAlphanumeric = false;
                 options.SignIn.RequireConfirmedEmail = false;
+            });
+
+            services.Configure<RequestLocalizationOptions>(options =>
+            {
+                var supportedCultures = new List<CultureInfo>
+                {
+                    new CultureInfo("tr-TR"),
+                    new CultureInfo("de-CH"),
+                    new CultureInfo("fr-CH"),
+                    new CultureInfo("it-CH")
+                };
+                options.DefaultRequestCulture = new RequestCulture(culture: "tr-TR", uiCulture: "tr-TR");
+                options.SupportedCultures = supportedCultures;
+                options.SupportedUICultures = supportedCultures;
             });
         }
 

@@ -38,6 +38,8 @@ namespace GymTracker.Models.TraineeViewModels
 
         public DateTime MeasureDate { get; set; }
 
+        public string StrMeasureDate { get; set; }
+
         //to list done exercises with percentage
         public IEnumerable<DailyProgress> DailyProgresses { get; set; }
 
@@ -54,7 +56,11 @@ namespace GymTracker.Models.TraineeViewModels
 
         public DateTime ExStartDate { get; set; }
 
+        public string StrExStartDate { get; set; }
+
         public DateTime ExEndDate { get; set; }
+
+        public string StrExEndDate { get; set; }
 
         public int ExInterval { get; set; }
 
@@ -71,6 +77,8 @@ namespace GymTracker.Models.TraineeViewModels
 
         public DateTime EditMeasureDate { get; set; }
 
+        public string StrEditMeasureDate { get; set; }
+
         //to edit assigned exercise
         public int RoutineId { get; set; }
 
@@ -82,7 +90,11 @@ namespace GymTracker.Models.TraineeViewModels
 
         public DateTime EditExStartDate { get; set; }
 
+        public string StrEditExStartDate { get; set; }
+
         public DateTime EditExEndDate { get; set; }
+
+        public string StrEditExEndDate { get; set; }
 
         public int EditExInterval { get; set; }
 

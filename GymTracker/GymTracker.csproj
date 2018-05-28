@@ -23,6 +23,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="Properties\PublishProfiles\GymTracker2018 - Web Deploy.pubxml" />
+    <None Remove="Properties\PublishProfiles\GymTracker20180419052920 - Web Deploy.pubxml" />
+    <None Remove="Properties\PublishProfiles\GymTracker308 - Web Deploy.pubxml" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Content Include="wwwroot\bower_components\bootstrap-daterangepicker\.bower.json" />
     <Content Include="wwwroot\bower_components\bootstrap-daterangepicker\bower.json" />
     <Content Include="wwwroot\bower_components\bootstrap-daterangepicker\daterangepicker.css" />
@@ -1300,6 +1306,10 @@
 
   <ItemGroup>
     <TypeScriptCompile Include="wwwroot\bower_components\moment\moment.d.ts" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Properties\PublishProfiles\" />
   </ItemGroup>
 
 </Project>

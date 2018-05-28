@@ -273,11 +273,13 @@
             data: { },
             cache: false,
                 success: function (result) {
-                    //console.log(result);
-                    document.getElementById("userImage1").src = "data:image/png;base64," + result.image;
-                    document.getElementById("userImage2").src = "data:image/png;base64," + result.image;
-                    document.getElementById("userName1").innerHTML = result.name + " " + result.surname;
-                    document.getElementById("userName2").innerHTML = result.name + " " + result.surname;
+                    console.log(result);
+                    if (result.image != null) {
+                        document.getElementById("userImage1").src = "data:image/png;base64," + result.image;
+                        document.getElementById("userImage2").src = "data:image/png;base64," + result.image;
+                        document.getElementById("userName1").innerHTML = result.name + " " + result.surname;
+                        document.getElementById("userName2").innerHTML = result.name + " " + result.surname;
+                    }
             }
         });
         </script>

@@ -202,7 +202,8 @@ namespace GymTracker.Controllers
         [HttpPost]
         public async Task<IActionResult> NewTrainee(NewTraineeViewModel model)
         {
-                var trainer = await _userManager.GetUserAsync(User);
+            model.DateOfBirth = DateTime.ParseExact(model.StrDateOfBirth, "dd/MM/yyyy", CultureInfo.InvariantCulture);
+            var trainer = await _userManager.GetUserAsync(User);
                 var user = new ApplicationUser { UserName = model.Email, Email = model.Email,
                     Name = model.Name, Surname = model.Surname,
                     PhoneNumber = model.Phone, City = model.City,
@@ -269,6 +270,7 @@ namespace GymTracker.Controllers
         [HttpPost]
         public async Task<IActionResult> UpdateTraineeInfo(EditTraineeViewModel model)
         {
+            model.DateOfBirth = DateTime.ParseExact(model.StrDateOfBirth, "dd/MM/yyyy", CultureInfo.InvariantCulture);
             TraineeInfoModel trainee = new TraineeInfoModel
             {
                 Name = model.Name,
@@ -334,6 +336,7 @@ namespace GymTracker.Controllers
 
         public IActionResult CreateMeasurements(TraineeDetailsPageViewModel model)
         {
+            model.MeasureDate = DateTime.ParseExact(model.StrMeasureDate, "dd/MM/yyyy", CultureInfo.InvariantCulture);
             TraineeMeasurements measurements = new TraineeMeasurements
             {
                 FatRatio = model.FatRatio,
@@ -349,6 +352,7 @@ namespace GymTracker.Controllers
         [HttpPost]
         public IActionResult EditMeasurements(TraineeDetailsPageViewModel model)
         {
+            model.EditMeasureDate = DateTime.ParseExact(model.StrEditMeasureDate, "dd/MM/yyyy", CultureInfo.InvariantCulture);
             TraineeMeasurements measurements = new TraineeMeasurements
             {
                 FatRatio = model.EditFatRatio,
@@ -370,6 +374,8 @@ namespace GymTracker.Controllers
 
         public IActionResult AssignExercise(TraineeDetailsPageViewModel model)
         {
+            model.ExStartDate = DateTime.ParseExact(model.StrExStartDate, "dd/MM/yyyy", CultureInfo.InvariantCulture);
+            model.ExEndDate = DateTime.ParseExact(model.StrExEndDate, "dd/MM/yyyy", CultureInfo.InvariantCulture);
             DailyRoutine dailyRoutine = new DailyRoutine
             {
                 ExerciseId = model.ExId,
@@ -386,6 +392,8 @@ namespace GymTracker.Controllers
 
         public IActionResult EditAssignedExercise(TraineeDetailsPageViewModel model)
         {
+            model.EditExStartDate = DateTime.ParseExact(model.StrEditExStartDate, "dd/MM/yyyy", CultureInfo.InvariantCulture);
+            model.EditExEndDate = DateTime.ParseExact(model.StrEditExEndDate, "dd/MM/yyyy", CultureInfo.InvariantCulture);
             DailyRoutine dailyRoutine = new DailyRoutine
             {
                 RoutineId = model.RoutineId,

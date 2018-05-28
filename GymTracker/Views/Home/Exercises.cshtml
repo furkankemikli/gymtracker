@@ -115,7 +115,7 @@
         document.getElementById("loadingGif").classList.add('loader');
         var exerciseId = $(elem).closest("tr").find("td.exerciseId").html();
         var exerciseName = $(elem).closest("tr").find("td.exerciseName").html();
-        console.log(exerciseId);
+        //console.log(exerciseId);
         document.getElementById("ExerciseName").innerHTML = exerciseName;
         var myModal = $("#ShowGifModal");
         $.ajax({
@@ -124,7 +124,7 @@
             data: {
                 exerciseId: exerciseId
             },
-            cache: false,
+            cache: true,
             success: function (result) {
                 document.getElementById("loadingGif").classList.remove('loader');
                 document.getElementById("ItemPreview").src = "data:image/png;base64," + result;

@@ -36,6 +36,8 @@ namespace GymTracker.Models.TraineeViewModels
 
         public DateTime DateOfBirth { get; set; }
 
+        public string StrDateOfBirth { get; set; }
+
         public IFormFile Image { get; set; }
 
         public string Gender { get; set; }
