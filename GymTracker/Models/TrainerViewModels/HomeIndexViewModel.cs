@@ -5,6 +5,37 @@ using System.Threading.Tasks;
 
 namespace GymTracker.Models.TrainerViewModels
 {
+    public class TraineeInviteModel
+    {
+        public string TraineeId { get; set; }
+
+        public string TraineeName { get; set; }
+
+        public string TraineeSurname { get; set; }
+
+        public string TraineeEmail { get; set; }
+
+        public bool IsChecked { get; set; }
+
+        public TraineeInviteModel(string traineeId, string traineeName, string traineeSurname, string traineeEmail, Boolean isChecked)
+        {
+            TraineeId = traineeId;
+            TraineeName = traineeName;
+            TraineeSurname = traineeSurname;
+            TraineeEmail = traineeEmail;
+            IsChecked = isChecked;
+        }
+
+        public TraineeInviteModel()
+        {
+            TraineeId = "";
+            TraineeName = "";
+            TraineeSurname = "";
+            TraineeEmail = "";
+            IsChecked = false;
+        }
+    }
+
     public class HomeIndexViewModel
     {
         //for new event adding and update
@@ -29,7 +60,6 @@ namespace GymTracker.Models.TrainerViewModels
 
         public string jsonEvents { get; set; }
 
-        public List<ApplicationUser> TraineeList { get; set;}
-
+        public List<TraineeInviteModel> TraineeList { get; set;}
     }
 }

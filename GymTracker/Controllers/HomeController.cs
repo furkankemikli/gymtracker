@@ -61,15 +61,23 @@ namespace GymTracker.Controllers
         {
             string userId = this.User.FindFirst(ClaimTypes.NameIdentifier).Value;
             List<Event> myList = _eventRepository.Events(userId);
+            List<TraineeInfoModel> trainees = _traineeRepository.GetTrainees(userId).ToList();
             var json = JsonConvert.SerializeObject(myList, Formatting.None,
                         new JsonSerializerSettings()
                         {
                             ReferenceLoopHandling = ReferenceLoopHandling.Ignore
                         });
+
+            List<TraineeInviteModel> inviteTraineeList = new List<TraineeInviteModel>();
+            for (int i = 0; i < trainees.Count; i++)
+            {
+                inviteTraineeList.Add(new TraineeInviteModel(trainees[i].TraineeId, trainees[i].Name, trainees[i].Surname, trainees[i].Email, false));
+            }
             HomeIndexViewModel homeIndexViewModel = new HomeIndexViewModel
             {
                 Events = myList,
-                jsonEvents = json
+                jsonEvents = json,
+                TraineeList = inviteTraineeList
             };
 
             return View(homeIndexViewModel);
@@ -110,7 +118,26 @@ namespace GymTracker.Controllers
                     EndDate = model.EndDate,
                     UserId = this.User.FindFirst(ClaimTypes.NameIdentifier).Value
                 };
-                _eventRepository.CreateEvent(newEvent);
+                int holderEventId = _eventRepository.CreateEvent(newEvent);
+                for (int i = 0; i < model.TraineeList.Count(); i++)
+                {
+                    if (model.TraineeList[i].IsChecked)
+                    {
+                        // create event invitation for trainee with waiting status
+                        Event eventInvite = new Event
+                        {
+                            Name = model.Name,
+                            Description = model.Description,
+                            Location = model.Location,
+                            StartDate = model.StartDate,
+                            EndDate = model.EndDate,
+                            ApporavalStatus = "waiting",
+                            HolderEventId = holderEventId,
+                            UserId = model.TraineeList[i].TraineeId
+                        };
+                        _eventRepository.CreateEvent(eventInvite);
+                    }
+                }
             }
             return RedirectToAction("Index", "Home");
         }
@@ -118,6 +145,14 @@ namespace GymTracker.Controllers
         [HttpPost]
         public IActionResult UpdateEvent(HomeIndexViewModel model)
         {
+            int count = 0;
+            for(int i=0; i< model.TraineeList.Count(); i++)
+            {
+                if (model.TraineeList[i].IsChecked)
+                {
+                    count += 1;
+                }
+            }
             try
             {
                 //tries to convert string date into datetime object if it is in valid format => dd.MM.yyyy hh:mm tt

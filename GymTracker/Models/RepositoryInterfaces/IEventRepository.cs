@@ -11,7 +11,7 @@ namespace GymTracker.Models.Repositories
 
         Event GetEventById(int eventId);
 
-        void CreateEvent(Event newEvent);
+        int CreateEvent(Event newEvent);
 
         void UpdateEvent(Event newEvent);
 

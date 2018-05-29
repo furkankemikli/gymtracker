@@ -24,11 +24,13 @@ namespace GymTracker.Models.Repositories
             return _aspnetGymTrackerContext.Event.FirstOrDefault(d => d.EventId == eventId);
         }
 
-        public void CreateEvent(Event newEvent)
+        public int CreateEvent(Event newEvent)
         {
             _aspnetGymTrackerContext.Event.Add(newEvent);
 
             _aspnetGymTrackerContext.SaveChanges();
+
+            return newEvent.EventId;
         }
 
         public void UpdateEvent(Event editEvent)

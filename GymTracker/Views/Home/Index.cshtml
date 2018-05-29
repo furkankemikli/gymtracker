@@ -19,7 +19,7 @@
             </div>
             <div class="modal-body">
                 <div id="testmodal" style="padding: 5px 20px;">
-                    <form id="antoform" class="form-horizontal calender" asp-controller="Home" asp-action="AddNewEvent" role="form">
+                    <form id="antoform" class="form-horizontal calender" asp-controller="Home" asp-action="AddNewEvent">
                         <div class="form-group">
                             <label class="control-label col-md-3 col-sm-3 col-xs-12" asp-for="Name">
                                 Title<span class="required">*</span>
@@ -70,24 +70,29 @@
                                 </div>
                             </div>
                         </div>
-                        @*<div class="form-group">
-                            <label class="control-label col-md-3 col-sm-3 col-xs-12" asp-for="StrEndDate">
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
                                 Trainee Invitation
                             </label>
-                            <div class="col-md-6 col-sm-6 col-xs-12">
-                                @{ 
-                                    foreach (var trainee in Model.TraineeList)
-                                    {
-                                        <input asp-for="">
-
-                                    }
-                                }
+                            <div class="col-md-6 col-sm-6 col-xs-12" style="height: 100px; overflow-y: scroll; font-family:Arial; font-size:12px; font-weight:normal; color:black">
+                                <table>
+                                    @for (int i = 0; i < Model.TraineeList.Count; i++)
+    {
+                                    <tr>
+                                        <td>
+                                            @Html.CheckBoxFor(it => Model.TraineeList[i].IsChecked, new { Style = "vertical-align:3px" })
+                                        </td>
+                                        <td>
+                                            @Html.HiddenFor(x => Model.TraineeList[i].TraineeId)
+                                            @Html.DisplayFor(it => Model.TraineeList[i].TraineeName)
+                                        </td>
+                                    </tr>}
+                                </table>
                             </div>
-                        </div>*@
-
+                        </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-info antoclose2" data-dismiss="modal">Close</button>
-                            <button type="submit" class="btn btn-primary antosubmit2">Save changes</button>
+                            <button type="submit" name="action" class="btn btn-primary antosubmit2">Save changes</button>
                         </div>
                     </form>
                 </div>
