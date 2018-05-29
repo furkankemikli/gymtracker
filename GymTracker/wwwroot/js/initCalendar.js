@@ -159,8 +159,6 @@ function init_calendar() {
                 if (myInviteEvents[i].holderEventId == calEvent.id) {
                     document.getElementById('CheckId' + myInviteEvents[i].traineeId).checked = true;
                 }
-                //console.log(document.getElementById('CheckId' + myInviteEvents[i].traineeId).value);
-                //console.log(myInviteEvents[i]);
             }
 
             categoryClass = $("#event_type").val();

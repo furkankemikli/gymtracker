@@ -172,10 +172,10 @@
                                     {
                                         <tr>
                                             <td>
-                                                @Html.CheckBox("CheckId" + Model.TraineeList[i].TraineeId, Model.TraineeList[i].IsChecked, new { Style = "vertical-align:3px" })
+                                                @Html.CheckBoxFor(it => Model.TraineeList[i].IsChecked, new { Style = "vertical-align:3px",id = "CheckId" + Model.TraineeList[i].TraineeId })
                                             </td>
                                             <td>
-                                                @Html.Hidden(Model.TraineeList[i].TraineeId)
+                                                @Html.HiddenFor(it => Model.TraineeList[i].TraineeId)
                                                 @Html.DisplayFor(it => Model.TraineeList[i].TraineeName)
                                             </td>
                                         </tr>
