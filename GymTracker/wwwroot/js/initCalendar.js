@@ -19,7 +19,7 @@ function init_calendar() {
         var inputEvents = elemEvents.value;
         //hellojs = hellojs.replace(/&quot;/g, "\"");
         //console.log("test15");
-        //console.log(inputEvents);
+        console.log(inputEvents);
         var obj = JSON.parse(inputEvents);
         //console.log("test16");
         for (var i = 0; i < obj.length; i++) {

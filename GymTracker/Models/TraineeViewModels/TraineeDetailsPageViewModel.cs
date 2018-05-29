@@ -43,6 +43,8 @@ namespace GymTracker.Models.TraineeViewModels
         //to list done exercises with percentage
         public IEnumerable<DailyProgress> DailyProgresses { get; set; }
 
+        public List<DailyProgress> DailyProgressList { get; set; }
+
         //to list exercises assigned to the trainee(current and passed 15 days after since enddate)
         public IEnumerable<DailyRoutine> DailyRoutines { get; set; }
 

@@ -390,6 +390,23 @@ namespace GymTracker.Controllers
         public IActionResult TraineeDetails(string Id)
         {
             TraineeInfoModel personalInfo = _traineeRepository.GetTraineeById(Id);
+            IEnumerable<DailyProgress> dp = _dailyProgressRepository.DailyProgresses(Id);
+            List<DailyProgress> dpList = new List<DailyProgress>();
+            foreach (DailyProgress prog in dp){
+                DailyProgress progress = new DailyProgress();
+                progress.AssignedSets = prog.AssignedSets;
+                progress.CompletedSets = prog.CompletedSets;
+                progress.Date = prog.Date;
+                progress.ProgressId = prog.ProgressId;
+                progress.TraineeId = prog.TraineeId;
+                progress.ExerciseId = prog.ExerciseId;
+                dpList.Add(progress);
+            }
+            //var dailyProgressesJson = JsonConvert.SerializeObject(dpList, Formatting.None,
+            //            new JsonSerializerSettings()
+            //            {
+            //                ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+            //            });
             TraineeDetailsPageViewModel model = new TraineeDetailsPageViewModel
             {
                 Id = personalInfo.TraineeId,
@@ -405,7 +422,8 @@ namespace GymTracker.Controllers
                 City = personalInfo.City,
                 Gender = personalInfo.Gender,
                 EntryDate = personalInfo.EntryDate,
-                DailyProgresses = _dailyProgressRepository.DailyProgresses(Id),
+                DailyProgresses = dp,
+                DailyProgressList = dpList,
                 DailyRoutines = _dailyRoutineRepository.DailyRoutines(Id),
                 Exercises = _exerciseRepository.Exercises,
                 Measurements = _traineeMeasurementsRepository.GetTraineeMeasurements(Id)

@@ -33,9 +33,6 @@
                             <li>
                                 <i class="fa fa-envelope user-profile-icon"></i> @Model.Email
                             </li>
-                            @*<li>
-                                    <i class="fa fa-phone user-profile-icon"></i> Phone
-                                </li>*@
                             <li>
                                 <i class="fa fa-birthday-cake user-profile-icon"></i> @Model.DateOfBirth.ToShortDateString()
                             </li>
@@ -45,75 +42,35 @@
                             <li>
                                 <i class="fa fa-child user-profile-icon"></i> @Model.Height
                             </li>
-                            @*<li>
-                                    <i class="fa fa-child user-profile-icon"></i> Fat Ratio
-                                </li>*@
-                            @*<li>
-                                    <i class="fa fa-map-marker user-profile-icon"></i> City
-                                </li>*@
                         </ul>
                         <a class="btn btn-success" onclick="location.href='@(Url.Action("EditTrainee", "Home", new { Id = Model.Id }))'"><i class="fa fa-edit m-right-xs"></i>Edit Profile</a>
                         <br />
-                        @*<!-- start skills -->
-                            <h4>Skills</h4>
-                            <ul class="list-unstyled user_data">
-                                <li>
-                                    <p>Web Applications</p>
-                                    <div class="progress progress_sm">
-                                        <div class="progress-bar bg-green" role="progressbar" data-transitiongoal="50"></div>
-                                    </div>
-                                </li>
-                                <li>
-                                    <p>Website Design</p>
-                                    <div class="progress progress_sm">
-                                        <div class="progress-bar bg-green" role="progressbar" data-transitiongoal="70"></div>
-                                    </div>
-                                </li>
-                                <li>
-                                    <p>Automation & Testing</p>
-                                    <div class="progress progress_sm">
-                                        <div class="progress-bar bg-green" role="progressbar" data-transitiongoal="30"></div>
-                                    </div>
-                                </li>
-                                <li>
-                                    <p>UI / UX</p>
-                                    <div class="progress progress_sm">
-                                        <div class="progress-bar bg-green" role="progressbar" data-transitiongoal="50"></div>
-                                    </div>
-                                </li>
-                            </ul>
-                            <!-- end of skills -->*@
                     </div>
                     <div class="col-md-9 col-sm-9 col-xs-12">
-                        @*<div class="profile_title">
-                                <div class="col-md-6">
-                                    <h2>User Activity Report</h2>
-                                </div>
-                                <div class="col-md-6">
-                                    <div id="reportrange" class="pull-right" style="margin-top: 5px; background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #E6E9ED">
-                                        <i class="glyphicon glyphicon-calendar fa fa-calendar"></i>
-                                        <span>December 30, 2014 - January 28, 2015</span> <b class="caret"></b>
-                                    </div>
-                                </div>
+                        <div class="x_panel">
+                            <div class="x_title">
+                                <h2>Bar Graph</h2>
+                                <div class="clearfix"></div>
                             </div>
-                            <!-- start of user-activity-graph -->
-                            <div id="graph_bar" style="width:100%; height:280px;"></div>
-                            <!-- end of user-activity-graph -->*@
+                            <div class="x_content">
+                                <div id="mainb" style="height:350px;"></div>
+                            </div>
+                        </div>
                         <div class="" role="tabpanel" data-example-id="togglable-tabs">
                             <ul id="myTab" class="nav nav-tabs bar_tabs" role="tablist">
-                                <li role="presentation" class="active">
+                                <li role="presentation" class="active" style="margin-bottom:5px">
                                     <a href="#tab_content1" role="tab" id="profile-tab" data-toggle="tab" aria-expanded="false">Exercises Done</a>
                                 </li>
-                                <li role="presentation" class="">
+                                <li role="presentation" class="" style="margin-bottom:5px">
                                     <a href="#tab_content4" role="tab" id="profile-tab4" data-toggle="tab" aria-expanded="false">Exercises in Progress</a>
                                 </li>
-                                <li role="presentation" class="">
+                                <li role="presentation" class="" style="margin-bottom:5px">
                                     <a href="#tab_content5" role="tab" id="profile-tab5" data-toggle="tab" aria-expanded="false">Assign Exercise</a>
                                 </li>
-                                <li role="presentation" class="">
+                                <li role="presentation" class="" style="margin-bottom:5px">
                                     <a href="#tab_content3" role="tab" id="profile-tab3" data-toggle="tab" aria-expanded="false">Trainee Body Measurements</a>
                                 </li>
-                                <li role="presentation" class="">
+                                <li role="presentation" class="" style="margin-bottom:5px">
                                     <a href="#tab_content2" role="tab" id="profile-tab2" data-toggle="tab" aria-expanded="false">Profile</a>
                                 </li>
                             </ul>
@@ -676,7 +633,7 @@
 </div>
 
 <div id="ShowGifModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog" >
+    <div class="modal-dialog">
         <div class="modal-content" style="position: relative; overflow-y: auto; max-width: 500px;">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
@@ -898,8 +855,10 @@
             },
             cache: false,
             success: function (result) {
-                document.getElementById("loadingGif").classList.remove('loader');
-                document.getElementById("ItemPreview").src = "data:image/png;base64," + result;
+                if (result != null) {
+                    document.getElementById("loadingGif").classList.remove('loader');
+                    document.getElementById("ItemPreview").src = "data:image/png;base64," + result;
+                }
             }
         });
         myModal.modal('show');
@@ -920,10 +879,23 @@
             },
             cache: false,
             success: function (result) {
-                document.getElementById("loadingGif").classList.remove('loader');
-                document.getElementById("ItemPreview").src = "data:image/png;base64," + result;
+                if (result != null) {
+                    document.getElementById("loadingGif").classList.remove('loader');
+                    document.getElementById("ItemPreview").src = "data:image/png;base64," + result;
+                }
             }
         });
         myModal.modal('show');
     }
 </script>
+
+@section Scripts
+    {
+    <script>
+        var measurements = @Html.Raw(Json.Serialize(Model.Measurements));
+        //console.log(measurements);
+        var dailyProgresses = @Html.Raw(Json.Serialize(Model.DailyProgressList));
+        //console.log(dailyProgresses);
+    </script>
+    <script src="~/js/init_echarts.js" charset="utf-8"></script>
+}

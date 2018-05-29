@@ -191,6 +191,8 @@
         <script src="~/js/fastclick/lib/fastclick.js"></script>
         <!-- NProgress -->
         <script src="~/js/nprogress/nprogress.js"></script>
+        <!--ECharts-->
+        <script src="~/js/echarts/dist/echarts.min.js"></script>
         <!-- morris.js -->
         <script src="~/js/raphael/raphael.min.js"></script>
         <script src="~/js/morris.js/morris.min.js"></script>
@@ -273,7 +275,7 @@
             data: { },
             cache: false,
                 success: function (result) {
-                    console.log(result);
+                    //console.log(result);
                     if (result.image != null) {
                         document.getElementById("userImage1").src = "data:image/png;base64," + result.image;
                         document.getElementById("userImage2").src = "data:image/png;base64," + result.image;
