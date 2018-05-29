@@ -73,11 +73,22 @@ namespace GymTracker.Controllers
             {
                 inviteTraineeList.Add(new TraineeInviteModel(trainees[i].TraineeId, trainees[i].Name, trainees[i].Surname, trainees[i].Email, false));
             }
+            List<Event> invitedEventList = new List<Event>();
+            for(int i = 0; i < myList.Count; i++)
+            {
+                invitedEventList.AddRange(_eventRepository.GetInvitedTraineeEvent(myList[i].EventId));
+            }
+            var inviteJson = JsonConvert.SerializeObject(invitedEventList, Formatting.None,
+                        new JsonSerializerSettings()
+                        {
+                            ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+                        });
             HomeIndexViewModel homeIndexViewModel = new HomeIndexViewModel
             {
                 Events = myList,
                 jsonEvents = json,
-                TraineeList = inviteTraineeList
+                TraineeList = inviteTraineeList,
+                InviteEventList = inviteJson
             };
 
             return View(homeIndexViewModel);

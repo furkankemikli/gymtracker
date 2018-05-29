@@ -61,5 +61,7 @@ namespace GymTracker.Models.TrainerViewModels
         public string jsonEvents { get; set; }
 
         public List<TraineeInviteModel> TraineeList { get; set;}
+
+        public string InviteEventList { get; set; }
     }
 }

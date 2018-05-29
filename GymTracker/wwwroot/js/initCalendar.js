@@ -7,19 +7,26 @@ function init_calendar() {
 
     myEvents = []
 
+    myInviteEvents = []
+
     try {//to fix html encoding problem some utf-8 chars encoded when passing into js
         var elemEvents = document.createElement('textarea');
         elemEvents.innerHTML = eventList;
         var inputEvents = elemEvents.value;
         //hellojs = hellojs.replace(/&quot;/g, "\"");
-
         var obj = JSON.parse(inputEvents);
-
         for (var i = 0; i < obj.length; i++) {
             myEvents.push({ id: obj[i].EventId, title: obj[i].Name, start: obj[i].StartDate, end: obj[i].EndDate, description: obj[i].Description, location: obj[i].Location });
         }
+        var elemInviteEvents = document.createElement('textarea');
+        elemInviteEvents.innerHTML = inviteEventList;
+        var inputInviteEvents = elemInviteEvents.value;
+        var inviteObj = JSON.parse(inputInviteEvents);
+        for (var i = 0; i < inviteObj.length; i++) {
+            myInviteEvents.push({ id: inviteObj[i].EventId, holderEventId: inviteObj[i].HolderEventId, traineeId: inviteObj[i].UserId });
+        }
+
     } catch (e) { }
-    //console.log("Hell");
 
     var date = new Date(),
         d = date.getDate(),
@@ -142,6 +149,19 @@ function init_calendar() {
             $('#location2').val(calEvent.location);
             $('#startdate2').val(sdate);
             $('#enddate2').val(edate);
+
+            //console.log(calEvent.id);
+            for (var i = 0; i < myInviteEvents.length; i++) {
+                document.getElementById('CheckId' + myInviteEvents[i].traineeId).checked = false;
+            }
+            for (var i = 0; i < myInviteEvents.length; i++) {
+                //console.log(document.getElementById('CheckId' + myInviteEvents[i].traineeId).checked);
+                if (myInviteEvents[i].holderEventId == calEvent.id) {
+                    document.getElementById('CheckId' + myInviteEvents[i].traineeId).checked = true;
+                }
+                //console.log(document.getElementById('CheckId' + myInviteEvents[i].traineeId).value);
+                //console.log(myInviteEvents[i]);
+            }
 
             categoryClass = $("#event_type").val();
 

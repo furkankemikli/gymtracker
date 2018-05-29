@@ -77,16 +77,17 @@
                             <div class="col-md-6 col-sm-6 col-xs-12" style="height: 100px; overflow-y: scroll; font-family:Arial; font-size:12px; font-weight:normal; color:black">
                                 <table>
                                     @for (int i = 0; i < Model.TraineeList.Count; i++)
-    {
-                                    <tr>
-                                        <td>
-                                            @Html.CheckBoxFor(it => Model.TraineeList[i].IsChecked, new { Style = "vertical-align:3px" })
-                                        </td>
-                                        <td>
-                                            @Html.HiddenFor(x => Model.TraineeList[i].TraineeId)
-                                            @Html.DisplayFor(it => Model.TraineeList[i].TraineeName)
-                                        </td>
-                                    </tr>}
+                                    {
+                                        <tr>
+                                            <td>
+                                                @Html.CheckBoxFor(it => Model.TraineeList[i].IsChecked, new { Style = "vertical-align:3px" })
+                                            </td>
+                                            <td>
+                                                @Html.HiddenFor(x => Model.TraineeList[i].TraineeId)
+                                                @Html.DisplayFor(it => Model.TraineeList[i].TraineeName)
+                                            </td>
+                                        </tr>
+                                    }
                                 </table>
                             </div>
                         </div>
@@ -161,6 +162,27 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                Trainee Invitation
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12" style="height: 100px; overflow-y: scroll; font-family:Arial; font-size:12px; font-weight:normal; color:black">
+                                <table>
+                                    @for (int i = 0; i < Model.TraineeList.Count; i++)
+                                    {
+                                        <tr>
+                                            <td>
+                                                @Html.CheckBox("CheckId" + Model.TraineeList[i].TraineeId, Model.TraineeList[i].IsChecked, new { Style = "vertical-align:3px" })
+                                            </td>
+                                            <td>
+                                                @Html.Hidden(Model.TraineeList[i].TraineeId)
+                                                @Html.DisplayFor(it => Model.TraineeList[i].TraineeName)
+                                            </td>
+                                        </tr>
+                                    }
+                                </table>
+                            </div>
+                        </div>
                         <div class="modal-footer">
                             <button type="button" id="deleteBtn" class="pull-left btn btn-danger" onclick="location.href='@Url.Action("DeleteEvent", "Home")?eventId=' + $('#eventId2').val()">Delete Event</button>
                             <button type="button" class="btn btn-info antoclose2" data-dismiss="modal">Close</button>
@@ -178,7 +200,9 @@
 @section Scripts
     {
     <script>
+        var trainees = @Html.Raw(Json.Serialize(Model.TraineeList));
         var eventList = '@Model.jsonEvents';
+        var inviteEventList = '@Model.InviteEventList';
     </script>
     <script src="~/js/initCalendar.js" charset="utf-8"></script>
 }
