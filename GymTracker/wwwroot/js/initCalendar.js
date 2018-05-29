@@ -19,7 +19,7 @@ function init_calendar() {
         var inputEvents = elemEvents.value;
         //hellojs = hellojs.replace(/&quot;/g, "\"");
         //console.log("test15");
-        console.log(inputEvents);
+        //console.log(inputEvents);
         var obj = JSON.parse(inputEvents);
         //console.log("test16");
         for (var i = 0; i < obj.length; i++) {
@@ -31,8 +31,9 @@ function init_calendar() {
         var inputInviteEvents = elemInviteEvents.value;
         //console.log("test2");
         var inviteObj = JSON.parse(inputInviteEvents);
+        //console.log(inviteObj);
         for (var i = 0; i < inviteObj.length; i++) {
-            myInviteEvents.push({ id: inviteObj[i].EventId, holderEventId: inviteObj[i].HolderEventId, traineeId: inviteObj[i].UserId });
+            myInviteEvents.push({ id: inviteObj[i].EventId, holderEventId: inviteObj[i].HolderEventId, traineeId: inviteObj[i].UserId, approvalStatus: inviteObj[i].ApporavalStatus });
         }
         //console.log("test3");
 
@@ -163,11 +164,21 @@ function init_calendar() {
             //console.log(calEvent.id);
             for (var i = 0; i < myInviteEvents.length; i++) {
                 document.getElementById('CheckId' + myInviteEvents[i].traineeId).checked = false;
+                //console.log(document.getElementById('ApprovalId' + myInviteEvents[i].traineeId));
+                document.getElementById('ApprovalId' + myInviteEvents[i].traineeId).innerHTML = "";
             }
             for (var i = 0; i < myInviteEvents.length; i++) {
                 //console.log(document.getElementById('CheckId' + myInviteEvents[i].traineeId).checked);
                 if (myInviteEvents[i].holderEventId == calEvent.id) {
                     document.getElementById('CheckId' + myInviteEvents[i].traineeId).checked = true;
+                    document.getElementById('ApprovalId' + myInviteEvents[i].traineeId).innerHTML = myInviteEvents[i].approvalStatus.charAt(0).toUpperCase() + myInviteEvents[i].approvalStatus.slice(1);
+                    if (myInviteEvents[i].approvalStatus == "waiting") {
+                        document.getElementById('ApprovalId' + myInviteEvents[i].traineeId).style.color = "orange";
+                    } else if (myInviteEvents[i].approvalStatus == "approved") {
+                        document.getElementById('ApprovalId' + myInviteEvents[i].traineeId).style.color = "green";
+                    } else {
+                        document.getElementById('ApprovalId' + myInviteEvents[i].traineeId).style.color = "red";
+                    }
                 }
             }
 

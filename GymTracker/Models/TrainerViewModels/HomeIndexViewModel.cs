@@ -17,13 +17,16 @@ namespace GymTracker.Models.TrainerViewModels
 
         public bool IsChecked { get; set; }
 
-        public TraineeInviteModel(string traineeId, string traineeName, string traineeSurname, string traineeEmail, Boolean isChecked)
+        public string ApprovalStatus { get; set; }
+
+        public TraineeInviteModel(string traineeId, string traineeName, string traineeSurname, string traineeEmail, Boolean isChecked, string approvalStatus)
         {
             TraineeId = traineeId;
             TraineeName = traineeName;
             TraineeSurname = traineeSurname;
             TraineeEmail = traineeEmail;
             IsChecked = isChecked;
+            ApprovalStatus = approvalStatus;
         }
 
         public TraineeInviteModel()
@@ -33,6 +36,7 @@ namespace GymTracker.Models.TrainerViewModels
             TraineeSurname = "";
             TraineeEmail = "";
             IsChecked = false;
+            ApprovalStatus = "";
         }
     }
 

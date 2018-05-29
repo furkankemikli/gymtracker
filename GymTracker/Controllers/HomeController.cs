@@ -71,7 +71,7 @@ namespace GymTracker.Controllers
             List<TraineeInviteModel> inviteTraineeList = new List<TraineeInviteModel>();
             for (int i = 0; i < trainees.Count; i++)
             {
-                inviteTraineeList.Add(new TraineeInviteModel(trainees[i].TraineeId, trainees[i].Name, trainees[i].Surname, trainees[i].Email, false));
+                inviteTraineeList.Add(new TraineeInviteModel(trainees[i].TraineeId, trainees[i].Name, trainees[i].Surname, trainees[i].Email, false, "waiting"));
             }
             List<Event> invitedEventList = new List<Event>();
             for(int i = 0; i < myList.Count; i++)

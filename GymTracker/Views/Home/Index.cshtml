@@ -2,6 +2,19 @@
 @{
     ViewData["Title"] = "Home Page";
 }
+<head>
+    <style>
+        .color-box {
+            width: 10px;
+            height: 10px;
+            display: inline-block;
+            background-color: #ccc;
+            position: absolute;
+            left: 5px;
+            top: 5px;
+        }
+    </style>
+</head>
 
 <div class="x_panel">
     <div class="x_content">
@@ -85,6 +98,8 @@
                                             <td>
                                                 @Html.HiddenFor(x => Model.TraineeList[i].TraineeId)
                                                 @Html.DisplayFor(it => Model.TraineeList[i].TraineeName)
+                                                @Html.DisplayFor(it => Model.TraineeList[i].TraineeSurname)
+                                                @Html.DisplayFor(it => Model.TraineeList[i].TraineeEmail)
                                             </td>
                                         </tr>
                                     }
@@ -177,6 +192,10 @@
                                             <td>
                                                 @Html.HiddenFor(it => Model.TraineeList[i].TraineeId)
                                                 @Html.DisplayFor(it => Model.TraineeList[i].TraineeName)
+                                                @Html.DisplayFor(it => Model.TraineeList[i].TraineeSurname)
+                                                @Html.DisplayFor(it => Model.TraineeList[i].TraineeEmail)
+                                                @Html.Label("", "Approval Status: ")
+                                                @Html.Label("", Model.TraineeList[i].ApprovalStatus, new { id = "ApprovalId" + Model.TraineeList[i].TraineeId })
                                             </td>
                                         </tr>
                                     }
