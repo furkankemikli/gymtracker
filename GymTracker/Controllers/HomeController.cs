@@ -156,14 +156,6 @@ namespace GymTracker.Controllers
         [HttpPost]
         public IActionResult UpdateEvent(HomeIndexViewModel model)
         {
-            int count = 0;
-            for(int i=0; i< model.TraineeList.Count(); i++)
-            {
-                if (model.TraineeList[i].IsChecked)
-                {
-                    count += 1;
-                }
-            }
             try
             {
                 //tries to convert string date into datetime object if it is in valid format => dd.MM.yyyy hh:mm tt
@@ -187,6 +179,54 @@ namespace GymTracker.Controllers
                     UserId = this.User.FindFirst(ClaimTypes.NameIdentifier).Value
                 };
                 _eventRepository.UpdateEvent(newEvent);
+
+                for (int i = 0; i < model.TraineeList.Count(); i++)
+                {
+                    var result = _eventRepository.GetEventByHolderAndTrainee(model.EventId, model.TraineeList[i].TraineeId);
+                    if (result == null)// trainee do not have event with that holder event
+                    {
+                        //trainee don't have and checkbox checked, add new event to that trainee
+                        if (model.TraineeList[i].IsChecked)
+                        {
+                            //create event with holderevent
+                            Event eventInvite = new Event
+                            {
+                                Name = model.Name,
+                                Description = model.Description,
+                                Location = model.Location,
+                                StartDate = model.StartDate,
+                                EndDate = model.EndDate,
+                                ApporavalStatus = "waiting",
+                                HolderEventId = model.EventId,
+                                UserId = model.TraineeList[i].TraineeId
+                            };
+                            _eventRepository.CreateEvent(eventInvite);
+                        }
+                    }
+                    else// trainee has event with that holder event
+                    {
+                        if (!model.TraineeList[i].IsChecked)// trainee has event but checkbox removed cancel event of trainee
+                        {
+                            _eventRepository.DeleteEvent(result.EventId);
+                        }
+                        else// trainee has event and checkbox is checked so update his/her event
+                        {
+                            Event newEventInvite = new Event
+                            {
+                                EventId = result.EventId,
+                                Name = model.Name,
+                                Description = model.Description,
+                                Location = model.Location,
+                                StartDate = model.StartDate,
+                                EndDate = model.EndDate,
+                                UserId = this.User.FindFirst(ClaimTypes.NameIdentifier).Value,
+                                HolderEventId = model.EventId,
+                                ApporavalStatus = result.ApporavalStatus
+                            };
+                            _eventRepository.UpdateEvent(newEventInvite);
+                        }
+                    }
+                }
             }
             return RedirectToAction("Index", "Home");
         }

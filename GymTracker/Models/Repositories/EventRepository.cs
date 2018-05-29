@@ -29,6 +29,11 @@ namespace GymTracker.Models.Repositories
             return _aspnetGymTrackerContext.Event.Where(f => f.HolderEventId == holderEventId).ToList();
         }
 
+        public Event GetEventByHolderAndTrainee(int holderId, string traineeId)
+        {
+            return _aspnetGymTrackerContext.Event.FirstOrDefault(f => f.HolderEventId == holderId && f.UserId == traineeId);
+        }
+
         public int CreateEvent(Event newEvent)
         {
             _aspnetGymTrackerContext.Event.Add(newEvent);

@@ -7,24 +7,34 @@ function init_calendar() {
 
     myEvents = []
 
+    //console.log("test12");
     myInviteEvents = []
 
+   // console.log("test13");
     try {//to fix html encoding problem some utf-8 chars encoded when passing into js
+
+       // console.log("test14");
         var elemEvents = document.createElement('textarea');
         elemEvents.innerHTML = eventList;
         var inputEvents = elemEvents.value;
         //hellojs = hellojs.replace(/&quot;/g, "\"");
+        //console.log("test15");
+        //console.log(inputEvents);
         var obj = JSON.parse(inputEvents);
+        //console.log("test16");
         for (var i = 0; i < obj.length; i++) {
             myEvents.push({ id: obj[i].EventId, title: obj[i].Name, start: obj[i].StartDate, end: obj[i].EndDate, description: obj[i].Description, location: obj[i].Location });
         }
+        //console.log("test1");
         var elemInviteEvents = document.createElement('textarea');
         elemInviteEvents.innerHTML = inviteEventList;
         var inputInviteEvents = elemInviteEvents.value;
+        //console.log("test2");
         var inviteObj = JSON.parse(inputInviteEvents);
         for (var i = 0; i < inviteObj.length; i++) {
             myInviteEvents.push({ id: inviteObj[i].EventId, holderEventId: inviteObj[i].HolderEventId, traineeId: inviteObj[i].UserId });
         }
+        //console.log("test3");
 
     } catch (e) { }
 

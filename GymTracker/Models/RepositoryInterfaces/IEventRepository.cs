@@ -18,5 +18,7 @@ namespace GymTracker.Models.Repositories
         void UpdateEvent(Event newEvent);
 
         void DeleteEvent(int eventId);
+
+        Event GetEventByHolderAndTrainee(int holderId, string traineeId);
     }
 }
