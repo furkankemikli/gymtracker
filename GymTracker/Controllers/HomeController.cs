@@ -233,6 +233,11 @@ namespace GymTracker.Controllers
         
         public IActionResult DeleteEvent(int eventId)
         {
+            List<Event> invitedEvents = _eventRepository.GetInvitedTraineeEvent(eventId);
+            for(int i=0; i < invitedEvents.Count; i++)
+            {
+                _eventRepository.DeleteEvent(invitedEvents[i].EventId);
+            }
             _eventRepository.DeleteEvent(eventId);
             return RedirectToAction("Index", "Home");
         }
