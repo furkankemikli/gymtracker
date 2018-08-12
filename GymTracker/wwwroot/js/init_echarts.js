@@ -28,6 +28,11 @@ function init_echarts() {
         weightData.push(measurements[i].weight);
         fatRatioData.push(measurements[i].fatRatio);
     }
+    progressData = progressData.reverse();
+    heightData = heightData.reverse();
+    weightData = weightData.reverse();
+    fatRatioData = fatRatioData.reverse();
+
     //console.log(heightData);
     //console.log(weightData);
     //console.log(fatRatioData);

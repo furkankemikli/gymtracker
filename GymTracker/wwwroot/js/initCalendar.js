@@ -174,7 +174,7 @@ function init_calendar() {
                     document.getElementById('ApprovalId' + myInviteEvents[i].traineeId).innerHTML = myInviteEvents[i].approvalStatus.charAt(0).toUpperCase() + myInviteEvents[i].approvalStatus.slice(1);
                     if (myInviteEvents[i].approvalStatus == "waiting") {
                         document.getElementById('ApprovalId' + myInviteEvents[i].traineeId).style.color = "orange";
-                    } else if (myInviteEvents[i].approvalStatus == "approved") {
+                    } else if (myInviteEvents[i].approvalStatus == "accepted") {
                         document.getElementById('ApprovalId' + myInviteEvents[i].traineeId).style.color = "green";
                     } else {
                         document.getElementById('ApprovalId' + myInviteEvents[i].traineeId).style.color = "red";

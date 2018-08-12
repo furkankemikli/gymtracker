@@ -61,7 +61,7 @@ namespace GymTracker
                 options.Password.RequireLowercase = false;
                 options.Password.RequireUppercase = false;
                 options.Password.RequireNonAlphanumeric = false;
-                options.SignIn.RequireConfirmedEmail = false;
+                options.SignIn.RequireConfirmedEmail = true;
             });
 
             services.Configure<RequestLocalizationOptions>(options =>

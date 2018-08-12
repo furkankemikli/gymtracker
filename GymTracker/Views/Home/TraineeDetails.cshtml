@@ -530,7 +530,7 @@
                                 Weight <span class="required">*</span>
                             </label>
                             <div class="col-md-6 col-sm-6 col-xs-12">
-                                <input type="number" step="0.1" id="editWeight" required="required" asp-for="EditWeight" class="form-control col-md-7 col-xs-12 EditWeight">
+                                <input type="number" step="1" id="editWeight" required="required" asp-for="EditWeight" class="form-control col-md-7 col-xs-12 EditWeight">
                             </div>
                         </div>
                         <div class="form-group">
@@ -589,7 +589,7 @@
                                 Weight <span class="required">*</span>
                             </label>
                             <div class="col-md-6 col-sm-6 col-xs-12">
-                                <input type="number" step="0.1" min="0" max="300" required="required" asp-for="Weight" value="@Model.Weight" class="form-control col-md-7 col-xs-12 NewWeight">
+                                <input type="number" step="1" min="0" max="300" required="required" asp-for="Weight" value="@Model.Weight" class="form-control col-md-7 col-xs-12 NewWeight">
                             </div>
                         </div>
                         <div class="form-group">
